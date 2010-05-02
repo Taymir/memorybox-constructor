@@ -125,7 +125,7 @@ namespace Constructor
             this.archiveSections_path = new Constructor.FolderSelect();
             this.label35 = new System.Windows.Forms.Label();
             this.archiveSections_list = new System.Windows.Forms.ListBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.archiveSections_datasource = new System.Windows.Forms.BindingSource(this.components);
             this.archiveSections_navigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -163,6 +163,7 @@ namespace Constructor
             this.schoolmates_path = new Constructor.FolderSelect();
             this.label26 = new System.Windows.Forms.Label();
             this.schoolmates_list = new System.Windows.Forms.ListBox();
+            this.schoolmates_datasource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolmates_navigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -200,6 +201,7 @@ namespace Constructor
             this.teachers_path = new Constructor.FolderSelect();
             this.label47 = new System.Windows.Forms.Label();
             this.teachers_list = new System.Windows.Forms.ListBox();
+            this.teachers_datasource = new System.Windows.Forms.BindingSource(this.components);
             this.teachers_navigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -227,6 +229,7 @@ namespace Constructor
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.folderSelect3 = new Constructor.FolderSelect();
             this.label38 = new System.Windows.Forms.Label();
+            this.data_source = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -250,7 +253,7 @@ namespace Constructor
             this.tableLayoutPanel9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.archiveSections_datasource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.archiveSections_navigator)).BeginInit();
             this.archiveSections_navigator.SuspendLayout();
             this.SchoolmatesPanel.SuspendLayout();
@@ -258,6 +261,7 @@ namespace Constructor
             this.tableLayoutPanel7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolmates_datasource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolmates_navigator)).BeginInit();
             this.schoolmates_navigator.SuspendLayout();
             this.TeachersPanel.SuspendLayout();
@@ -265,6 +269,7 @@ namespace Constructor
             this.tableLayoutPanel11.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.teachers_datasource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachers_navigator)).BeginInit();
             this.teachers_navigator.SuspendLayout();
             this.ColorsPanel.SuspendLayout();
@@ -272,6 +277,7 @@ namespace Constructor
             this.ScrollbarsPanel.SuspendLayout();
             this.SchoolHistoryPanel.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data_source)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -304,18 +310,21 @@ namespace Constructor
             this.новыйПроектToolStripMenuItem.Name = "новыйПроектToolStripMenuItem";
             this.новыйПроектToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.новыйПроектToolStripMenuItem.Text = "Новый проект";
+            this.новыйПроектToolStripMenuItem.Click += new System.EventHandler(this.новыйПроектToolStripMenuItem_Click);
             // 
             // сохранитьПроектToolStripMenuItem
             // 
             this.сохранитьПроектToolStripMenuItem.Name = "сохранитьПроектToolStripMenuItem";
             this.сохранитьПроектToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.сохранитьПроектToolStripMenuItem.Text = "Сохранить проект";
+            this.сохранитьПроектToolStripMenuItem.Click += new System.EventHandler(this.сохранитьПроектToolStripMenuItem_Click);
             // 
             // открытьПроектToolStripMenuItem
             // 
             this.открытьПроектToolStripMenuItem.Name = "открытьПроектToolStripMenuItem";
             this.открытьПроектToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.открытьПроектToolStripMenuItem.Text = "Открыть проект";
+            this.открытьПроектToolStripMenuItem.Click += new System.EventHandler(this.открытьПроектToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -1075,7 +1084,7 @@ namespace Constructor
             // 
             // archiveSections_list
             // 
-            this.archiveSections_list.DataSource = this.bindingSource1;
+            this.archiveSections_list.DataSource = this.archiveSections_datasource;
             this.archiveSections_list.FormattingEnabled = true;
             this.archiveSections_list.Location = new System.Drawing.Point(153, 32);
             this.archiveSections_list.Name = "archiveSections_list";
@@ -1085,7 +1094,7 @@ namespace Constructor
             // archiveSections_navigator
             // 
             this.archiveSections_navigator.AddNewItem = this.toolStripButton1;
-            this.archiveSections_navigator.BindingSource = this.bindingSource1;
+            this.archiveSections_navigator.BindingSource = this.archiveSections_datasource;
             this.archiveSections_navigator.CountItem = this.toolStripLabel1;
             this.archiveSections_navigator.DeleteItem = this.toolStripButton2;
             this.archiveSections_navigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1459,7 +1468,7 @@ namespace Constructor
             // 
             // schoolmates_list
             // 
-            this.schoolmates_list.DataSource = this.bindingSource1;
+            this.schoolmates_list.DataSource = this.schoolmates_datasource;
             this.schoolmates_list.FormattingEnabled = true;
             this.schoolmates_list.Location = new System.Drawing.Point(153, 32);
             this.schoolmates_list.Name = "schoolmates_list";
@@ -1469,7 +1478,7 @@ namespace Constructor
             // schoolmates_navigator
             // 
             this.schoolmates_navigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.schoolmates_navigator.BindingSource = this.bindingSource1;
+            this.schoolmates_navigator.BindingSource = this.schoolmates_datasource;
             this.schoolmates_navigator.CountItem = this.bindingNavigatorCountItem;
             this.schoolmates_navigator.DeleteItem = this.bindingNavigatorDeleteItem;
             this.schoolmates_navigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1843,7 +1852,7 @@ namespace Constructor
             // 
             // teachers_list
             // 
-            this.teachers_list.DataSource = this.bindingSource1;
+            this.teachers_list.DataSource = this.teachers_datasource;
             this.teachers_list.FormattingEnabled = true;
             this.teachers_list.Location = new System.Drawing.Point(153, 32);
             this.teachers_list.Name = "teachers_list";
@@ -1853,7 +1862,7 @@ namespace Constructor
             // teachers_navigator
             // 
             this.teachers_navigator.AddNewItem = this.toolStripButton7;
-            this.teachers_navigator.BindingSource = this.bindingSource1;
+            this.teachers_navigator.BindingSource = this.teachers_datasource;
             this.teachers_navigator.CountItem = this.toolStripLabel2;
             this.teachers_navigator.DeleteItem = this.toolStripButton8;
             this.teachers_navigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2177,7 +2186,7 @@ namespace Constructor
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.archiveSections_datasource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.archiveSections_navigator)).EndInit();
             this.archiveSections_navigator.ResumeLayout(false);
             this.archiveSections_navigator.PerformLayout();
@@ -2188,6 +2197,7 @@ namespace Constructor
             this.groupBox6.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolmates_datasource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolmates_navigator)).EndInit();
             this.schoolmates_navigator.ResumeLayout(false);
             this.schoolmates_navigator.PerformLayout();
@@ -2198,6 +2208,7 @@ namespace Constructor
             this.groupBox12.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.teachers_datasource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachers_navigator)).EndInit();
             this.teachers_navigator.ResumeLayout(false);
             this.teachers_navigator.PerformLayout();
@@ -2208,6 +2219,7 @@ namespace Constructor
             this.SchoolHistoryPanel.PerformLayout();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.data_source)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2305,7 +2317,7 @@ namespace Constructor
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.BindingSource schoolmates_datasource;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox schoolmate_name;
@@ -2389,6 +2401,9 @@ namespace Constructor
         private System.Windows.Forms.TextBox teacher_discipline;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox info_html;
+        private System.Windows.Forms.BindingSource teachers_datasource;
+        private System.Windows.Forms.BindingSource archiveSections_datasource;
+        private System.Windows.Forms.BindingSource data_source;
     }
 }
 

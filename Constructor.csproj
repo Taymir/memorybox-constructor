@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchiveSection.cs" />
+    <Compile Include="DataRegistry.cs" />
     <Compile Include="FolderSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>
