@@ -30,16 +30,27 @@ namespace Constructor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            registry = new DataRegistry();
-            data_source.DataSource = registry;
+            panelManager1.SelectedPanel = null;
+            resetRegistry();
+
             setupPanels();
             setupDataBinding();
 
-            
-
             treeView1.ExpandAll();
 
+            treeView1.Enabled = false;
+        }
 
+        private void resetRegistry()
+        {
+
+            this.setupRegistry(new DataRegistry());
+        }
+
+        private void setupRegistry(DataRegistry reg)
+        {
+            this.registry = reg;
+            data_source.DataSource = reg;
         }
 
         private Dictionary<string, Controls.ManagedPanel> panels;
@@ -164,10 +175,169 @@ namespace Constructor
             fStream.Close();
 
             data_source.DataSource = registry;
+            treeView1.Enabled = true;
         }
 
         private void новыйПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*NewProject form = new NewProject();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                resetRegistry();
+
+                this.registry.settings_project_path = form.projectPath;
+                this.registry.settings_source_path = form.sourcePath;
+
+                findAvailableDirectories(form.sourcePath);*/
+
+                treeView1.Enabled = true;
+                registry.teachers.Add(new User() { name = "БРЕД" });
+            //}
+        }
+
+        private void findAvailableDirectories(string path)
+        {
+            if (path == "")
+                return;
+
+            /* SCHOOL */
+            if (Directory.Exists(path + @"\school"))
+            {
+                if (Directory.Exists(path + @"\school\director"))
+                {
+                    if (File.Exists(path + @"\school\director\photo.jpg"))
+                    {
+                        registry.school_director_photo = path + @"\school\director\photo.jpg";
+                    }
+                    if (File.Exists(path + @"\school\director\video.flv"))
+                    {
+                        registry.school_director_video = path + @"\school\director\video.flv";
+                    }
+                }
+
+                if (File.Exists(path + @"\school\photo.jpg"))
+                {
+                    registry.school_photo = path + @"\school\photo.jpg";
+                }
+                if (File.Exists(path + @"\school\video.flv"))
+                {
+                    registry.school_video = path + @"\school\video.flv";
+                }
+
+                if (File.Exists(path + @"\school\history.jpg"))
+                {
+                    registry.school_pictures_history = path + @"\school\history.jpg";
+                }
+                if (File.Exists(path + @"\school\director.jpg"))
+                {
+                    registry.school_pictures_director = path + @"\school\director.jpg";
+                }
+                if (File.Exists(path + @"\school\video.jpg"))
+                {
+                    registry.school_pictures_video = path + @"\school\video.jpg";
+                }
+            }
+
+            /* SCHOOLMATES */
+            if (Directory.Exists(path + @"\schoolmates"))
+            {
+                //registry.schoolmates_path = path + @"\schoolmates";
+
+                //registry.schoolmates.AddRange(findAvailableUsersInDir(path + @"\schoolmates"));
+            }
+
+            /* TEACHERS */
+            if (Directory.Exists(path + @"\teachers"))
+            {
+                registry.teachers_path = path + @"\teachers";
+
+                //registry.teachers = findAvailableUsersInDir(path + @"\teachers");
+            }
+
+            /* ARCHIVE */
+            if (Directory.Exists(path + @"\archive"))
+            {
+                registry.archive_path = path + @"\archive";
+
+                //registry.archive = findAvailableArchiveSectionsInDir(path + @"\archive");
+            }
+
+            if (File.Exists(path + @"\intro.flv"))
+            {
+                registry.general_intro_video = path + @"\intro.flv";
+            }
+
+        }
+
+        private List<ArchiveSection> findAvailableArchiveSectionsInDir(string path)
+        {
+            List<ArchiveSection> sections = new List<ArchiveSection>(Directory.GetDirectories(path).Count());
+            foreach (string sec_dir in Directory.GetDirectories(path))
+            {
+                ArchiveSection sec = new ArchiveSection();
+                sec.name = Path.GetDirectoryName(sec_dir);
+
+                if (Directory.Exists(sec_dir))
+                {
+                    if (Directory.Exists(sec_dir + @"\thumbnails"))
+                    {
+                        //@TODO
+                    }
+
+                    //@TODO
+                    sec.photos = sec_dir;
+                }
+
+                sections.Add(sec);
+            }
+
+            return sections;
+        }
+
+        private List<User> findAvailableUsersInDir(string path)
+        {
+            List<User> users = new List<User>(Directory.GetDirectories(path).Count());
+            foreach (string user_dir in Directory.GetDirectories(path))
+            {
+                User user = new User();
+                user.name = "123";// Path.GetDirectoryName(user_dir);
+
+                if (Directory.Exists(user_dir + @"\photos"))
+                {
+                    if (Directory.Exists(user_dir + @"\photos\thumbnails"))
+                    {
+                        //@TODO
+                    }
+
+                    //@TODO
+                    user.photos = user_dir + @"\photos";
+                }
+
+                if (Directory.Exists(user_dir + @"\videos"))
+                {
+                    if (Directory.Exists(user_dir + @"\videos\thumbnails"))
+                    {
+                        //@TODO
+                    }
+
+                    //@TODO
+                    user.videos = user_dir + @"\videos";
+                }
+
+                if (File.Exists(user_dir + @"\photo.jpg"))
+                {
+                    user.photo = user_dir + @"\photo.jpg";
+                }
+
+                if (File.Exists(user_dir + @"\photo_thumbnail.jpg"))
+                {
+                    //@TODO
+                }
+
+                users.Add(user);
+            }
+
+            return users;
         }
     }
 }

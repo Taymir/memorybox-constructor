@@ -49,6 +49,10 @@ namespace Constructor
         public bool general_start_fullscreen { get; set; }
         public bool general_show_intro { get; set; }
 
+        /* PROJECT SETTINGS */
+        public string settings_project_path { get; set; }
+        public string settings_source_path { get; set; }
+
         public DataRegistry()
         {
             this.schoolmates = new List<User>();
