@@ -55,9 +55,39 @@ namespace Constructor
 
         public DataRegistry()
         {
+            this.school_name = "";
+            this.school_photo = "";
+
+            this.school_contacts_phone = "";
+            this.school_contacts_email = "";
+            this.school_contacts_links = "";
+
+            this.school_pictures_history = "";
+            this.school_pictures_director = "";
+            this.school_pictures_video = "";
+
+            this.school_history_html = "";
+
+            this.school_director_name = "";
+            this.school_director_photo = "";
+            this.school_director_video = "";
+
+            this.school_video = "";
+
             this.schoolmates = new List<User>();
+            this.schoolmates_path = "";
+
             this.teachers = new List<User>();
+            this.teachers_path = "";
+
             this.archive = new List<ArchiveSection>();
+            this.archive_path = "";
+
+            this.info_html = "";
+
+            this.general_intro_video = "";
+            this.general_start_fullscreen = false;
+            this.general_show_intro = false;
         }
     }
 }

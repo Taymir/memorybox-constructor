@@ -78,7 +78,7 @@
             // 
             this.source.AutoSize = true;
             this.source.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.source.filepath = "";
+            this.source.filepath = "C:\\MyProjects\\MemoryBox\\code2\\src";
             this.source.Location = new System.Drawing.Point(18, 71);
             this.source.Name = "source";
             this.source.Size = new System.Drawing.Size(446, 23);

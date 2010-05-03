@@ -51,7 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchiveSection.cs" />
+    <Compile Include="Compile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compile.Designer.cs">
+      <DependentUpon>Compile.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataRegistry.cs" />
+    <Compile Include="exportDataRegistry.cs" />
     <Compile Include="FolderSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +88,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Compile.resx">
+      <DependentUpon>Compile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FolderSelect.resx">
       <DependentUpon>FolderSelect.cs</DependentUpon>
     </EmbeddedResource>

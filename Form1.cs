@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Xml.Serialization;
 using System.IO;
+using System.Diagnostics;
 
 namespace Constructor
 {
@@ -38,7 +39,7 @@ namespace Constructor
 
             treeView1.ExpandAll();
 
-            treeView1.Enabled = false;
+            //treeView1.Enabled = false;
         }
 
         private void resetRegistry()
@@ -167,7 +168,7 @@ namespace Constructor
 
         private void открытьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            panelManager1.SelectedPanel = null;
+            //panelManager1.SelectedPanel = null;
 
             XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
             FileStream fStream = File.OpenRead("text.xml");
@@ -176,11 +177,12 @@ namespace Constructor
 
             data_source.DataSource = registry;
             treeView1.Enabled = true;
+            data_source.ResetBindings(false);
         }
 
         private void новыйПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*NewProject form = new NewProject();
+            NewProject form = new NewProject();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 resetRegistry();
@@ -188,11 +190,12 @@ namespace Constructor
                 this.registry.settings_project_path = form.projectPath;
                 this.registry.settings_source_path = form.sourcePath;
 
-                findAvailableDirectories(form.sourcePath);*/
+                findAvailableDirectories(form.sourcePath);
+
+                data_source.ResetBindings(false);
 
                 treeView1.Enabled = true;
-                registry.teachers.Add(new User() { name = "БРЕД" });
-            //}
+            }
         }
 
         private void findAvailableDirectories(string path)
@@ -201,70 +204,70 @@ namespace Constructor
                 return;
 
             /* SCHOOL */
-            if (Directory.Exists(path + @"\school"))
+            if (Directory.Exists( Path.Combine(path, @"school") ))
             {
-                if (Directory.Exists(path + @"\school\director"))
+                if (Directory.Exists( Path.Combine(path, @"school\director") ))
                 {
-                    if (File.Exists(path + @"\school\director\photo.jpg"))
+                    if (File.Exists( Path.Combine(path, @"school\director\photo.jpg") ))
                     {
-                        registry.school_director_photo = path + @"\school\director\photo.jpg";
+                        registry.school_director_photo =  Path.Combine(path, @"school\director\photo.jpg") ;
                     }
-                    if (File.Exists(path + @"\school\director\video.flv"))
+                    if (File.Exists( Path.Combine(path, @"school\director\video.flv") ))
                     {
-                        registry.school_director_video = path + @"\school\director\video.flv";
+                        registry.school_director_video =  Path.Combine(path, @"school\director\video.flv") ;
                     }
                 }
 
-                if (File.Exists(path + @"\school\photo.jpg"))
+                if (File.Exists( Path.Combine(path, @"school\photo.jpg") ))
                 {
-                    registry.school_photo = path + @"\school\photo.jpg";
+                    registry.school_photo =  Path.Combine(path, @"school\photo.jpg") ;
                 }
-                if (File.Exists(path + @"\school\video.flv"))
+                if (File.Exists( Path.Combine(path, @"school\video.flv") ))
                 {
-                    registry.school_video = path + @"\school\video.flv";
+                    registry.school_video =  Path.Combine(path, @"school\video.flv") ;
                 }
 
-                if (File.Exists(path + @"\school\history.jpg"))
+                if (File.Exists( Path.Combine(path,  @"school\history.jpg") ))
                 {
-                    registry.school_pictures_history = path + @"\school\history.jpg";
+                    registry.school_pictures_history =  Path.Combine(path, @"school\history.jpg") ;
                 }
-                if (File.Exists(path + @"\school\director.jpg"))
+                if (File.Exists( Path.Combine(path, @"school\director.jpg") ))
                 {
-                    registry.school_pictures_director = path + @"\school\director.jpg";
+                    registry.school_pictures_director =  Path.Combine(path, @"school\director.jpg") ;
                 }
-                if (File.Exists(path + @"\school\video.jpg"))
+                if (File.Exists( Path.Combine(path, @"school\video.jpg") ))
                 {
-                    registry.school_pictures_video = path + @"\school\video.jpg";
+                    registry.school_pictures_video =  Path.Combine(path, @"school\video.jpg") ;
                 }
             }
 
             /* SCHOOLMATES */
-            if (Directory.Exists(path + @"\schoolmates"))
+            if (Directory.Exists( Path.Combine(path, @"schoolmates") ))
             {
-                //registry.schoolmates_path = path + @"\schoolmates";
+                registry.schoolmates_path =  Path.Combine(path, @"schoolmates") ;
 
-                //registry.schoolmates.AddRange(findAvailableUsersInDir(path + @"\schoolmates"));
+                registry.schoolmates.AddRange(findAvailableUsersInDir( Path.Combine(path, @"schoolmates") ));
             }
 
             /* TEACHERS */
-            if (Directory.Exists(path + @"\teachers"))
+            if (Directory.Exists( Path.Combine(path, @"teachers") ))
             {
-                registry.teachers_path = path + @"\teachers";
+                registry.teachers_path =  Path.Combine(path, @"teachers") ;
 
-                //registry.teachers = findAvailableUsersInDir(path + @"\teachers");
+                registry.teachers.AddRange(findAvailableUsersInDir( Path.Combine(path, @"teachers") ));
             }
 
             /* ARCHIVE */
-            if (Directory.Exists(path + @"\archive"))
+            if (Directory.Exists( Path.Combine(path, @"archive") ))
             {
-                registry.archive_path = path + @"\archive";
+                registry.archive_path =  Path.Combine(path, @"archive") ;
 
-                //registry.archive = findAvailableArchiveSectionsInDir(path + @"\archive");
+                registry.archive.AddRange(findAvailableArchiveSectionsInDir( Path.Combine(path, @"archive") ));
             }
 
-            if (File.Exists(path + @"\intro.flv"))
+            if (File.Exists( Path.Combine(path, @"intro.flv") ))
             {
-                registry.general_intro_video = path + @"\intro.flv";
+                registry.general_intro_video = Path.Combine(path, @"intro.flv");
             }
 
         }
@@ -275,11 +278,11 @@ namespace Constructor
             foreach (string sec_dir in Directory.GetDirectories(path))
             {
                 ArchiveSection sec = new ArchiveSection();
-                sec.name = Path.GetDirectoryName(sec_dir);
+                sec.name = Path.GetFileName(sec_dir);
 
                 if (Directory.Exists(sec_dir))
                 {
-                    if (Directory.Exists(sec_dir + @"\thumbnails"))
+                    if (Directory.Exists(Path.Combine(sec_dir, @"thumbnails")))
                     {
                         //@TODO
                     }
@@ -300,36 +303,36 @@ namespace Constructor
             foreach (string user_dir in Directory.GetDirectories(path))
             {
                 User user = new User();
-                user.name = "123";// Path.GetDirectoryName(user_dir);
+                user.name = Path.GetFileName(user_dir);
 
-                if (Directory.Exists(user_dir + @"\photos"))
+                if (Directory.Exists(Path.Combine(user_dir, @"photos")))
                 {
-                    if (Directory.Exists(user_dir + @"\photos\thumbnails"))
+                    if (Directory.Exists(Path.Combine(user_dir, @"photos\thumbnails")))
                     {
                         //@TODO
                     }
 
                     //@TODO
-                    user.photos = user_dir + @"\photos";
+                    user.photos = Path.Combine(user_dir, @"photos");
                 }
 
-                if (Directory.Exists(user_dir + @"\videos"))
+                if (Directory.Exists( Path.Combine(user_dir, @"videos") ))
                 {
-                    if (Directory.Exists(user_dir + @"\videos\thumbnails"))
+                    if (Directory.Exists( Path.Combine(user_dir, @"videos\thumbnails") ))
                     {
                         //@TODO
                     }
 
                     //@TODO
-                    user.videos = user_dir + @"\videos";
+                    user.videos = Path.Combine(user_dir, @"videos");
                 }
 
-                if (File.Exists(user_dir + @"\photo.jpg"))
+                if (File.Exists( Path.Combine(user_dir, @"photo.jpg") ))
                 {
-                    user.photo = user_dir + @"\photo.jpg";
+                    user.photo = Path.Combine(user_dir, @"photo.jpg");
                 }
 
-                if (File.Exists(user_dir + @"\photo_thumbnail.jpg"))
+                if (File.Exists( Path.Combine(user_dir, @"photo_thumbnail.jpg") ))
                 {
                     //@TODO
                 }
@@ -338,6 +341,14 @@ namespace Constructor
             }
 
             return users;
+        }
+
+        private void собратьПроектToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Compile form = new Compile();
+            exportDataRegistry export = new exportDataRegistry(this.registry);
+            form.Show();
+            form.text = export.export();
         }
     }
 }

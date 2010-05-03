@@ -336,6 +336,7 @@ namespace Constructor
             this.собратьПроектToolStripMenuItem.Name = "собратьПроектToolStripMenuItem";
             this.собратьПроектToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.собратьПроектToolStripMenuItem.Text = "Собрать проект";
+            this.собратьПроектToolStripMenuItem.Click += new System.EventHandler(this.собратьПроектToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -423,8 +424,8 @@ namespace Constructor
             this.panelManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelManager1.Location = new System.Drawing.Point(0, 0);
             this.panelManager1.Name = "panelManager1";
-            this.panelManager1.SelectedIndex = 4;
-            this.panelManager1.SelectedPanel = this.SchoolmatesPanel;
+            this.panelManager1.SelectedIndex = -1;
+            this.panelManager1.SelectedPanel = null;
             this.panelManager1.Size = new System.Drawing.Size(793, 574);
             this.panelManager1.TabIndex = 0;
             // 
@@ -1227,7 +1228,7 @@ namespace Constructor
             this.SchoolmatesPanel.Controls.Add(this.label3);
             this.SchoolmatesPanel.Location = new System.Drawing.Point(0, 0);
             this.SchoolmatesPanel.Name = "SchoolmatesPanel";
-            this.SchoolmatesPanel.Size = new System.Drawing.Size(793, 574);
+            this.SchoolmatesPanel.Size = new System.Drawing.Size(0, 0);
             this.SchoolmatesPanel.Text = "Одноклассники";
             // 
             // groupBox7
@@ -1236,7 +1237,7 @@ namespace Constructor
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox7.Location = new System.Drawing.Point(0, 281);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(793, 290);
+            this.groupBox7.Size = new System.Drawing.Size(0, 290);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Карточка одноклассника";
@@ -1274,7 +1275,7 @@ namespace Constructor
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(787, 268);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(0, 268);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
             // schoolmate_contacts_links
@@ -1347,7 +1348,7 @@ namespace Constructor
             this.schoolmate_photos.filepath = "";
             this.schoolmate_photos.Location = new System.Drawing.Point(153, 29);
             this.schoolmate_photos.Name = "schoolmate_photos";
-            this.schoolmate_photos.Size = new System.Drawing.Size(446, 23);
+            this.schoolmate_photos.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_photos.TabIndex = 4;
             // 
             // schoolmate_videos
@@ -1357,7 +1358,7 @@ namespace Constructor
             this.schoolmate_videos.filepath = "";
             this.schoolmate_videos.Location = new System.Drawing.Point(153, 58);
             this.schoolmate_videos.Name = "schoolmate_videos";
-            this.schoolmate_videos.Size = new System.Drawing.Size(446, 23);
+            this.schoolmate_videos.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_videos.TabIndex = 5;
             // 
             // label30
@@ -1413,7 +1414,7 @@ namespace Constructor
             this.schoolmate_photo.filter = "";
             this.schoolmate_photo.Location = new System.Drawing.Point(153, 241);
             this.schoolmate_photo.Name = "schoolmate_photo";
-            this.schoolmate_photo.Size = new System.Drawing.Size(446, 23);
+            this.schoolmate_photo.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_photo.TabIndex = 15;
             // 
             // groupBox6
@@ -1422,7 +1423,7 @@ namespace Constructor
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(0, 39);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(793, 242);
+            this.groupBox6.Size = new System.Drawing.Size(0, 242);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Одноклассники";
@@ -1598,7 +1599,7 @@ namespace Constructor
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(10);
-            this.label3.Size = new System.Drawing.Size(793, 39);
+            this.label3.Size = new System.Drawing.Size(0, 39);
             this.label3.TabIndex = 1;
             this.label3.Text = "Одноклассники";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
