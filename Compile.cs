@@ -32,5 +32,17 @@ namespace Constructor
                 return this.textBox1.Text;
             }
         }
+
+        public double percent
+        {
+            set
+            {
+                this.progressBar1.Value = (int)(value * 100);
+            }
+            get
+            {
+                return (double)this.progressBar1.Value / 100;
+            }
+        }
     }
 }

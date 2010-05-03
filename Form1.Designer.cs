@@ -30,28 +30,28 @@ namespace Constructor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Общее");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("История");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Школа", new System.Windows.Forms.TreeNode[] {
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Одноклассники");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Учителя");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Архив");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Информация");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Контент", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode15,
-            treeNode16,
-            treeNode17,
-            treeNode18,
-            treeNode19});
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Цвета");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Кнопки");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Скроллбары");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
-            treeNode21,
-            treeNode22,
-            treeNode23});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Общее");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("История");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Школа", new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Одноклассники");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Учителя");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Архив");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Информация");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Контент", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Цвета");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Кнопки");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Скроллбары");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +76,8 @@ namespace Constructor
             this.general_show_intro = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.InfoPanel = new Controls.ManagedPanel();
-            this.label48 = new System.Windows.Forms.Label();
+            this.info_htmlsource_button = new System.Windows.Forms.Button();
+            this.info_editor = new Constructor.Design.Editor();
             this.info_html = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.SchoolPanel = new Controls.ManagedPanel();
@@ -222,7 +223,8 @@ namespace Constructor
             this.ScrollbarsPanel = new Controls.ManagedPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.SchoolHistoryPanel = new Controls.ManagedPanel();
-            this.label25 = new System.Windows.Forms.Label();
+            this.history_htmlsource_button = new System.Windows.Forms.Button();
+            this.school_history_editor = new Constructor.Design.Editor();
             this.school_history_html = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -378,33 +380,33 @@ namespace Constructor
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode13.Name = "General";
-            treeNode13.Text = "Общее";
-            treeNode14.Name = "SchoolHistory";
-            treeNode14.Text = "История";
-            treeNode15.Name = "School";
-            treeNode15.Text = "Школа";
-            treeNode16.Name = "Schoolmates";
-            treeNode16.Text = "Одноклассники";
-            treeNode17.Name = "Teachers";
-            treeNode17.Text = "Учителя";
-            treeNode18.Name = "Archive";
-            treeNode18.Text = "Архив";
-            treeNode19.Name = "Info";
-            treeNode19.Text = "Информация";
-            treeNode20.Name = "Content";
-            treeNode20.Text = "Контент";
-            treeNode21.Name = "Colors";
-            treeNode21.Text = "Цвета";
-            treeNode22.Name = "Buttons";
-            treeNode22.Text = "Кнопки";
-            treeNode23.Name = "Scrollbars";
-            treeNode23.Text = "Скроллбары";
-            treeNode24.Name = "Design";
-            treeNode24.Text = "Оформление";
+            treeNode1.Name = "General";
+            treeNode1.Text = "Общее";
+            treeNode2.Name = "SchoolHistory";
+            treeNode2.Text = "История";
+            treeNode3.Name = "School";
+            treeNode3.Text = "Школа";
+            treeNode4.Name = "Schoolmates";
+            treeNode4.Text = "Одноклассники";
+            treeNode5.Name = "Teachers";
+            treeNode5.Text = "Учителя";
+            treeNode6.Name = "Archive";
+            treeNode6.Text = "Архив";
+            treeNode7.Name = "Info";
+            treeNode7.Text = "Информация";
+            treeNode8.Name = "Content";
+            treeNode8.Text = "Контент";
+            treeNode9.Name = "Colors";
+            treeNode9.Text = "Цвета";
+            treeNode10.Name = "Buttons";
+            treeNode10.Text = "Кнопки";
+            treeNode11.Name = "Scrollbars";
+            treeNode11.Text = "Скроллбары";
+            treeNode12.Name = "Design";
+            treeNode12.Text = "Оформление";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode20,
-            treeNode24});
+            treeNode8,
+            treeNode12});
             this.treeView1.Size = new System.Drawing.Size(233, 574);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -539,25 +541,37 @@ namespace Constructor
             // InfoPanel
             // 
             this.InfoPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.InfoPanel.Controls.Add(this.label48);
+            this.InfoPanel.Controls.Add(this.info_htmlsource_button);
+            this.InfoPanel.Controls.Add(this.info_editor);
             this.InfoPanel.Controls.Add(this.info_html);
             this.InfoPanel.Controls.Add(this.label6);
             this.InfoPanel.Location = new System.Drawing.Point(0, 0);
             this.InfoPanel.Name = "InfoPanel";
-            this.InfoPanel.Size = new System.Drawing.Size(0, 0);
+            this.InfoPanel.Size = new System.Drawing.Size(793, 574);
             this.InfoPanel.Text = "Информация";
             // 
-            // label48
+            // info_htmlsource_button
             // 
-            this.label48.AutoSize = true;
-            this.label48.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label48.Location = new System.Drawing.Point(0, 537);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(168, 13);
-            this.label48.TabIndex = 7;
-            this.label48.Text = "Доступно html-форматирование";
-            this.label48.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.info_htmlsource_button.Location = new System.Drawing.Point(0, 543);
+            this.info_htmlsource_button.Name = "info_htmlsource_button";
+            this.info_htmlsource_button.Size = new System.Drawing.Size(164, 23);
+            this.info_htmlsource_button.TabIndex = 9;
+            this.info_htmlsource_button.Text = "html / source";
+            this.info_htmlsource_button.UseVisualStyleBackColor = true;
+            this.info_htmlsource_button.Click += new System.EventHandler(this.info_htmlsource_button_Click);
+            // 
+            // info_editor
+            // 
+            this.info_editor.BodyHtml = null;
+            this.info_editor.BodyText = null;
+            this.info_editor.DocumentText = resources.GetString("info_editor.DocumentText");
+            this.info_editor.EditorBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.info_editor.EditorForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.info_editor.FontSize = Constructor.Design.FontSize.Three;
+            this.info_editor.Location = new System.Drawing.Point(0, 39);
+            this.info_editor.Name = "info_editor";
+            this.info_editor.Size = new System.Drawing.Size(793, 498);
+            this.info_editor.TabIndex = 8;
             // 
             // info_html
             // 
@@ -565,7 +579,7 @@ namespace Constructor
             this.info_html.Location = new System.Drawing.Point(0, 39);
             this.info_html.Multiline = true;
             this.info_html.Name = "info_html";
-            this.info_html.Size = new System.Drawing.Size(0, 498);
+            this.info_html.Size = new System.Drawing.Size(793, 498);
             this.info_html.TabIndex = 6;
             // 
             // label6
@@ -577,7 +591,7 @@ namespace Constructor
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(10);
-            this.label6.Size = new System.Drawing.Size(0, 39);
+            this.label6.Size = new System.Drawing.Size(793, 39);
             this.label6.TabIndex = 1;
             this.label6.Text = "Информация";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2060,7 +2074,8 @@ namespace Constructor
             // SchoolHistoryPanel
             // 
             this.SchoolHistoryPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.SchoolHistoryPanel.Controls.Add(this.label25);
+            this.SchoolHistoryPanel.Controls.Add(this.history_htmlsource_button);
+            this.SchoolHistoryPanel.Controls.Add(this.school_history_editor);
             this.SchoolHistoryPanel.Controls.Add(this.school_history_html);
             this.SchoolHistoryPanel.Controls.Add(this.label19);
             this.SchoolHistoryPanel.Location = new System.Drawing.Point(0, 0);
@@ -2068,17 +2083,28 @@ namespace Constructor
             this.SchoolHistoryPanel.Size = new System.Drawing.Size(0, 0);
             this.SchoolHistoryPanel.Text = "История";
             // 
-            // label25
+            // history_htmlsource_button
             // 
-            this.label25.AutoSize = true;
-            this.label25.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label25.Location = new System.Drawing.Point(0, 537);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(168, 13);
-            this.label25.TabIndex = 5;
-            this.label25.Text = "Доступно html-форматирование";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.history_htmlsource_button.Location = new System.Drawing.Point(0, 543);
+            this.history_htmlsource_button.Name = "history_htmlsource_button";
+            this.history_htmlsource_button.Size = new System.Drawing.Size(164, 23);
+            this.history_htmlsource_button.TabIndex = 11;
+            this.history_htmlsource_button.Text = "html / source";
+            this.history_htmlsource_button.UseVisualStyleBackColor = true;
+            this.history_htmlsource_button.Click += new System.EventHandler(this.school_history_htmlsource_button_Click);
+            // 
+            // school_history_editor
+            // 
+            this.school_history_editor.BodyHtml = null;
+            this.school_history_editor.BodyText = null;
+            this.school_history_editor.DocumentText = resources.GetString("school_history_editor.DocumentText");
+            this.school_history_editor.EditorBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.school_history_editor.EditorForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.school_history_editor.FontSize = Constructor.Design.FontSize.Three;
+            this.school_history_editor.Location = new System.Drawing.Point(0, 39);
+            this.school_history_editor.Name = "school_history_editor";
+            this.school_history_editor.Size = new System.Drawing.Size(793, 498);
+            this.school_history_editor.TabIndex = 10;
             // 
             // school_history_html
             // 
@@ -2298,7 +2324,6 @@ namespace Constructor
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label label24;
         private FileSelect school_video;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox school_history_html;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -2400,11 +2425,14 @@ namespace Constructor
         private System.Windows.Forms.ToolStripButton toolStripButton12;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.TextBox teacher_discipline;
-        private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox info_html;
         private System.Windows.Forms.BindingSource teachers_datasource;
         private System.Windows.Forms.BindingSource archiveSections_datasource;
         private System.Windows.Forms.BindingSource data_source;
+        private Constructor.Design.Editor info_editor;
+        private System.Windows.Forms.Button info_htmlsource_button;
+        private System.Windows.Forms.Button history_htmlsource_button;
+        private Constructor.Design.Editor school_history_editor;
     }
 }
 

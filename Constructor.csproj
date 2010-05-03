@@ -12,6 +12,7 @@
     <AssemblyName>Constructor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -50,25 +55,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArchiveSection.cs" />
+    <Compile Include="Compilers\FFmpeg.cs" />
+    <Compile Include="Compilers\Flex.cs" />
+    <Compile Include="Compilers\ImageMagick.cs" />
+    <Compile Include="DataClasses\ArchiveSection.cs" />
     <Compile Include="Compile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compile.Designer.cs">
       <DependentUpon>Compile.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataRegistry.cs" />
-    <Compile Include="exportDataRegistry.cs" />
-    <Compile Include="FolderSelect.cs">
+    <Compile Include="DataClasses\DataRegistry.cs" />
+    <Compile Include="Design\Editor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FolderSelect.Designer.cs">
+    <Compile Include="Design\Editor.designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\LinkDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\LinkDialog.designer.cs">
+      <DependentUpon>LinkDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Design\SearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\SearchDialog.designer.cs">
+      <DependentUpon>SearchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses\exportDataRegistry.cs" />
+    <Compile Include="Selectors\FolderSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Selectors\FolderSelect.Designer.cs">
       <DependentUpon>FolderSelect.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileSelect.cs">
+    <Compile Include="Selectors\FileSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FileSelect.Designer.cs">
+    <Compile Include="Selectors\FileSelect.Designer.cs">
       <DependentUpon>FileSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -91,10 +127,17 @@
     <EmbeddedResource Include="Compile.resx">
       <DependentUpon>Compile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FolderSelect.resx">
+    <EmbeddedResource Include="Design\LinkDialog.resx">
+      <DependentUpon>LinkDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Selectors\FolderSelect.resx">
       <DependentUpon>FolderSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileSelect.resx">
+    <EmbeddedResource Include="Selectors\FileSelect.resx">
       <DependentUpon>FileSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -111,8 +154,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Design\Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,7 +170,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="DataClasses\User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Design\Resources\backcolor.bmp" />
+    <Content Include="Design\Resources\bold.bmp" />
+    <Content Include="Design\Resources\cj.bmp" />
+    <Content Include="Design\Resources\color.bmp" />
+    <Content Include="Design\Resources\fj.bmp" />
+    <Content Include="Design\Resources\indent.bmp" />
+    <Content Include="Design\Resources\italic.bmp" />
+    <Content Include="Design\Resources\link.bmp" />
+    <Content Include="Design\Resources\lj.bmp" />
+    <Content Include="Design\Resources\ol.bmp" />
+    <Content Include="Design\Resources\outdent.bmp" />
+    <Content Include="Design\Resources\right_arrow.bmp" />
+    <Content Include="Design\Resources\rj.bmp" />
+    <Content Include="Design\Resources\underscore.bmp" />
+    <Content Include="Design\Resources\uol.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

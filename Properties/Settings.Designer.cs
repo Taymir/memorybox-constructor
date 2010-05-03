@@ -22,17 +22,5 @@ namespace Constructor.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("300, 20")]
-        public global::System.Drawing.Size DefTextBoxSize {
-            get {
-                return ((global::System.Drawing.Size)(this["DefTextBoxSize"]));
-            }
-            set {
-                this["DefTextBoxSize"] = value;
-            }
-        }
     }
 }

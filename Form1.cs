@@ -92,7 +92,8 @@ namespace Constructor
             school_pictures_director.DataBindings.Add("filename", data_source, "school_pictures_director");
             school_pictures_video.DataBindings.Add("filename", data_source, "school_pictures_video");
 
-            school_history_html.DataBindings.Add("Text", data_source, "school_history_html");
+            school_history_html.DataBindings.Add("Text", data_source, "school_history_html", true, DataSourceUpdateMode.OnPropertyChanged);
+            school_history_editor.DataBindings.Add("BodyHtml", data_source, "school_history_html", true, DataSourceUpdateMode.OnPropertyChanged);
 
             school_director_photo.DataBindings.Add("filename", data_source, "school_director_photo");
             school_director_name.DataBindings.Add("Text", data_source, "school_director_name");
@@ -146,7 +147,8 @@ namespace Constructor
             archiveSection_photos.DataBindings.Add("filepath", archiveSections_datasource, "photos");  
             
             /* INFO */
-            info_html.DataBindings.Add("Text", data_source, "info_html");
+            info_html.DataBindings.Add("Text", data_source, "info_html", true, DataSourceUpdateMode.OnPropertyChanged);
+            info_editor.DataBindings.Add("BodyHtml", data_source, "info_html", true, DataSourceUpdateMode.OnPropertyChanged);
 
         }
 
@@ -343,12 +345,63 @@ namespace Constructor
             return users;
         }
 
+        private Compile compileForm;
         private void собратьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Compile form = new Compile();
-            exportDataRegistry export = new exportDataRegistry(this.registry);
-            form.Show();
-            form.text = export.export();
+            compileForm = new Compile();
+            //exportDataRegistry export = new exportDataRegistry(this.registry);
+            compileForm.Show();
+            //form.text = export.export();
+
+            //@TESTS
+            Compilers.FFmpeg im = new Constructor.Compilers.FFmpeg();
+
+            im.Progress += new Constructor.Compilers.FFmpeg.ProgressHandler(im_Progress);
+
+            im.batch_convert(@"C:\MyProjects\MemoryBox\test", @"C:\MyProjects\MemoryBox\test\thumbnails");
+
+        }
+
+        void im_Progress(object sender, double progress, string filename)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    compileForm.percent = progress;
+                    compileForm.text = filename;
+                }));
+                return;
+            }
+        }
+
+        private void info_htmlsource_button_Click(object sender, EventArgs e)
+        {
+            if (info_editor.Visible)
+            {
+                info_editor.Hide();
+                info_html.Show();
+            }
+            else
+            {
+                info_html.Hide();
+                info_editor.Show();
+            }
+        }
+
+        private void school_history_htmlsource_button_Click(object sender, EventArgs e)
+        {
+            if (school_history_editor.Visible)
+            {
+                school_history_editor.Hide();
+                school_history_html.Show();
+
+            }
+            else
+            {
+                school_history_html.Hide();
+                school_history_editor.Show();
+            }
         }
     }
 }
