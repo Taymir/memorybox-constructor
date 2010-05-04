@@ -95,6 +95,7 @@
       <DependentUpon>SearchDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\exportDataRegistry.cs" />
+    <Compile Include="EirikurN\Utilities\CopyExtensions.cs" />
     <Compile Include="Selectors\FolderSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>

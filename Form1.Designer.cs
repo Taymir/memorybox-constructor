@@ -62,7 +62,6 @@ namespace Constructor
             this.собратьПроектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panelManager1 = new Controls.PanelManager();
@@ -232,6 +231,8 @@ namespace Constructor
             this.folderSelect3 = new Constructor.FolderSelect();
             this.label38 = new System.Windows.Forms.Label();
             this.data_source = new System.Windows.Forms.BindingSource(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -285,8 +286,7 @@ namespace Constructor
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.проектToolStripMenuItem,
-            this.помощьToolStripMenuItem});
+            this.проектToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1030, 24);
@@ -351,12 +351,6 @@ namespace Constructor
             this.выходToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
-            // 
-            // помощьToolStripMenuItem
-            // 
-            this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.помощьToolStripMenuItem.Text = "Помощь";
             // 
             // splitContainer1
             // 
@@ -491,10 +485,10 @@ namespace Constructor
             this.general_intro_video.AutoSize = true;
             this.general_intro_video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.general_intro_video.filename = "";
-            this.general_intro_video.filter = "";
+            this.general_intro_video.filter = "Flash video (*.flv)|*.flv";
             this.general_intro_video.Location = new System.Drawing.Point(158, 8);
             this.general_intro_video.Name = "general_intro_video";
-            this.general_intro_video.Size = new System.Drawing.Size(300, 23);
+            this.general_intro_video.Size = new System.Drawing.Size(1, 23);
             this.general_intro_video.TabIndex = 1;
             // 
             // label10
@@ -519,7 +513,7 @@ namespace Constructor
             this.general_show_intro.AutoSize = true;
             this.general_show_intro.Location = new System.Drawing.Point(158, 37);
             this.general_show_intro.Name = "general_show_intro";
-            this.general_show_intro.Size = new System.Drawing.Size(300, 17);
+            this.general_show_intro.Size = new System.Drawing.Size(1, 17);
             this.general_show_intro.TabIndex = 3;
             this.general_show_intro.Text = "Показывать вступительный ролик";
             this.general_show_intro.UseVisualStyleBackColor = true;
@@ -547,7 +541,7 @@ namespace Constructor
             this.InfoPanel.Controls.Add(this.label6);
             this.InfoPanel.Location = new System.Drawing.Point(0, 0);
             this.InfoPanel.Name = "InfoPanel";
-            this.InfoPanel.Size = new System.Drawing.Size(793, 574);
+            this.InfoPanel.Size = new System.Drawing.Size(0, 0);
             this.InfoPanel.Text = "Информация";
             // 
             // info_htmlsource_button
@@ -579,7 +573,7 @@ namespace Constructor
             this.info_html.Location = new System.Drawing.Point(0, 39);
             this.info_html.Multiline = true;
             this.info_html.Name = "info_html";
-            this.info_html.Size = new System.Drawing.Size(793, 498);
+            this.info_html.Size = new System.Drawing.Size(0, 498);
             this.info_html.TabIndex = 6;
             // 
             // label6
@@ -591,7 +585,7 @@ namespace Constructor
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(10);
-            this.label6.Size = new System.Drawing.Size(793, 39);
+            this.label6.Size = new System.Drawing.Size(0, 39);
             this.label6.TabIndex = 1;
             this.label6.Text = "Информация";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -649,10 +643,10 @@ namespace Constructor
             this.school_video.AutoSize = true;
             this.school_video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_video.filename = "";
-            this.school_video.filter = "";
+            this.school_video.filter = "Flash video (*.flv)|*.flv";
             this.school_video.Location = new System.Drawing.Point(153, 3);
             this.school_video.Name = "school_video";
-            this.school_video.Size = new System.Drawing.Size(300, 21);
+            this.school_video.Size = new System.Drawing.Size(1, 21);
             this.school_video.TabIndex = 1;
             // 
             // groupBox5
@@ -691,7 +685,7 @@ namespace Constructor
             // 
             this.school_director_name.Location = new System.Drawing.Point(153, 3);
             this.school_director_name.Name = "school_director_name";
-            this.school_director_name.Size = new System.Drawing.Size(300, 20);
+            this.school_director_name.Size = new System.Drawing.Size(1, 20);
             this.school_director_name.TabIndex = 5;
             // 
             // label21
@@ -726,10 +720,10 @@ namespace Constructor
             this.school_director_photo.AutoSize = true;
             this.school_director_photo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_director_photo.filename = "";
-            this.school_director_photo.filter = "";
+            this.school_director_photo.filter = "Images (*.jpg)|*.jpg";
             this.school_director_photo.Location = new System.Drawing.Point(153, 29);
             this.school_director_photo.Name = "school_director_photo";
-            this.school_director_photo.Size = new System.Drawing.Size(300, 23);
+            this.school_director_photo.Size = new System.Drawing.Size(1, 23);
             this.school_director_photo.TabIndex = 6;
             // 
             // school_director_video
@@ -737,10 +731,10 @@ namespace Constructor
             this.school_director_video.AutoSize = true;
             this.school_director_video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_director_video.filename = "";
-            this.school_director_video.filter = "";
+            this.school_director_video.filter = "Flash video (*.flv)|*.flv";
             this.school_director_video.Location = new System.Drawing.Point(153, 58);
             this.school_director_video.Name = "school_director_video";
-            this.school_director_video.Size = new System.Drawing.Size(300, 23);
+            this.school_director_video.Size = new System.Drawing.Size(1, 23);
             this.school_director_video.TabIndex = 7;
             // 
             // groupBox4
@@ -807,10 +801,10 @@ namespace Constructor
             this.school_pictures_director.AutoSize = true;
             this.school_pictures_director.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_pictures_director.filename = "";
-            this.school_pictures_director.filter = "";
+            this.school_pictures_director.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_director.Location = new System.Drawing.Point(153, 3);
             this.school_pictures_director.Name = "school_pictures_director";
-            this.school_pictures_director.Size = new System.Drawing.Size(300, 23);
+            this.school_pictures_director.Size = new System.Drawing.Size(1, 23);
             this.school_pictures_director.TabIndex = 3;
             // 
             // school_pictures_history
@@ -818,10 +812,10 @@ namespace Constructor
             this.school_pictures_history.AutoSize = true;
             this.school_pictures_history.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_pictures_history.filename = "";
-            this.school_pictures_history.filter = "";
+            this.school_pictures_history.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_history.Location = new System.Drawing.Point(153, 32);
             this.school_pictures_history.Name = "school_pictures_history";
-            this.school_pictures_history.Size = new System.Drawing.Size(300, 23);
+            this.school_pictures_history.Size = new System.Drawing.Size(1, 23);
             this.school_pictures_history.TabIndex = 4;
             // 
             // school_pictures_video
@@ -829,10 +823,10 @@ namespace Constructor
             this.school_pictures_video.AutoSize = true;
             this.school_pictures_video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_pictures_video.filename = "";
-            this.school_pictures_video.filter = "";
+            this.school_pictures_video.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_video.Location = new System.Drawing.Point(153, 61);
             this.school_pictures_video.Name = "school_pictures_video";
-            this.school_pictures_video.Size = new System.Drawing.Size(300, 23);
+            this.school_pictures_video.Size = new System.Drawing.Size(1, 23);
             this.school_pictures_video.TabIndex = 5;
             // 
             // groupBox2
@@ -913,21 +907,21 @@ namespace Constructor
             // 
             this.school_name.Location = new System.Drawing.Point(153, 3);
             this.school_name.Name = "school_name";
-            this.school_name.Size = new System.Drawing.Size(300, 20);
+            this.school_name.Size = new System.Drawing.Size(1, 20);
             this.school_name.TabIndex = 4;
             // 
             // school_contacts_phone
             // 
             this.school_contacts_phone.Location = new System.Drawing.Point(153, 29);
             this.school_contacts_phone.Name = "school_contacts_phone";
-            this.school_contacts_phone.Size = new System.Drawing.Size(300, 20);
+            this.school_contacts_phone.Size = new System.Drawing.Size(1, 20);
             this.school_contacts_phone.TabIndex = 5;
             // 
             // school_contacts_email
             // 
             this.school_contacts_email.Location = new System.Drawing.Point(153, 55);
             this.school_contacts_email.Name = "school_contacts_email";
-            this.school_contacts_email.Size = new System.Drawing.Size(300, 20);
+            this.school_contacts_email.Size = new System.Drawing.Size(1, 20);
             this.school_contacts_email.TabIndex = 6;
             // 
             // school_contacts_links
@@ -935,7 +929,7 @@ namespace Constructor
             this.school_contacts_links.Location = new System.Drawing.Point(153, 81);
             this.school_contacts_links.Multiline = true;
             this.school_contacts_links.Name = "school_contacts_links";
-            this.school_contacts_links.Size = new System.Drawing.Size(300, 100);
+            this.school_contacts_links.Size = new System.Drawing.Size(1, 100);
             this.school_contacts_links.TabIndex = 7;
             // 
             // label16
@@ -952,10 +946,10 @@ namespace Constructor
             this.school_photo.AutoSize = true;
             this.school_photo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.school_photo.filename = "";
-            this.school_photo.filter = "";
+            this.school_photo.filter = "Images (*.jpg)|*.jpg";
             this.school_photo.Location = new System.Drawing.Point(153, 187);
             this.school_photo.Name = "school_photo";
-            this.school_photo.Size = new System.Drawing.Size(300, 23);
+            this.school_photo.Size = new System.Drawing.Size(1, 23);
             this.school_photo.TabIndex = 9;
             // 
             // label2
@@ -1037,14 +1031,14 @@ namespace Constructor
             this.archiveSection_photos.filepath = "";
             this.archiveSection_photos.Location = new System.Drawing.Point(153, 29);
             this.archiveSection_photos.Name = "archiveSection_photos";
-            this.archiveSection_photos.Size = new System.Drawing.Size(300, 23);
+            this.archiveSection_photos.Size = new System.Drawing.Size(1, 23);
             this.archiveSection_photos.TabIndex = 2;
             // 
             // archiveSection_name
             // 
             this.archiveSection_name.Location = new System.Drawing.Point(153, 3);
             this.archiveSection_name.Name = "archiveSection_name";
-            this.archiveSection_name.Size = new System.Drawing.Size(300, 20);
+            this.archiveSection_name.Size = new System.Drawing.Size(1, 20);
             this.archiveSection_name.TabIndex = 3;
             // 
             // groupBox8
@@ -1297,21 +1291,21 @@ namespace Constructor
             this.schoolmate_contacts_links.Location = new System.Drawing.Point(153, 139);
             this.schoolmate_contacts_links.Multiline = true;
             this.schoolmate_contacts_links.Name = "schoolmate_contacts_links";
-            this.schoolmate_contacts_links.Size = new System.Drawing.Size(300, 70);
+            this.schoolmate_contacts_links.Size = new System.Drawing.Size(1, 70);
             this.schoolmate_contacts_links.TabIndex = 13;
             // 
             // schoolmate_contacts_phone
             // 
             this.schoolmate_contacts_phone.Location = new System.Drawing.Point(153, 113);
             this.schoolmate_contacts_phone.Name = "schoolmate_contacts_phone";
-            this.schoolmate_contacts_phone.Size = new System.Drawing.Size(300, 20);
+            this.schoolmate_contacts_phone.Size = new System.Drawing.Size(1, 20);
             this.schoolmate_contacts_phone.TabIndex = 12;
             // 
             // schoolmate_contacts_cellphone
             // 
             this.schoolmate_contacts_cellphone.Location = new System.Drawing.Point(153, 87);
             this.schoolmate_contacts_cellphone.Name = "schoolmate_contacts_cellphone";
-            this.schoolmate_contacts_cellphone.Size = new System.Drawing.Size(300, 20);
+            this.schoolmate_contacts_cellphone.Size = new System.Drawing.Size(1, 20);
             this.schoolmate_contacts_cellphone.TabIndex = 11;
             // 
             // label27
@@ -1327,14 +1321,14 @@ namespace Constructor
             // 
             this.schoolmate_birthday.Location = new System.Drawing.Point(153, 215);
             this.schoolmate_birthday.Name = "schoolmate_birthday";
-            this.schoolmate_birthday.Size = new System.Drawing.Size(300, 20);
+            this.schoolmate_birthday.Size = new System.Drawing.Size(1, 20);
             this.schoolmate_birthday.TabIndex = 14;
             // 
             // schoolmate_name
             // 
             this.schoolmate_name.Location = new System.Drawing.Point(153, 3);
             this.schoolmate_name.Name = "schoolmate_name";
-            this.schoolmate_name.Size = new System.Drawing.Size(300, 20);
+            this.schoolmate_name.Size = new System.Drawing.Size(1, 20);
             this.schoolmate_name.TabIndex = 1;
             // 
             // label28
@@ -1362,7 +1356,7 @@ namespace Constructor
             this.schoolmate_photos.filepath = "";
             this.schoolmate_photos.Location = new System.Drawing.Point(153, 29);
             this.schoolmate_photos.Name = "schoolmate_photos";
-            this.schoolmate_photos.Size = new System.Drawing.Size(300, 23);
+            this.schoolmate_photos.Size = new System.Drawing.Size(1, 23);
             this.schoolmate_photos.TabIndex = 4;
             // 
             // schoolmate_videos
@@ -1372,7 +1366,7 @@ namespace Constructor
             this.schoolmate_videos.filepath = "";
             this.schoolmate_videos.Location = new System.Drawing.Point(153, 58);
             this.schoolmate_videos.Name = "schoolmate_videos";
-            this.schoolmate_videos.Size = new System.Drawing.Size(300, 23);
+            this.schoolmate_videos.Size = new System.Drawing.Size(1, 23);
             this.schoolmate_videos.TabIndex = 5;
             // 
             // label30
@@ -1425,10 +1419,10 @@ namespace Constructor
             this.schoolmate_photo.AutoSize = true;
             this.schoolmate_photo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.schoolmate_photo.filename = "";
-            this.schoolmate_photo.filter = "";
+            this.schoolmate_photo.filter = "Images (*.jpg)|*.jpg";
             this.schoolmate_photo.Location = new System.Drawing.Point(153, 241);
             this.schoolmate_photo.Name = "schoolmate_photo";
-            this.schoolmate_photo.Size = new System.Drawing.Size(300, 23);
+            this.schoolmate_photo.Size = new System.Drawing.Size(1, 23);
             this.schoolmate_photo.TabIndex = 15;
             // 
             // groupBox6
@@ -1681,21 +1675,21 @@ namespace Constructor
             this.teacher_contacts_links.Location = new System.Drawing.Point(153, 139);
             this.teacher_contacts_links.Multiline = true;
             this.teacher_contacts_links.Name = "teacher_contacts_links";
-            this.teacher_contacts_links.Size = new System.Drawing.Size(300, 70);
+            this.teacher_contacts_links.Size = new System.Drawing.Size(1, 70);
             this.teacher_contacts_links.TabIndex = 13;
             // 
             // teacher_contacts_phone
             // 
             this.teacher_contacts_phone.Location = new System.Drawing.Point(153, 113);
             this.teacher_contacts_phone.Name = "teacher_contacts_phone";
-            this.teacher_contacts_phone.Size = new System.Drawing.Size(300, 20);
+            this.teacher_contacts_phone.Size = new System.Drawing.Size(1, 20);
             this.teacher_contacts_phone.TabIndex = 12;
             // 
             // teacher_contacts_cellphone
             // 
             this.teacher_contacts_cellphone.Location = new System.Drawing.Point(153, 87);
             this.teacher_contacts_cellphone.Name = "teacher_contacts_cellphone";
-            this.teacher_contacts_cellphone.Size = new System.Drawing.Size(300, 20);
+            this.teacher_contacts_cellphone.Size = new System.Drawing.Size(1, 20);
             this.teacher_contacts_cellphone.TabIndex = 11;
             // 
             // label39
@@ -1711,7 +1705,7 @@ namespace Constructor
             // 
             this.teacher_name.Location = new System.Drawing.Point(153, 3);
             this.teacher_name.Name = "teacher_name";
-            this.teacher_name.Size = new System.Drawing.Size(300, 20);
+            this.teacher_name.Size = new System.Drawing.Size(1, 20);
             this.teacher_name.TabIndex = 1;
             // 
             // label40
@@ -1739,7 +1733,7 @@ namespace Constructor
             this.teacher_photos.filepath = "";
             this.teacher_photos.Location = new System.Drawing.Point(153, 29);
             this.teacher_photos.Name = "teacher_photos";
-            this.teacher_photos.Size = new System.Drawing.Size(300, 23);
+            this.teacher_photos.Size = new System.Drawing.Size(1, 23);
             this.teacher_photos.TabIndex = 4;
             // 
             // teacher_videos
@@ -1749,7 +1743,7 @@ namespace Constructor
             this.teacher_videos.filepath = "";
             this.teacher_videos.Location = new System.Drawing.Point(153, 58);
             this.teacher_videos.Name = "teacher_videos";
-            this.teacher_videos.Size = new System.Drawing.Size(300, 23);
+            this.teacher_videos.Size = new System.Drawing.Size(1, 23);
             this.teacher_videos.TabIndex = 5;
             // 
             // label42
@@ -1802,17 +1796,17 @@ namespace Constructor
             this.teacher_photo.AutoSize = true;
             this.teacher_photo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.teacher_photo.filename = "";
-            this.teacher_photo.filter = "";
+            this.teacher_photo.filter = "Images (*.jpg)|*.jpg";
             this.teacher_photo.Location = new System.Drawing.Point(153, 241);
             this.teacher_photo.Name = "teacher_photo";
-            this.teacher_photo.Size = new System.Drawing.Size(300, 23);
+            this.teacher_photo.Size = new System.Drawing.Size(1, 23);
             this.teacher_photo.TabIndex = 15;
             // 
             // teacher_discipline
             // 
             this.teacher_discipline.Location = new System.Drawing.Point(153, 215);
             this.teacher_discipline.Name = "teacher_discipline";
-            this.teacher_discipline.Size = new System.Drawing.Size(300, 20);
+            this.teacher_discipline.Size = new System.Drawing.Size(1, 20);
             this.teacher_discipline.TabIndex = 16;
             // 
             // groupBox12
@@ -2169,6 +2163,16 @@ namespace Constructor
             this.label38.TabIndex = 1;
             this.label38.Text = "Католог одноклассников:";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "project.xml";
+            this.openFileDialog1.Filter = "Xml configuration|*.xml";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileName = "project.xml";
+            this.saveFileDialog1.Filter = "Xml configuration|*.xml";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2362,7 +2366,6 @@ namespace Constructor
         private System.Windows.Forms.Label label34;
         private FileSelect schoolmate_photo;
         private System.Windows.Forms.ToolStripMenuItem сохранитьПроектToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private FolderSelect archiveSections_path;
@@ -2433,6 +2436,8 @@ namespace Constructor
         private System.Windows.Forms.Button info_htmlsource_button;
         private System.Windows.Forms.Button history_htmlsource_button;
         private Constructor.Design.Editor school_history_editor;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

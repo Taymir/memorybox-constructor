@@ -161,15 +161,18 @@ namespace Constructor
 
         private void сохранитьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
+            saveFileDialog1.ShowDialog();
+            /*XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
             FileStream fStream = new System.IO.FileStream("text.xml", System.IO.FileMode.Create, System.IO.FileAccess.Write, FileShare.None);
             xml.Serialize(fStream, registry);
             fStream.Close();
-
+            */
         }
 
         private void открытьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            openFileDialog1.ShowDialog();
+            /*
             //panelManager1.SelectedPanel = null;
 
             XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
@@ -180,6 +183,7 @@ namespace Constructor
             data_source.DataSource = registry;
             treeView1.Enabled = true;
             data_source.ResetBindings(false);
+             * */
         }
 
         private void новыйПроектToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,10 +290,10 @@ namespace Constructor
                 {
                     if (Directory.Exists(Path.Combine(sec_dir, @"thumbnails")))
                     {
-                        //@TODO
+                        //@NOTHING : Список тумбнейлов генерится при компиляции
                     }
 
-                    //@TODO
+                    //@NOTHING : Список файлов генерится при компиляции
                     sec.photos = sec_dir;
                 }
 
@@ -311,10 +315,10 @@ namespace Constructor
                 {
                     if (Directory.Exists(Path.Combine(user_dir, @"photos\thumbnails")))
                     {
-                        //@TODO
+                        //@NOTHING : Список тумбнейлов генерится при компиляции
                     }
 
-                    //@TODO
+                    //@NOTHING : Список файлов генерится при компиляции
                     user.photos = Path.Combine(user_dir, @"photos");
                 }
 
@@ -322,10 +326,10 @@ namespace Constructor
                 {
                     if (Directory.Exists( Path.Combine(user_dir, @"videos\thumbnails") ))
                     {
-                        //@TODO
+                        //@NOTHING : Список тумбнейлов генерится при компиляции
                     }
 
-                    //@TODO
+                    //@NOTHING : Список файлов генерится при компиляции
                     user.videos = Path.Combine(user_dir, @"videos");
                 }
 
@@ -336,7 +340,7 @@ namespace Constructor
 
                 if (File.Exists( Path.Combine(user_dir, @"photo_thumbnail.jpg") ))
                 {
-                    //@TODO
+                    //@NOTHING : Существование тумбнейла проверяется при компилции
                 }
 
                 users.Add(user);
@@ -349,30 +353,10 @@ namespace Constructor
         private void собратьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
             compileForm = new Compile();
+            compileForm.registry = this.registry;
             //exportDataRegistry export = new exportDataRegistry(this.registry);
             compileForm.Show();
-            //form.text = export.export();
-
-            //@TESTS
-            Compilers.FFmpeg im = new Constructor.Compilers.FFmpeg();
-
-            im.Progress += new Constructor.Compilers.FFmpeg.ProgressHandler(im_Progress);
-
-            im.batch_convert(@"C:\MyProjects\MemoryBox\test", @"C:\MyProjects\MemoryBox\test\thumbnails");
-
-        }
-
-        void im_Progress(object sender, double progress, string filename)
-        {
-            if (InvokeRequired)
-            {
-                this.Invoke(new MethodInvoker(delegate
-                {
-                    compileForm.percent = progress;
-                    compileForm.text = filename;
-                }));
-                return;
-            }
+            //compileForm.text = export.export();
         }
 
         private void info_htmlsource_button_Click(object sender, EventArgs e)
