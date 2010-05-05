@@ -122,15 +122,20 @@
             // 
             // step_two_bw
             // 
+            this.step_two_bw.WorkerReportsProgress = true;
             this.step_two_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_two_bw_DoWork);
+            this.step_two_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_two_bw_RunWorkerCompleted);
             this.step_two_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
             // step_three_bw
             // 
+            this.step_three_bw.WorkerReportsProgress = true;
+            this.step_three_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_three_bw_DoWork);
             this.step_three_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
             // step_four_bw
             // 
+            this.step_four_bw.WorkerReportsProgress = true;
             this.step_four_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
             // Compile

@@ -26,13 +26,19 @@ namespace Constructor.Compilers
             {
                 StartInfo =
                 {
-                    Arguments = string.Format("{0} \"{1}\" \"{2}\"",
+                    /*Arguments = string.Format("{0} \"{1}\" \"{2}\"",
                                             settings,
                                             filename_from,
-                                            filename_to),
+                                            Path.Combine(filename_to, Path.GetFileName(filename_from))),*/
+                    Arguments =             Encoding.Default.GetString(Encoding.UTF8.GetBytes(
+                                                string.Format("{0} \"{1}\" \"{2}\"",
+                                                    settings,
+                                                    filename_from,
+                                                    Path.Combine(filename_to, Path.GetFileName(filename_from)))
+                                            )),
                     FileName = Path_to_imagick,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
                     RedirectStandardOutput = false,
                     RedirectStandardError = false
                 }
@@ -52,8 +58,8 @@ namespace Constructor.Compilers
                                             filename_from,
                                             filename_to),
                     FileName = Path_to_imagick,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
                     RedirectStandardOutput = false,
                     RedirectStandardError = false
                 }
@@ -87,11 +93,12 @@ namespace Constructor.Compilers
             if(file_iterator < file_list.Length)
                 cur_file = Path.GetFileName(file_list[file_iterator]);
 
-            Progress(
-                this,
-                (double)file_iterator / (double)file_list.Length,
-                cur_file
-                );
+            if(Progress != null)
+                Progress(
+                    this,
+                    (double)file_iterator / (double)file_list.Length,
+                    cur_file
+                    );
         }
 
         public void batch_convert(string filepath_from, string filepath_to)

@@ -10,7 +10,7 @@ namespace Constructor.Compilers
     class FFmpeg
     {
         public static string Path_to_ffmpeg = @"C:\MyProjects\MemoryBox\Constructor\libs\ffmpeg\bin\ffmpeg";
-        public string settings = " -vcodec mjpeg -vframes 1 -an -f rawvideo -s 150x120";
+        public string settings = " -vcodec mjpeg -vframes 1 -an -f rawvideo -s 150x120 -y";
 
         private string[] file_list;
         private int file_iterator;
@@ -37,6 +37,7 @@ namespace Constructor.Compilers
                     RedirectStandardError = false
                 }
             };
+            
 
             proc.Start();
         }
@@ -87,11 +88,12 @@ namespace Constructor.Compilers
             if (file_iterator < file_list.Length)
                 cur_file = Path.GetFileName(file_list[file_iterator]);
 
-            Progress(
-                this,
-                (double)file_iterator / (double)file_list.Length,
-                cur_file
-                );
+            if (Progress != null)
+                Progress(
+                    this,
+                    (double)file_iterator / (double)file_list.Length,
+                    cur_file
+                    );
         }
 
         public void batch_convert(string filepath_from, string filepath_to)
