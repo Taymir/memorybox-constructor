@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Drawing;
 
 namespace Constructor.Compilers
 {
     class ImageMagick
     {
-        public static string Path_to_imagick = @"C:\MyProjects\MemoryBox\Constructor\libs\imagemagick\bin\convert";
-        public string settings = " -resize 150x120";
- 
+        public static int thumbnail_width = 150;
+        public static int thumbnail_height = 120;
+
         private string[] file_list;
-        private int file_iterator;
         private string filepath_to;
 
         public delegate void ProgressHandler(object sender, double progress, string filename);
@@ -22,93 +22,65 @@ namespace Constructor.Compilers
 
         public void single_convert(string filename_from, string filename_to)
         {
-            Process proc = new Process
+            MagickNet.Magick.Init();
+            MagickNet.Image im = new MagickNet.Image(filename_from);
+
+            im.Resize(calculateSize(im.Size));
+
+            im.Write(filename_to);
+            MagickNet.Magick.Term();
+        }
+
+        private void convert()
+        {
+            for (int i = 0; i < file_list.Length; ++i )
             {
-                StartInfo =
-                {
-                    /*Arguments = string.Format("{0} \"{1}\" \"{2}\"",
-                                            settings,
-                                            filename_from,
-                                            Path.Combine(filename_to, Path.GetFileName(filename_from))),*/
-                    Arguments =             Encoding.Default.GetString(Encoding.UTF8.GetBytes(
-                                                string.Format("{0} \"{1}\" \"{2}\"",
-                                                    settings,
-                                                    filename_from,
-                                                    Path.Combine(filename_to, Path.GetFileName(filename_from)))
-                                            )),
-                    FileName = Path_to_imagick,
-                    UseShellExecute = true,
-                    CreateNoWindow = false,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false
-                }
-            };
+                string cur_file = Path.GetFileName(file_list[i]);
 
-            proc.Start();
+                if (Progress != null)
+                    Progress(
+                        this,
+                        (double)i / (double)(file_list.Length - 1),
+                        cur_file
+                        );
+
+                MagickNet.Image im = new MagickNet.Image(file_list[i]);
+
+                im.Resize(calculateSize(im.Size));
+
+                string destination = Path.Combine(filepath_to, Path.GetFileName(file_list[i]));
+
+                im.Write(destination);
+            }
         }
 
-        private void convert(string filename_from, string filename_to)
+        private Size calculateSize(Size original)
         {
-            Process proc = new Process
+            //Вычисление размеров
+            Size result = new Size(thumbnail_width, thumbnail_height);
+
+            if (original.Width > original.Height)
             {
-                StartInfo =
-                {
-                    Arguments = string.Format("{0} \"{1}\" \"{2}\"",
-                                            settings,
-                                            filename_from,
-                                            filename_to),
-                    FileName = Path_to_imagick,
-                    UseShellExecute = true,
-                    CreateNoWindow = false,
-                    RedirectStandardOutput = false,
-                    RedirectStandardError = false
-                }
-            };
-            proc.EnableRaisingEvents = true;
-            proc.Exited += new EventHandler(proc_Exited);
+                result.Height = (int)Math.Floor(original.Height * ((double)150 / original.Width));
+            }
+            else
+            {
+                result.Width = (int)Math.Floor(original.Width * ((double)150 / original.Height));
+            }
 
-            proc.Start();
-            
-        }
-
-        private void convert_next()
-        {
-            this.convert(file_list[file_iterator], Path.Combine(filepath_to, Path.GetFileName(file_list[file_iterator])));
-            file_iterator++;
-        }
-
-        private void proc_Exited(object sender, EventArgs e)
-        {
-            update_progress();
-
-            if (file_iterator < file_list.Length)
-                // continue
-                convert_next();
-        }
-
-        private void update_progress()
-        {
-            string cur_file = "";
-
-            if(file_iterator < file_list.Length)
-                cur_file = Path.GetFileName(file_list[file_iterator]);
-
-            if(Progress != null)
-                Progress(
-                    this,
-                    (double)file_iterator / (double)file_list.Length,
-                    cur_file
-                    );
+            return result;
         }
 
         public void batch_convert(string filepath_from, string filepath_to)
         {
+            MagickNet.Magick.Init();
+
             file_list = Directory.GetFiles(filepath_from, "*.jpg");
             this.filepath_to = filepath_to;
-            file_iterator = 0;
 
-            update_progress();
-            convert_next();
+            convert();
+
+            MagickNet.Magick.Term();
         }
     }
 }

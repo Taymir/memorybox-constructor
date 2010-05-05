@@ -8,6 +8,43 @@ namespace Constructor
 {
     public class User
     {
+        public static List<User> cloneUsers(List<User> users)
+        {
+            List<User> result = new List<User>(users.Count);
+
+            for (int i = 0; i < users.Count; ++i)
+            {
+                result.Insert(i, new User());
+                result[i].name = users[i].name;
+
+                result[i].photo = users[i].photo;
+
+                result[i].isTeacher = users[i].isTeacher;
+                result[i].birthday = users[i].birthday;
+                result[i].disipline = users[i].disipline;
+
+                result[i].contacts_cellphone = users[i].contacts_cellphone;
+                result[i].contacts_phone = users[i].contacts_phone;
+                result[i].contacts_links = users[i].contacts_links;
+
+                result[i].photos = users[i].photos;
+
+                result[i].videos = users[i].videos;
+
+                if(users[i].photos_list != null)
+                result[i].photos_list = (string[])users[i].photos_list.Clone();
+                if(users[i].photos_thumbnails_list != null)
+                result[i].photos_thumbnails_list = (string[])users[i].photos_thumbnails_list.Clone();
+
+                if(users[i].videos_list != null)
+                result[i].videos_list = (string[])users[i].videos_list.Clone();
+                if(users[i].videos_thumbnails_list != null)
+                result[i].videos_thumbnails_list = (string[])users[i].videos_thumbnails_list.Clone();
+            }
+
+            return result;
+        }
+
         public User()
         {
             this.birthday = new DateTime(1987, 01, 01);
@@ -86,6 +123,7 @@ namespace Constructor
             return photos_thumbnails_list;
         }
 
+
         public string[] fill_videos_list()
         {
             if (!Directory.Exists(this.videos))
@@ -95,7 +133,7 @@ namespace Constructor
 
             return videos_list;
         }
-        public string[] fill_videos_thumbnails_list()
+        public string[] fill_videos_thumbnails_list()/// не подходит для тумбнейлов!
         {
             if (!Directory.Exists(this.videos_thumbnails))
                 return null;

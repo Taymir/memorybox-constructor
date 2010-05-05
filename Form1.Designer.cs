@@ -46,12 +46,8 @@ namespace Constructor
             treeNode6,
             treeNode7});
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Цвета");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Кнопки");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Скроллбары");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -392,15 +388,11 @@ namespace Constructor
             treeNode8.Text = "Контент";
             treeNode9.Name = "Colors";
             treeNode9.Text = "Цвета";
-            treeNode10.Name = "Buttons";
-            treeNode10.Text = "Кнопки";
-            treeNode11.Name = "Scrollbars";
-            treeNode11.Text = "Скроллбары";
-            treeNode12.Name = "Design";
-            treeNode12.Text = "Оформление";
+            treeNode10.Name = "Design";
+            treeNode10.Text = "Оформление";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode8,
-            treeNode12});
+            treeNode10});
             this.treeView1.Size = new System.Drawing.Size(233, 574);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);

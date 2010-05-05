@@ -110,7 +110,6 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Детали >>";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // step_one_bw
@@ -131,12 +130,21 @@
             // 
             this.step_three_bw.WorkerReportsProgress = true;
             this.step_three_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_three_bw_DoWork);
+            this.step_three_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_three_bw_RunWorkerCompleted);
             this.step_three_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
             // step_four_bw
             // 
             this.step_four_bw.WorkerReportsProgress = true;
+            this.step_four_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_four_bw_DoWork);
+            this.step_four_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_four_bw_RunWorkerCompleted);
             this.step_four_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
+            // 
+            // step_five_bw
+            // 
+            this.step_five_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_five_bw_DoWork);
+            this.step_five_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_five_bw_RunWorkerCompleted);
+            this.step_five_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
             // Compile
             // 

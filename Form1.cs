@@ -352,33 +352,13 @@ namespace Constructor
         private Compile compileForm;
         private void собратьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*compileForm = new Compile();
+            compileForm = new Compile();
             compileForm.registry = this.registry;
             //exportDataRegistry export = new exportDataRegistry(this.registry);
             compileForm.Show();
             //compileForm.text = export.export();
-             * */
+             
             //@TMP
-            MagickNet.Magick.Init();
-            MagickNet.Image im = new MagickNet.Image(@"C:\MyProjects\MemoryBox\test\bin-debug\schoolmates\Алёхина Юлия\photos\DSC00688.JPG");
-
-            //Вычисление размеров
-            int thumbnail_width = 150;
-            int thumbnail_height = 120;
-            Size size = new Size(thumbnail_width, thumbnail_height);
-
-            if (im.Size.Width > im.Size.Height)
-            {
-                size.Height = (int)Math.Floor( im.Size.Height * ((double)150 / im.Size.Width) );
-            }
-            else
-            {
-                size.Width = (int)Math.Floor(im.Size.Width * ((double)150 / im.Size.Height));
-            }
-            im.Resize(size);
-
-            im.Write(@"C:\MyProjects\MemoryBox\test\dest\блабла.jpg");
-            MagickNet.Magick.Term();
         }
 
         private void info_htmlsource_button_Click(object sender, EventArgs e)

@@ -88,6 +88,50 @@ namespace Constructor
             this.general_intro_video = string.Empty;
             this.general_start_fullscreen = false;
             this.general_show_intro = false;
+
+            this.settings_project_path = string.Empty;
+            this.settings_source_path = string.Empty;
+        }
+
+        // Copy constructor
+        public DataRegistry(DataRegistry clone)
+        {
+            this.school_name = clone.school_name;
+            this.school_photo = clone.school_photo;
+
+            this.school_contacts_phone = clone.school_contacts_phone;
+            this.school_contacts_email = clone.school_contacts_email;
+            this.school_contacts_links = clone.school_contacts_links;
+
+            this.school_pictures_history = clone.school_pictures_history;
+            this.school_pictures_director = clone.school_pictures_director;
+            this.school_pictures_video = clone.school_pictures_video;
+
+            this.school_history_html = clone.school_history_html;
+
+            this.school_director_name = clone.school_director_name;
+            this.school_director_photo = clone.school_director_photo;
+            this.school_director_video = clone.school_director_video;
+
+            this.school_video = clone.school_video;
+
+            this.schoolmates = User.cloneUsers(clone.schoolmates);
+            this.schoolmates_path = clone.schoolmates_path;
+
+            this.teachers = User.cloneUsers(clone.teachers);
+            this.teachers_path = clone.teachers_path;
+
+            this.archive = ArchiveSection.cloneArchiveSections(clone.archive);
+            this.archive_path = clone.archive_path;
+
+            this.info_html = clone.info_html;
+
+            this.general_intro_video = clone.general_intro_video;
+            this.general_start_fullscreen = clone.general_start_fullscreen;
+            this.general_show_intro = clone.general_show_intro;
+
+            this.settings_project_path = clone.settings_project_path;
+            this.settings_source_path = clone.settings_source_path;
         }
     }
 }

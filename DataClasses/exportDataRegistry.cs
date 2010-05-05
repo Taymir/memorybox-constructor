@@ -17,6 +17,8 @@ namespace Constructor
 
         private string escape(string str)
         {
+            if (str == null)
+                return string.Empty;
             return str.Replace("\"", "\\\"");
         }
 
@@ -47,7 +49,18 @@ namespace Constructor
 
         private string exportArray(string value)
         {
+            if (value == null)
+                return string.Empty;
             string[] arr = Regex.Split(value, "\r\n");
+
+            return exportArray(arr);
+        }
+
+        private string exportArray(string[] arr)
+        {
+            if (arr == null)
+                return string.Empty;
+
             string res = "new Array(\r\n";
 
             for (int i = 0; i < arr.Length; ++i)
@@ -66,8 +79,12 @@ namespace Constructor
 
         private string exportMultilineString(string name, string value)
         {
-            string[] arr = Regex.Split(value, "\r\n");
             string res = string.Format("public var {0} : String = \r\n", name);
+
+            if (value == null)
+                return res + "\"\";\r\n";
+
+            string[] arr = Regex.Split(value, "\r\n");
 
             if (arr.Length > 0)
             {
@@ -110,7 +127,8 @@ namespace Constructor
                 exportString(user.name) + ",\r\n" +
 
                 exportString(user.photo) + ",\r\n" +
-                exportString(user.photo) + ",\r\n";  //@TMP: thumbnail
+                //exportString(user.photo) + ",\r\n";  //@TMP: thumbnail
+                exportString(user.photo_thumbnail) + ",\r\n";
 
             if (user.isTeacher)
                 res += exportString(user.disipline) + ",\r\n";
@@ -122,11 +140,16 @@ namespace Constructor
                 exportString(user.contacts_phone) + ",\r\n" +
                 exportArray(user.contacts_links) + ",\r\n" +
 
-                exportString(user.photos) + ",\r\n" + //@TMP
-                exportString(user.photos) + ",\r\n" + //@TMP: thumbnail
+                //exportString(user.photos) + ",\r\n" + //@TMP
+                //exportString(user.photos) + ",\r\n" + //@TMP: thumbnail
+                exportArray(user.photos_list) + ",\r\n" +
+                exportArray(user.photos_thumbnails_list) + ",\r\n" + 
 
-                exportString(user.videos) + ",\r\n" + //@TMP
-                exportString(user.videos) + "\r\n" +  //@TMP: thumbnail
+
+                //exportString(user.videos) + ",\r\n" + //@TMP
+                //exportString(user.videos) + "\r\n" +  //@TMP: thumbnail
+                exportArray(user.videos_list) + ",\r\n" +
+                exportArray(user.videos_thumbnails_list) + "\r\n" + 
                 ")";
 
             return res;
@@ -158,8 +181,10 @@ namespace Constructor
                 "new ArchiveSection(\r\n" +
                 exportString(section.name) + ",\r\n" +
 
-                exportString(section.photos) + ",\r\n" + //@TMP
-                exportString(section.photos) + "\r\n" +  //@TMP: thumbnail
+                //exportString(section.photos) + ",\r\n" + //@TMP
+                //exportString(section.photos) + "\r\n" +  //@TMP: thumbnail
+                exportArray(section.photos_list) + ",\r\n" +
+                exportArray(section.photos_thumbnails_list) + "\r\n" + 
                 ")";
 
             return res;
