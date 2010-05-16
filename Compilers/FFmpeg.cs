@@ -9,7 +9,7 @@ namespace Constructor.Compilers
 {
     class FFmpeg
     {
-        public static string Path_to_ffmpeg = @"C:\MyProjects\MemoryBox\Constructor\libs\ffmpeg\bin\ffmpeg";
+        public static string Path_to_ffmpeg = Path.Combine(DataRegistry.program_path, @"libs\ffmpeg\bin\ffmpeg");
         public string settings = " -vcodec mjpeg -vframes 1 -an -f rawvideo -s 150x120 -y";
 
         private string[] file_list;
@@ -22,6 +22,9 @@ namespace Constructor.Compilers
 
         public void single_convert(string filename_from, string filename_to)
         {
+            if (!File.Exists(filename_from))
+                return;
+
             Process proc = new Process
             {
                 StartInfo =
@@ -98,12 +101,17 @@ namespace Constructor.Compilers
 
         public void batch_convert(string filepath_from, string filepath_to)
         {
+            if (!Directory.Exists(filepath_from))
+                return;
+
             file_list = Directory.GetFiles(filepath_from, "*.flv");
             this.filepath_to = filepath_to;
             file_iterator = 0;
 
             update_progress();
-            convert_next();
+
+            if (file_iterator < file_list.Length)
+                convert_next();
         }
     }
 }

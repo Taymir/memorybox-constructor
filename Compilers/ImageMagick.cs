@@ -22,6 +22,9 @@ namespace Constructor.Compilers
 
         public void single_convert(string filename_from, string filename_to)
         {
+            if (!File.Exists(filename_from))
+                return;
+
             MagickNet.Magick.Init();
             MagickNet.Image im = new MagickNet.Image(filename_from);
 
@@ -73,6 +76,9 @@ namespace Constructor.Compilers
 
         public void batch_convert(string filepath_from, string filepath_to)
         {
+            if (!Directory.Exists(filepath_from))
+                return;
+
             MagickNet.Magick.Init();
 
             file_list = Directory.GetFiles(filepath_from, "*.jpg");

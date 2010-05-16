@@ -78,7 +78,7 @@
             // 
             this.source.AutoSize = true;
             this.source.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.source.filepath = "C:\\MyProjects\\MemoryBox\\code2\\bin-debug";
+            this.source.filepath = "c:\\MyProjects\\MemoryBox\\CONTENT2\\";
             this.source.Location = new System.Drawing.Point(18, 71);
             this.source.Name = "source";
             this.source.Size = new System.Drawing.Size(446, 23);
@@ -88,7 +88,7 @@
             // 
             this.project.AutoSize = true;
             this.project.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.project.filepath = "C:\\MyProjects\\MemoryBox\\test\\dest";
+            this.project.filepath = "c:\\MyProjects\\MemoryBox\\RESULT\\";
             this.project.Location = new System.Drawing.Point(15, 25);
             this.project.Name = "project";
             this.project.Size = new System.Drawing.Size(446, 23);
@@ -111,6 +111,7 @@
             this.MaximizeBox = false;
             this.Name = "NewProject";
             this.Text = "Новый проект";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewProject_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

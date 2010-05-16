@@ -18,16 +18,12 @@ namespace Constructor
         public Form1()
         {
             InitializeComponent();
-
-
-            
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -39,7 +35,7 @@ namespace Constructor
 
             treeView1.ExpandAll();
 
-            //treeView1.Enabled = false;
+            treeView1.Enabled = false;
         }
 
         private void resetRegistry()
@@ -79,6 +75,12 @@ namespace Constructor
             general_intro_video.DataBindings.Add("filename", data_source, "general_intro_video");
             general_show_intro.DataBindings.Add("Checked", data_source, "general_show_intro");
             general_start_fullscreen.DataBindings.Add("Checked", data_source, "general_start_fullscreen");
+
+            general_music_school.DataBindings.Add("filename", data_source, "general_music_school");
+            general_music_schoolmates.DataBindings.Add("filename", data_source, "general_music_schoolmates");
+            general_music_teachers.DataBindings.Add("filename", data_source, "general_music_teachers");
+            general_music_archive.DataBindings.Add("filename", data_source, "general_music_archive");
+            general_music_info.DataBindings.Add("filename", data_source, "general_music_info");
 
             /* SCHOOL */
             school_name.DataBindings.Add("Text", data_source, "school_name");
@@ -144,7 +146,7 @@ namespace Constructor
             archiveSections_list.DisplayMember = "name";
 
             archiveSection_name.DataBindings.Add("Text", archiveSections_datasource, "name");
-            archiveSection_photos.DataBindings.Add("filepath", archiveSections_datasource, "photos");  
+            archiveSection_large.DataBindings.Add("filepath", archiveSections_datasource, "large_path");  
             
             /* INFO */
             info_html.DataBindings.Add("Text", data_source, "info_html", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -161,29 +163,32 @@ namespace Constructor
 
         private void сохранитьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            /*XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
-            FileStream fStream = new System.IO.FileStream("text.xml", System.IO.FileMode.Create, System.IO.FileAccess.Write, FileShare.None);
-            xml.Serialize(fStream, registry);
-            fStream.Close();
-            */
+            saveFileDialog1.InitialDirectory = registry.settings_project_path;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
+                FileStream fStream = new System.IO.FileStream(saveFileDialog1.FileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, FileShare.None);
+                xml.Serialize(fStream, registry);
+                fStream.Close();
+            }
         }
 
         private void открытьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
-            /*
-            //panelManager1.SelectedPanel = null;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                panelManager1.SelectedPanel = null;
 
-            XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
-            FileStream fStream = File.OpenRead("text.xml");
-            registry = (DataRegistry)xml.Deserialize(fStream);
-            fStream.Close();
+                XmlSerializer xml = new XmlSerializer(typeof(DataRegistry), new Type[] { typeof(User), typeof(ArchiveSection) });
+                FileStream fStream = File.OpenRead(openFileDialog1.FileName);
+                registry = (DataRegistry)xml.Deserialize(fStream);
+                fStream.Close();
 
-            data_source.DataSource = registry;
-            treeView1.Enabled = true;
-            data_source.ResetBindings(false);
-             * */
+                data_source.DataSource = registry;
+                treeView1.Enabled = true;
+                data_source.ResetBindings(false);
+            }
+            
         }
 
         private void новыйПроектToolStripMenuItem_Click(object sender, EventArgs e)
@@ -274,14 +279,37 @@ namespace Constructor
             if (File.Exists( Path.Combine(path, @"intro.flv") ))
             {
                 registry.general_intro_video = Path.Combine(path, @"intro.flv");
+                registry.general_show_intro = true;
+            }
+
+            /* MUSIC */
+            if (Directory.Exists(Path.Combine(path, @"music")))
+            {
+                if (File.Exists(Path.Combine(path, @"music\school.mp3")))
+                    registry.general_music_school = Path.Combine(path, @"music\school.mp3");
+
+                if (File.Exists(Path.Combine(path, @"music\schoolmates.mp3")))
+                    registry.general_music_school = Path.Combine(path, @"music\schoolmates.mp3");
+
+                if (File.Exists(Path.Combine(path, @"music\teachers.mp3")))
+                    registry.general_music_school = Path.Combine(path, @"music\teachers.mp3");
+
+                if (File.Exists(Path.Combine(path, @"music\archive.mp3")))
+                    registry.general_music_school = Path.Combine(path, @"music\archive.mp3");
+
+                if (File.Exists(Path.Combine(path, @"music\info.mp3")))
+                    registry.general_music_school = Path.Combine(path, @"music\info.mp3");
             }
 
         }
 
         private List<ArchiveSection> findAvailableArchiveSectionsInDir(string path)
         {
-            List<ArchiveSection> sections = new List<ArchiveSection>(Directory.GetDirectories(path).Count());
-            foreach (string sec_dir in Directory.GetDirectories(path))
+            string[] archive_paths = Directory.GetDirectories(path);
+            Array.Sort(archive_paths);
+
+            List<ArchiveSection> sections = new List<ArchiveSection>(archive_paths.Count());
+            foreach (string sec_dir in archive_paths)
             {
                 ArchiveSection sec = new ArchiveSection();
                 sec.name = Path.GetFileName(sec_dir);
@@ -294,7 +322,7 @@ namespace Constructor
                     }
 
                     //@NOTHING : Список файлов генерится при компиляции
-                    sec.photos = sec_dir;
+                    sec.large_path = sec_dir;
                 }
 
                 sections.Add(sec);
@@ -305,8 +333,11 @@ namespace Constructor
 
         private List<User> findAvailableUsersInDir(string path)
         {
-            List<User> users = new List<User>(Directory.GetDirectories(path).Count());
-            foreach (string user_dir in Directory.GetDirectories(path))
+            string[] user_paths = Directory.GetDirectories(path);
+            Array.Sort(user_paths);
+
+            List<User> users = new List<User>(user_paths.Count());
+            foreach (string user_dir in user_paths)
             {
                 User user = new User();
                 user.name = Path.GetFileName(user_dir);
@@ -354,11 +385,8 @@ namespace Constructor
         {
             compileForm = new Compile();
             compileForm.registry = this.registry;
-            //exportDataRegistry export = new exportDataRegistry(this.registry);
-            compileForm.Show();
-            //compileForm.text = export.export();
-             
-            //@TMP
+            this.panelManager1.SelectedPanel = null;
+            compileForm.ShowDialog();
         }
 
         private void info_htmlsource_button_Click(object sender, EventArgs e)
@@ -387,6 +415,42 @@ namespace Constructor
             {
                 school_history_html.Hide();
                 school_history_editor.Show();
+            }
+        }
+
+        void schoolmates_path_Selected(object sender, string filepath)
+        {
+            registry.schoolmates_path = filepath;
+
+            registry.schoolmates.Clear();
+            registry.schoolmates.AddRange(findAvailableUsersInDir(filepath));
+        }
+
+        void teachers_path_Selected(object sender, string filepath)
+        {
+            registry.teachers_path = filepath;
+
+            registry.teachers.Clear();
+            registry.teachers.AddRange(findAvailableUsersInDir(filepath));
+        }
+
+        void archiveSections_path_Selected(object sender, string filepath)
+        {
+            registry.archive_path = filepath;
+
+            registry.archive.Clear();
+            registry.archive.AddRange(findAvailableArchiveSectionsInDir(filepath));
+        }
+
+        void general_intro_video_Selected(object sender, string filename)
+        {
+            if (filename != null && filename != string.Empty)
+            {
+                general_show_intro.Checked = true;
+            }
+            else
+            {
+                general_show_intro.Checked = false;
             }
         }
     }

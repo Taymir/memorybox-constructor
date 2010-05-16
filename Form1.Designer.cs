@@ -45,9 +45,6 @@ namespace Constructor
             treeNode5,
             treeNode6,
             treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Цвета");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,13 +59,26 @@ namespace Constructor
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panelManager1 = new Controls.PanelManager();
             this.GeneralPanel = new Controls.ManagedPanel();
-            this.general_start_fullscreen = new System.Windows.Forms.CheckBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.general_music_school = new Constructor.FileSelect();
+            this.general_music_schoolmates = new Constructor.FileSelect();
+            this.general_music_teachers = new Constructor.FileSelect();
+            this.general_music_archive = new Constructor.FileSelect();
+            this.general_music_info = new Constructor.FileSelect();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.general_intro_video = new Constructor.FileSelect();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.general_show_intro = new System.Windows.Forms.CheckBox();
+            this.general_start_fullscreen = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.InfoPanel = new Controls.ManagedPanel();
             this.info_htmlsource_button = new System.Windows.Forms.Button();
@@ -114,7 +124,7 @@ namespace Constructor
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
-            this.archiveSection_photos = new Constructor.FolderSelect();
+            this.archiveSection_large = new Constructor.FolderSelect();
             this.archiveSection_name = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -235,6 +245,8 @@ namespace Constructor
             this.splitContainer1.SuspendLayout();
             this.panelManager1.SuspendLayout();
             this.GeneralPanel.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.InfoPanel.SuspendLayout();
@@ -386,13 +398,8 @@ namespace Constructor
             treeNode7.Text = "Информация";
             treeNode8.Name = "Content";
             treeNode8.Text = "Контент";
-            treeNode9.Name = "Colors";
-            treeNode9.Text = "Цвета";
-            treeNode10.Name = "Design";
-            treeNode10.Text = "Оформление";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode10});
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(233, 574);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -412,33 +419,171 @@ namespace Constructor
             this.panelManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelManager1.Location = new System.Drawing.Point(0, 0);
             this.panelManager1.Name = "panelManager1";
-            this.panelManager1.SelectedIndex = -1;
-            this.panelManager1.SelectedPanel = null;
+            this.panelManager1.SelectedIndex = 9;
+            this.panelManager1.SelectedPanel = this.SchoolHistoryPanel;
             this.panelManager1.Size = new System.Drawing.Size(793, 574);
             this.panelManager1.TabIndex = 0;
             // 
             // GeneralPanel
             // 
             this.GeneralPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.GeneralPanel.Controls.Add(this.general_start_fullscreen);
+            this.GeneralPanel.Controls.Add(this.groupBox13);
             this.GeneralPanel.Controls.Add(this.groupBox1);
             this.GeneralPanel.Controls.Add(this.label1);
             this.GeneralPanel.Location = new System.Drawing.Point(0, 0);
             this.GeneralPanel.Name = "GeneralPanel";
-            this.GeneralPanel.Size = new System.Drawing.Size(0, 0);
+            this.GeneralPanel.Size = new System.Drawing.Size(793, 574);
             this.GeneralPanel.Text = "Общее";
             // 
-            // general_start_fullscreen
+            // groupBox13
             // 
-            this.general_start_fullscreen.AutoSize = true;
-            this.general_start_fullscreen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.general_start_fullscreen.Location = new System.Drawing.Point(0, 124);
-            this.general_start_fullscreen.Name = "general_start_fullscreen";
-            this.general_start_fullscreen.Padding = new System.Windows.Forms.Padding(5);
-            this.general_start_fullscreen.Size = new System.Drawing.Size(0, 27);
-            this.general_start_fullscreen.TabIndex = 5;
-            this.general_start_fullscreen.Text = "Стартовать в полноэкранном режиме";
-            this.general_start_fullscreen.UseVisualStyleBackColor = true;
+            this.groupBox13.Controls.Add(this.label52);
+            this.groupBox13.Controls.Add(this.tableLayoutPanel13);
+            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox13.Location = new System.Drawing.Point(0, 143);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(793, 188);
+            this.groupBox13.TabIndex = 3;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Музыка";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label52.Location = new System.Drawing.Point(4, 168);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(596, 13);
+            this.label52.TabIndex = 1;
+            this.label52.Text = "* Для того, чтобы использовать одну музыкальную тему, выберите только музыкальный" +
+                " файл для раздела школа.";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.label25, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.label48, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label49, 0, 2);
+            this.tableLayoutPanel13.Controls.Add(this.label50, 0, 3);
+            this.tableLayoutPanel13.Controls.Add(this.label51, 0, 4);
+            this.tableLayoutPanel13.Controls.Add(this.general_music_school, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.general_music_schoolmates, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.general_music_teachers, 1, 2);
+            this.tableLayoutPanel13.Controls.Add(this.general_music_archive, 1, 3);
+            this.tableLayoutPanel13.Controls.Add(this.general_music_info, 1, 4);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 5;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(787, 145);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(3, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(43, 13);
+            this.label25.TabIndex = 0;
+            this.label25.Text = "Школа:";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(3, 29);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(90, 13);
+            this.label48.TabIndex = 1;
+            this.label48.Text = "Одноклассники:";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(3, 58);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(52, 13);
+            this.label49.TabIndex = 2;
+            this.label49.Text = "Учителя:";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(3, 87);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(40, 13);
+            this.label50.TabIndex = 3;
+            this.label50.Text = "Архив:";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(3, 116);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(76, 13);
+            this.label51.TabIndex = 4;
+            this.label51.Text = "Информация:";
+            // 
+            // general_music_school
+            // 
+            this.general_music_school.AutoSize = true;
+            this.general_music_school.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.general_music_school.filename = "";
+            this.general_music_school.filter = "Music (*.mp3)|*.mp3";
+            this.general_music_school.Location = new System.Drawing.Point(153, 3);
+            this.general_music_school.Name = "general_music_school";
+            this.general_music_school.Size = new System.Drawing.Size(446, 23);
+            this.general_music_school.TabIndex = 5;
+            // 
+            // general_music_schoolmates
+            // 
+            this.general_music_schoolmates.AutoSize = true;
+            this.general_music_schoolmates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.general_music_schoolmates.filename = "";
+            this.general_music_schoolmates.filter = "Music (*.mp3)|*.mp3";
+            this.general_music_schoolmates.Location = new System.Drawing.Point(153, 32);
+            this.general_music_schoolmates.Name = "general_music_schoolmates";
+            this.general_music_schoolmates.Size = new System.Drawing.Size(446, 23);
+            this.general_music_schoolmates.TabIndex = 6;
+            // 
+            // general_music_teachers
+            // 
+            this.general_music_teachers.AutoSize = true;
+            this.general_music_teachers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.general_music_teachers.filename = "";
+            this.general_music_teachers.filter = "Music (*.mp3)|*.mp3";
+            this.general_music_teachers.Location = new System.Drawing.Point(153, 61);
+            this.general_music_teachers.Name = "general_music_teachers";
+            this.general_music_teachers.Size = new System.Drawing.Size(446, 23);
+            this.general_music_teachers.TabIndex = 7;
+            // 
+            // general_music_archive
+            // 
+            this.general_music_archive.AutoSize = true;
+            this.general_music_archive.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.general_music_archive.filename = "";
+            this.general_music_archive.filter = "Music (*.mp3)|*.mp3";
+            this.general_music_archive.Location = new System.Drawing.Point(153, 90);
+            this.general_music_archive.Name = "general_music_archive";
+            this.general_music_archive.Size = new System.Drawing.Size(446, 23);
+            this.general_music_archive.TabIndex = 8;
+            // 
+            // general_music_info
+            // 
+            this.general_music_info.AutoSize = true;
+            this.general_music_info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.general_music_info.filename = "";
+            this.general_music_info.filter = "Music (*.mp3)|*.mp3";
+            this.general_music_info.Location = new System.Drawing.Point(153, 119);
+            this.general_music_info.Name = "general_music_info";
+            this.general_music_info.Size = new System.Drawing.Size(446, 23);
+            this.general_music_info.TabIndex = 9;
             // 
             // groupBox1
             // 
@@ -448,7 +593,7 @@ namespace Constructor
             this.groupBox1.Location = new System.Drawing.Point(0, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(0, 85);
+            this.groupBox1.Size = new System.Drawing.Size(793, 104);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Вступительный ролик";
@@ -462,14 +607,16 @@ namespace Constructor
             this.tableLayoutPanel1.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.general_show_intro, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.general_start_fullscreen, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 62);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(783, 81);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // general_intro_video
@@ -480,8 +627,9 @@ namespace Constructor
             this.general_intro_video.filter = "Flash video (*.flv)|*.flv";
             this.general_intro_video.Location = new System.Drawing.Point(158, 8);
             this.general_intro_video.Name = "general_intro_video";
-            this.general_intro_video.Size = new System.Drawing.Size(1, 23);
+            this.general_intro_video.Size = new System.Drawing.Size(446, 23);
             this.general_intro_video.TabIndex = 1;
+            this.general_intro_video.Selected += new Constructor.FileSelect.SelectedHandler(this.general_intro_video_Selected);
             // 
             // label10
             // 
@@ -505,10 +653,20 @@ namespace Constructor
             this.general_show_intro.AutoSize = true;
             this.general_show_intro.Location = new System.Drawing.Point(158, 37);
             this.general_show_intro.Name = "general_show_intro";
-            this.general_show_intro.Size = new System.Drawing.Size(1, 17);
+            this.general_show_intro.Size = new System.Drawing.Size(202, 17);
             this.general_show_intro.TabIndex = 3;
             this.general_show_intro.Text = "Показывать вступительный ролик";
             this.general_show_intro.UseVisualStyleBackColor = true;
+            // 
+            // general_start_fullscreen
+            // 
+            this.general_start_fullscreen.AutoSize = true;
+            this.general_start_fullscreen.Location = new System.Drawing.Point(158, 60);
+            this.general_start_fullscreen.Name = "general_start_fullscreen";
+            this.general_start_fullscreen.Size = new System.Drawing.Size(219, 17);
+            this.general_start_fullscreen.TabIndex = 6;
+            this.general_start_fullscreen.Text = "Стартовать в полноэкранном режиме";
+            this.general_start_fullscreen.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -519,7 +677,7 @@ namespace Constructor
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(10);
-            this.label1.Size = new System.Drawing.Size(0, 39);
+            this.label1.Size = new System.Drawing.Size(793, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Общее";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -987,7 +1145,7 @@ namespace Constructor
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Controls.Add(this.label36, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.label37, 0, 1);
-            this.tableLayoutPanel9.Controls.Add(this.archiveSection_photos, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.archiveSection_large, 1, 1);
             this.tableLayoutPanel9.Controls.Add(this.archiveSection_name, 1, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 16);
@@ -1016,15 +1174,15 @@ namespace Constructor
             this.label37.TabIndex = 1;
             this.label37.Text = "Католог раздела:";
             // 
-            // archiveSection_photos
+            // archiveSection_large
             // 
-            this.archiveSection_photos.AutoSize = true;
-            this.archiveSection_photos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.archiveSection_photos.filepath = "";
-            this.archiveSection_photos.Location = new System.Drawing.Point(153, 29);
-            this.archiveSection_photos.Name = "archiveSection_photos";
-            this.archiveSection_photos.Size = new System.Drawing.Size(1, 23);
-            this.archiveSection_photos.TabIndex = 2;
+            this.archiveSection_large.AutoSize = true;
+            this.archiveSection_large.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.archiveSection_large.filepath = "";
+            this.archiveSection_large.Location = new System.Drawing.Point(153, 29);
+            this.archiveSection_large.Name = "archiveSection_large";
+            this.archiveSection_large.Size = new System.Drawing.Size(1, 23);
+            this.archiveSection_large.TabIndex = 2;
             // 
             // archiveSection_name
             // 
@@ -1073,6 +1231,7 @@ namespace Constructor
             this.archiveSections_path.Name = "archiveSections_path";
             this.archiveSections_path.Size = new System.Drawing.Size(446, 23);
             this.archiveSections_path.TabIndex = 0;
+            this.archiveSections_path.Selected += new Constructor.FolderSelect.SelectedHandler(this.archiveSections_path_Selected);
             // 
             // label35
             // 
@@ -1457,6 +1616,7 @@ namespace Constructor
             this.schoolmates_path.Name = "schoolmates_path";
             this.schoolmates_path.Size = new System.Drawing.Size(446, 23);
             this.schoolmates_path.TabIndex = 0;
+            this.schoolmates_path.Selected += new Constructor.FolderSelect.SelectedHandler(this.schoolmates_path_Selected);
             // 
             // label26
             // 
@@ -1841,6 +2001,7 @@ namespace Constructor
             this.teachers_path.Name = "teachers_path";
             this.teachers_path.Size = new System.Drawing.Size(446, 23);
             this.teachers_path.TabIndex = 0;
+            this.teachers_path.Selected += new Constructor.FolderSelect.SelectedHandler(this.teachers_path_Selected);
             // 
             // label47
             // 
@@ -2066,7 +2227,7 @@ namespace Constructor
             this.SchoolHistoryPanel.Controls.Add(this.label19);
             this.SchoolHistoryPanel.Location = new System.Drawing.Point(0, 0);
             this.SchoolHistoryPanel.Name = "SchoolHistoryPanel";
-            this.SchoolHistoryPanel.Size = new System.Drawing.Size(0, 0);
+            this.SchoolHistoryPanel.Size = new System.Drawing.Size(793, 574);
             this.SchoolHistoryPanel.Text = "История";
             // 
             // history_htmlsource_button
@@ -2098,7 +2259,7 @@ namespace Constructor
             this.school_history_html.Location = new System.Drawing.Point(0, 39);
             this.school_history_html.Multiline = true;
             this.school_history_html.Name = "school_history_html";
-            this.school_history_html.Size = new System.Drawing.Size(0, 498);
+            this.school_history_html.Size = new System.Drawing.Size(793, 498);
             this.school_history_html.TabIndex = 4;
             // 
             // label19
@@ -2110,7 +2271,7 @@ namespace Constructor
             this.label19.Location = new System.Drawing.Point(0, 0);
             this.label19.Name = "label19";
             this.label19.Padding = new System.Windows.Forms.Padding(10);
-            this.label19.Size = new System.Drawing.Size(0, 39);
+            this.label19.Size = new System.Drawing.Size(793, 39);
             this.label19.TabIndex = 2;
             this.label19.Text = "История школы";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2184,6 +2345,10 @@ namespace Constructor
             this.panelManager1.ResumeLayout(false);
             this.GeneralPanel.ResumeLayout(false);
             this.GeneralPanel.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -2284,7 +2449,6 @@ namespace Constructor
         private FileSelect general_intro_video;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox general_show_intro;
-        private System.Windows.Forms.CheckBox general_start_fullscreen;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -2379,7 +2543,7 @@ namespace Constructor
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label37;
-        private FolderSelect archiveSection_photos;
+        private FolderSelect archiveSection_large;
         private System.Windows.Forms.TextBox archiveSection_name;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
@@ -2430,6 +2594,20 @@ namespace Constructor
         private Constructor.Design.Editor school_history_editor;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.CheckBox general_start_fullscreen;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private FileSelect general_music_school;
+        private FileSelect general_music_schoolmates;
+        private FileSelect general_music_teachers;
+        private FileSelect general_music_archive;
+        private FileSelect general_music_info;
+        private System.Windows.Forms.Label label52;
     }
 }
 

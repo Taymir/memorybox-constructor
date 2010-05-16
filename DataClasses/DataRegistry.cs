@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Constructor
 {
     [Serializable]
     public class DataRegistry
     {
+        /* PROGRAM SETTINGS */
+        public static string program_path = Path.GetDirectoryName(Application.ExecutablePath);
+        public static string program_src_distro = Path.Combine(program_path, "src_distro");
+        public static string program_bin_distro = Path.Combine(program_path, "bin_distro");
+
+        /* PROJECT SETTINGS */
+        public string settings_project_path { get; set; }
+        public string settings_source_path { get; set; }
+
         /* SCHOOL PROPERTIES */
         public string school_name {get; set; }
         public string school_photo { get; set; }
@@ -49,9 +60,67 @@ namespace Constructor
         public bool general_start_fullscreen { get; set; }
         public bool general_show_intro { get; set; }
 
-        /* PROJECT SETTINGS */
-        public string settings_project_path { get; set; }
-        public string settings_source_path { get; set; }
+        public string general_music_school { get; set; }
+
+        private string _general_music_schoolmates;
+        public string general_music_schoolmates
+        {
+            get
+            {
+                if (_general_music_schoolmates == string.Empty)
+                    return general_music_school;
+                return _general_music_schoolmates;
+            }
+            set
+            {
+                _general_music_schoolmates = value;
+            }
+        }
+
+        private string _general_music_teachers;
+        public string general_music_teachers
+        {
+            get
+            {
+                if (_general_music_teachers == string.Empty)
+                    return general_music_school;
+                return _general_music_teachers;
+            }
+            set
+            {
+                _general_music_teachers = value;
+            }
+        }
+
+        private string _general_music_archive;
+        public string general_music_archive
+        {
+            get
+            {
+                if (_general_music_archive == string.Empty)
+                    return general_music_school;
+                return _general_music_archive;
+            }
+            set
+            {
+                _general_music_archive = value;
+            }
+        }
+
+        private string _general_music_info;
+        public string general_music_info
+        {
+            get
+            {
+                if (_general_music_info == string.Empty)
+                    return general_music_school;
+                return _general_music_info;
+            }
+            set
+            {
+                _general_music_info = value;
+            }
+        }
 
         public DataRegistry()
         {
@@ -88,6 +157,12 @@ namespace Constructor
             this.general_intro_video = string.Empty;
             this.general_start_fullscreen = false;
             this.general_show_intro = false;
+
+            this.general_music_school = string.Empty;
+            this.general_music_schoolmates = string.Empty;
+            this.general_music_teachers = string.Empty;
+            this.general_music_archive = string.Empty;
+            this.general_music_info = string.Empty;
 
             this.settings_project_path = string.Empty;
             this.settings_source_path = string.Empty;
@@ -129,6 +204,12 @@ namespace Constructor
             this.general_intro_video = clone.general_intro_video;
             this.general_start_fullscreen = clone.general_start_fullscreen;
             this.general_show_intro = clone.general_show_intro;
+
+            this.general_music_school = clone.general_music_school;
+            this.general_music_schoolmates = clone.general_music_schoolmates;
+            this.general_music_teachers = clone.general_music_teachers;
+            this.general_music_archive = clone.general_music_archive;
+            this.general_music_info = clone.general_music_info;
 
             this.settings_project_path = clone.settings_project_path;
             this.settings_source_path = clone.settings_source_path;

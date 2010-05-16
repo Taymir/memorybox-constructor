@@ -47,7 +47,26 @@ namespace Constructor
 
         public User()
         {
+            this.name = string.Empty;
+
+            this.photo = string.Empty;
+
+            this.isTeacher = false;
             this.birthday = new DateTime(1987, 01, 01);
+            this.disipline = string.Empty;
+
+            this.contacts_cellphone = string.Empty;
+            this.contacts_links = string.Empty;
+            this.contacts_phone = string.Empty;
+
+            this.photos = string.Empty;
+            this.videos = string.Empty;
+
+            this.photos_list = new string[0];
+            this.photos_thumbnails_list = new string[0];
+
+            this.videos_list = new string[0];
+            this.videos_thumbnails_list = new string[0];
         }
 
         public string name { get; set; }
@@ -71,6 +90,8 @@ namespace Constructor
         {
             get
             {
+                if (photo == string.Empty) return string.Empty;
+
                 return
                 Path.Combine(
                     Path.GetDirectoryName(photo),
@@ -85,6 +106,8 @@ namespace Constructor
         {
             get
             {
+                if (photos == string.Empty) return string.Empty;
+
                 return Path.Combine(photos, "thumbnails");
             }
         }
@@ -93,6 +116,8 @@ namespace Constructor
         {
             get
             {
+                if (videos == string.Empty) return string.Empty;
+
                 return Path.Combine(videos, "thumbnails");
             }
         }
@@ -110,6 +135,7 @@ namespace Constructor
                 return null;
 
             photos_list = Directory.GetFiles(this.photos, "*.jpg");
+            Array.Sort(photos_list);
 
             return photos_list;
         }
@@ -119,6 +145,7 @@ namespace Constructor
                 return null;
 
             photos_thumbnails_list = Directory.GetFiles(this.photos_thumbnails, "*.jpg");
+            Array.Sort(photos_thumbnails_list);
 
             return photos_thumbnails_list;
         }
@@ -130,15 +157,17 @@ namespace Constructor
                 return null;
 
             videos_list = Directory.GetFiles(this.videos, "*.flv");
+            Array.Sort(videos_list);
 
             return videos_list;
         }
-        public string[] fill_videos_thumbnails_list()/// не подходит для тумбнейлов!
+        public string[] fill_videos_thumbnails_list()
         {
             if (!Directory.Exists(this.videos_thumbnails))
                 return null;
 
             videos_thumbnails_list = Directory.GetFiles(this.videos_thumbnails, "*.jpg");
+            Array.Sort(videos_thumbnails_list);
 
             return videos_thumbnails_list;
         }

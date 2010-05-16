@@ -39,7 +39,7 @@ namespace Constructor
 
         private string exportBoolean(bool value)
         {
-            return value.ToString();
+            return value.ToString().ToLower();
         }
 
         private string exportArray(string name, string value)
@@ -50,7 +50,7 @@ namespace Constructor
         private string exportArray(string value)
         {
             if (value == null)
-                return string.Empty;
+                return "new Array()";
             string[] arr = Regex.Split(value, "\r\n");
 
             return exportArray(arr);
@@ -59,18 +59,21 @@ namespace Constructor
         private string exportArray(string[] arr)
         {
             if (arr == null)
-                return string.Empty;
+                return "new Array()";
 
             string res = "new Array(\r\n";
 
-            for (int i = 0; i < arr.Length; ++i)
+            if (arr.Length > 1 || (arr.Length > 0 && arr[0] != String.Empty))
             {
-                res += string.Format("\"{0}\"", escape(arr[i]));
+                for (int i = 0; i < arr.Length; ++i)
+                {
+                    res += string.Format("\"{0}\"", escape(arr[i]));
 
-                if (i < arr.Length - 1)
-                    res += ",";
+                    if (i < arr.Length - 1)
+                        res += ",";
 
-                res += "\r\n";
+                    res += "\r\n";
+                }
             }
             res += ")";
 
@@ -127,7 +130,6 @@ namespace Constructor
                 exportString(user.name) + ",\r\n" +
 
                 exportString(user.photo) + ",\r\n" +
-                //exportString(user.photo) + ",\r\n";  //@TMP: thumbnail
                 exportString(user.photo_thumbnail) + ",\r\n";
 
             if (user.isTeacher)
@@ -140,17 +142,17 @@ namespace Constructor
                 exportString(user.contacts_phone) + ",\r\n" +
                 exportArray(user.contacts_links) + ",\r\n" +
 
-                //exportString(user.photos) + ",\r\n" + //@TMP
-                //exportString(user.photos) + ",\r\n" + //@TMP: thumbnail
                 exportArray(user.photos_list) + ",\r\n" +
-                exportArray(user.photos_thumbnails_list) + ",\r\n" + 
+                exportArray(user.photos_thumbnails_list) + ",\r\n" +
 
-
-                //exportString(user.videos) + ",\r\n" + //@TMP
-                //exportString(user.videos) + "\r\n" +  //@TMP: thumbnail
                 exportArray(user.videos_list) + ",\r\n" +
-                exportArray(user.videos_thumbnails_list) + "\r\n" + 
-                ")";
+                exportArray(user.videos_thumbnails_list) + "\r\n";
+
+            if (user.isTeacher)
+                res +=
+                "," + exportBoolean(user.isTeacher) + "\r\n";
+
+                res += ")";
 
             return res;
         }
@@ -181,11 +183,14 @@ namespace Constructor
                 "new ArchiveSection(\r\n" +
                 exportString(section.name) + ",\r\n" +
 
-                //exportString(section.photos) + ",\r\n" + //@TMP
-                //exportString(section.photos) + "\r\n" +  //@TMP: thumbnail
-                exportArray(section.photos_list) + ",\r\n" +
-                exportArray(section.photos_thumbnails_list) + "\r\n" + 
-                ")";
+                exportArray(section.large_list) + ",\r\n" +
+                exportArray(section.thumbnails_list);
+
+            if (section.videos_section)
+                res += ",\r\nArchiveSection.VIDEOS_SECTION";
+
+            res +=
+                "\r\n)";
 
             return res;
 
@@ -312,22 +317,42 @@ namespace Constructor
 
                 exportEmptyString() +
                 exportBoolean("general_start_fullscreen", registry.general_start_fullscreen) +
-                exportBoolean("general_show_intro", registry.general_show_intro);
+                exportBoolean("general_show_intro", registry.general_show_intro) +
+
+                exportEmptyString() +
+                exportString("general_music_school", registry.general_music_school) +
+                exportString("general_music_schoolmates", registry.general_music_schoolmates) +
+                exportString("general_music_teachers", registry.general_music_teachers) +
+                exportString("general_music_archive", registry.general_music_archive) +
+                exportString("general_music_info", registry.general_music_info);
         }
 
 
         public string export()
         {
             return
-                export_header() +
-                export_school() +
-                export_schoolmates() +
-                export_teachers() +
-                export_archive() +
-                export_info() +
-                export_general() +
-                export_footer();
+                fixSlashes(
+                    export_header() +
+                    export_school() +
+                    export_schoolmates() +
+                    export_teachers() +
+                    export_archive() +
+                    export_info() +
+                    export_general() +
+                    export_footer()
+                );
 
+        }
+
+        public string fixSlashes(string input)
+        {
+            // Replacing all bacward slashes to forward slashes
+            // except for the cases, when slash is followed by a quote symbol.
+            input = input.Replace("\\\"", "QUOTE_9345_ESCAPING\"");
+            input = input.Replace("\\", "/");
+            input = input.Replace("QUOTE_9345_ESCAPING", "\\");
+
+            return input;
         }
     }
 }

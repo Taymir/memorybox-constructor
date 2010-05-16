@@ -11,6 +11,10 @@ namespace Constructor
 {
     public partial class FolderSelect : UserControl
     {
+        public delegate void SelectedHandler(object sender, string filepath);
+
+        public event SelectedHandler Selected;
+
         public FolderSelect()
         {
             InitializeComponent();
@@ -21,6 +25,9 @@ namespace Constructor
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 this.pathTextBox.Text = folderBrowserDialog.SelectedPath;
+
+                if (this.Selected != null)
+                    Selected(this, filepath);
             }
         }
 

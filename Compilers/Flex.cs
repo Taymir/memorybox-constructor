@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
 
 namespace Constructor.Compilers
 {
     class Flex
     {
-        public static string Path_to_flex = @"C:\MyProjects\MemoryBox\Constructor\libs\flex\bin\mxmlc.exe";
+        public static string Path_to_flex = Path.Combine(DataRegistry.program_path, @"libs\flex\bin\mxmlc.exe");
 
         public delegate void CompleteHandler(object sender);
 
@@ -20,7 +21,7 @@ namespace Constructor.Compilers
             {
                 StartInfo =
                 {
-                    Arguments = string.Format("\"{0}\" -output \"{1}\"",
+                    Arguments = string.Format("\"{0}\" -o \"{1}\"",
                                             filename_from,
                                             filename_to),
                     FileName = Path_to_flex,
@@ -38,7 +39,8 @@ namespace Constructor.Compilers
 
         private void proc_Exited(object sender, EventArgs e)
         {
-            Complete(this);
+            if(Complete != null)
+                Complete(this);
         }
     }
 }

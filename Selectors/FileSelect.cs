@@ -11,6 +11,10 @@ namespace Constructor
 {
     public partial class FileSelect : UserControl
     {
+        public delegate void SelectedHandler(object sender, string filename);
+
+        public event SelectedHandler Selected;
+
         public FileSelect()
         {
             InitializeComponent();
@@ -21,6 +25,9 @@ namespace Constructor
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 this.pathTextBox.Text = openFileDialog.FileName;
+
+                if (this.Selected != null)
+                    Selected(this, filename);
             }
         }
 

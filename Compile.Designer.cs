@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.total_progress = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             this.step_three_bw = new System.ComponentModel.BackgroundWorker();
             this.step_four_bw = new System.ComponentModel.BackgroundWorker();
             this.step_five_bw = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // textBox1
@@ -110,6 +112,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Детали >>";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // step_one_bw
@@ -140,11 +143,9 @@
             this.step_four_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_four_bw_RunWorkerCompleted);
             this.step_four_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             // 
-            // step_five_bw
+            // timer1
             // 
-            this.step_five_bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.step_five_bw_DoWork);
-            this.step_five_bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.step_five_bw_RunWorkerCompleted);
-            this.step_five_bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Compile
             // 
@@ -187,5 +188,6 @@
         private System.ComponentModel.BackgroundWorker step_three_bw;
         private System.ComponentModel.BackgroundWorker step_four_bw;
         private System.ComponentModel.BackgroundWorker step_five_bw;
+        private System.Windows.Forms.Timer timer1;
     }
 }

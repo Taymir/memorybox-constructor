@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using EirikurN.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Constructor
 {
@@ -89,7 +90,8 @@ namespace Constructor
 
             cregistry = new DataRegistry(registry);
 
-            step_one_bw.RunWorkerAsync();
+            extractImagesFromHtml(registry.info_html);
+            //step_one_bw.RunWorkerAsync();//@TMP
         }
         private void step_two()
         {
@@ -110,9 +112,11 @@ namespace Constructor
         private void step_four()
         {
             step_counter.Text = "4 / 5";
-            total_text.Text = "Копирование дизайна";
+            total_text.Text = "Сборка файла данных";
             total_progress.Value = 4;
 
+            current_text.Text = "DataRegistry.as";
+            current_progress.Value = 0;
             step_four_bw.RunWorkerAsync();
         }
         private void step_five()
@@ -121,13 +125,33 @@ namespace Constructor
             total_text.Text = "Компиляция";
             total_progress.Value = 5;
 
-            step_five_bw.RunWorkerAsync();
+            current_text.Text = "mxmlc MemoryBox.mxml";
+            current_progress.Value = 0;
+            timer1.Enabled = true;
+
+            Constructor.Compilers.Flex flex = new Constructor.Compilers.Flex();
+            flex.Complete += new Constructor.Compilers.Flex.CompleteHandler(flex_Complete);
+            flex.compile(Path.Combine(DataRegistry.program_src_distro, "MemoryBox.mxml"), Path.Combine(registry.settings_project_path, "MemoryBox.swf"));
+
+        }
+
+        void flex_Complete(object sender)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    timer1.Enabled = false;
+                    current_progress.Value = 100;
+                    MessageBox.Show(string.Format("Проект собран: {0}", registry.settings_project_path));
+                }));
+            }
         }
 
         private void step_one_bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\MyProjects\MemoryBox\test\bin-debug");//@TMP: Distrib
-            dirInfo.CopyTo(registry.settings_project_path, (p) => //@TMP: Project folder
+            DirectoryInfo dirInfo = new DirectoryInfo(DataRegistry.program_bin_distro);
+            dirInfo.CopyTo(registry.settings_project_path, (p) =>
             {
                 step_one_bw.ReportProgress((int)((double)p.BytesTransferred * 100 / p.TotalBytes), p.CurrentFileName);
             });
@@ -135,7 +159,8 @@ namespace Constructor
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            current_progress.Value = e.ProgressPercentage;
+            if(e.ProgressPercentage >= current_progress.Minimum && e.ProgressPercentage <= current_progress.Maximum)
+                current_progress.Value = e.ProgressPercentage;
             current_text.Text = (string)e.UserState;
         }
 
@@ -149,22 +174,22 @@ namespace Constructor
             // Копирование контента
             string destination = registry.settings_project_path;
 
-            cregistry.school_photo = @"school\photo.jpg";
+            cregistry.school_photo = if_not_empty(registry.school_photo, @"school\photo.jpg");
             step_two_copy(registry.school_photo, cregistry.school_photo);
 
-            cregistry.school_pictures_director = @"school\director.jpg";
+            cregistry.school_pictures_director = if_not_empty(registry.school_pictures_director, @"school\director.jpg");
             step_two_copy(registry.school_pictures_director, cregistry.school_pictures_director);
-            cregistry.school_pictures_history = @"school\history.jpg";
+            cregistry.school_pictures_history = if_not_empty(registry.school_pictures_history, @"school\history.jpg");
             step_two_copy(registry.school_pictures_history, cregistry.school_pictures_history);
-            cregistry.school_pictures_video = @"school\video.jpg";
+            cregistry.school_pictures_video = if_not_empty(registry.school_pictures_video, @"school\video.jpg");
             step_two_copy(registry.school_pictures_video, cregistry.school_pictures_video);
 
-            cregistry.school_director_photo = @"school\director\photo.jpg";
+            cregistry.school_director_photo = if_not_empty(registry.school_director_photo, @"school\director\photo.jpg");
             step_two_copy(registry.school_director_photo, cregistry.school_director_photo);
-            cregistry.school_director_video = @"school\director\video.flv";
+            cregistry.school_director_video = if_not_empty(registry.school_director_video, @"school\director\video.flv");
             step_two_copy(registry.school_director_video, cregistry.school_director_video);
 
-            cregistry.school_video = @"school\director\video.flv";
+            cregistry.school_video = if_not_empty(registry.school_video, @"school\video.flv");
             step_two_copy(registry.school_video, cregistry.school_video);
 
             // SCHOOLMATES 
@@ -229,18 +254,90 @@ namespace Constructor
                 ArchiveSection a = registry.archive[i];
                 ArchiveSection ca = cregistry.archive[i];
 
-                a.fill_photos_list();
-                ca.photos_list = new string[a.photos_list.Count()];
-                for (int ii = 0; ii < a.photos_list.Count(); ++ii)
+                a.fill_large_list(); ca.videos_section = a.videos_section;
+                ca.large_list = new string[a.large_list.Count()];
+                for (int ii = 0; ii < a.large_list.Count(); ++ii)
                 {
-                    string item = a.photos_list[ii];
-                    ca.photos_list[ii] = Path.Combine(Path.Combine(@"archive", ca.name), Path.GetFileName(item));
-                    step_two_copy(item, ca.photos_list[ii]);
+                    string item = a.large_list[ii];
+                    ca.large_list[ii] = Path.Combine(Path.Combine(@"archive", ca.name), Path.GetFileName(item));
+                    step_two_copy(item, ca.large_list[ii]);
                 }
             }
 
-            cregistry.general_intro_video = @"intro.flv";
+            // GENERAL
+            cregistry.general_intro_video = if_not_empty(registry.general_intro_video, @"intro.flv");
             step_two_copy(registry.general_intro_video, cregistry.general_intro_video);
+
+
+            cregistry.general_music_school = if_not_empty(registry.general_music_school, Path.Combine("music", "school.mp3"));
+            step_two_copy(registry.general_music_school, cregistry.general_music_school);
+
+            // Если музыка одна для всех разделов
+            if (registry.general_music_school == registry.general_music_schoolmates &&
+                registry.general_music_teachers == registry.general_music_archive &&
+                registry.general_music_info == registry.general_music_archive &&
+                registry.general_music_school == registry.general_music_teachers)
+            {
+                cregistry.general_music_schoolmates =
+                cregistry.general_music_teachers =
+                cregistry.general_music_archive =
+                cregistry.general_music_info =
+                        cregistry.general_music_school;
+            }
+            else
+            {
+                cregistry.general_music_schoolmates = if_not_empty(registry.general_music_schoolmates, Path.Combine("music", "schoolmates.mp3"));
+                step_two_copy(registry.general_music_schoolmates, cregistry.general_music_schoolmates);
+
+                cregistry.general_music_teachers = if_not_empty(registry.general_music_teachers, Path.Combine("music", "teachers.mp3"));
+                step_two_copy(registry.general_music_teachers, cregistry.general_music_teachers);
+
+                cregistry.general_music_archive = if_not_empty(registry.general_music_archive, Path.Combine("music", "archive.mp3"));
+                step_two_copy(registry.general_music_archive, cregistry.general_music_archive);
+
+                cregistry.general_music_info = if_not_empty(registry.general_music_info, Path.Combine("music", "info.mp3"));
+                step_two_copy(registry.general_music_info, cregistry.general_music_info);
+            }
+
+            // Копирование картинок для html-содержимого
+            cregistry.school_history_html = extractImagesFromHtml(registry.school_history_html);
+            cregistry.info_html = extractImagesFromHtml(registry.info_html);
+        }
+
+        private string extractImagesFromHtml(string html)
+        {
+            string pattern = @"<IMG[^>]*?src\s*=\s*[""']([^'"">]+?)['""]>";
+
+            Regex reg = new Regex(pattern);
+            MatchCollection matches = reg.Matches(html);
+
+            foreach (Match match in matches)
+            {
+                string source_path = match.Groups[1].Value;
+
+                // @TODO одноименные файлы затираются
+                string dest_path = Path.Combine("html", Path.GetFileName(source_path));
+
+                if (source_path.StartsWith("http"))
+                {
+                    System.Net.WebClient wc = new System.Net.WebClient();
+                    wc.DownloadFile(source_path, dest_path);
+                }
+                else
+                {
+                    step_two_copy(source_path, dest_path);
+                }
+                html = html.Replace(source_path, dest_path);
+            }
+
+            return html;
+        }
+
+        private String if_not_empty(String str_to_check, String value)
+        {
+            if (str_to_check != null && str_to_check != String.Empty)
+                return value;
+            return String.Empty;
         }
 
         private void step_two_copy(string from, string to)
@@ -280,7 +377,7 @@ namespace Constructor
         private void step_three_bw_DoWork(object sender, DoWorkEventArgs e)
         {
             // Копирование миниатюр
-
+            
             // SCHOOLMATES
             for (int i = 0; i < registry.schoolmates.Count(); ++i)
             {
@@ -326,7 +423,7 @@ namespace Constructor
                 }
                 else
                 {
-                    cu.videos_thumbnails_list = populateVideoThumbnailsList(u.photos, Path.Combine(Path.Combine(@"schoolmates", cu.name), @"videos\thumbnails"));
+                    cu.videos_thumbnails_list = populateVideoThumbnailsList(u.videos, Path.Combine(Path.Combine(@"schoolmates", cu.name), @"videos\thumbnails"));
                     videos_convert(u.videos, cu.videos_thumbnails);
                 }
             }
@@ -376,32 +473,40 @@ namespace Constructor
                 }
                 else
                 {
-                    cu.videos_thumbnails_list = populatePhotoThumbnailsList(u.photos, Path.Combine(Path.Combine(@"teachers", cu.name), @"videos\thumbnails"));
+                    cu.videos_thumbnails_list = populateVideoThumbnailsList(u.videos, Path.Combine(Path.Combine(@"teachers", cu.name), @"videos\thumbnails"));
                     videos_convert(u.videos, cu.videos_thumbnails);
                 }
             }
-
+            
             // ARCHIVE
             for (int i = 0; i < registry.archive.Count(); ++i)
             {
                 ArchiveSection a = registry.archive[i];
                 ArchiveSection ca = cregistry.archive[i];
 
-                ca.photos = Path.Combine("archive", ca.name);
-                if (a.fill_photos_thumbnails_list() != null)
+                ca.large_path = Path.Combine("archive", ca.name);
+                if (a.fill_thumbnails_list() != null)
                 {
-                    ca.photos_thumbnails_list = new string[a.photos_thumbnails_list.Length];
-                    for (int ii = 0; ii < a.photos_thumbnails_list.Length; ++ii)
+                    ca.thumbnails_list = new string[a.thumbnails_list.Length];
+                    for (int ii = 0; ii < a.thumbnails_list.Length; ++ii)
                     {
-                        string item = a.photos_thumbnails_list[ii];
-                        ca.photos_thumbnails_list[ii] = Path.Combine(Path.Combine(@"archive", ca.name), Path.Combine(@"thumbnails", Path.GetFileName(item)));
-                        step_three_copy(item, ca.photos_thumbnails_list[ii]);
+                        string item = a.thumbnails_list[ii];
+                        ca.thumbnails_list[ii] = Path.Combine(Path.Combine(@"archive", ca.name), Path.Combine(@"thumbnails", Path.GetFileName(item)));
+                        step_three_copy(item, ca.thumbnails_list[ii]);
                     }
                 }
                 else
                 {
-                    ca.photos_thumbnails_list = populatePhotoThumbnailsList(a.photos, Path.Combine(Path.Combine(@"archive", ca.name), @"thumbnails"));
-                    images_convert(a.photos, ca.photos_thumbnails);
+                    if (a.videos_section)
+                    {
+                        ca.thumbnails_list = populateVideoThumbnailsList(a.large_path, Path.Combine(Path.Combine(@"archive", ca.name), @"thumbnails"));
+                        videos_convert(a.large_path, ca.thumbnails_path);
+                    }
+                    else
+                    {
+                        ca.thumbnails_list = populatePhotoThumbnailsList(a.large_path, Path.Combine(Path.Combine(@"archive", ca.name), @"thumbnails"));
+                        images_convert(a.large_path, ca.thumbnails_path);
+                    }
                 }
             }
         }
@@ -410,9 +515,9 @@ namespace Constructor
         {
             string[] file_list = Directory.GetFiles(path, "*.flv");
 
-            foreach (string file in file_list)
+            for (int i = 0; i < file_list.Length; ++i)
             {
-                Path.Combine(pre_path, file + ".jpg");
+                file_list[i] = Path.Combine(pre_path, Path.GetFileName(file_list[i]) + ".jpg");
             }
 
             return file_list;
@@ -422,9 +527,9 @@ namespace Constructor
         {
             string[] file_list = Directory.GetFiles(path, "*.jpg");
 
-            foreach (string file in file_list)
+            for (int i = 0; i < file_list.Length; ++i)
             {
-                Path.Combine(pre_path, file);
+                file_list[i] = Path.Combine(pre_path, Path.GetFileName(file_list[i]));
             }
 
             return file_list;
@@ -456,13 +561,13 @@ namespace Constructor
 
         void ff_Progress(object sender, double progress, string filename)
         {
-            //try
-            //{
+            try
+            {
                 step_three_bw.ReportProgress((int)(progress * 100), Path.GetFileName(filename));
-            //} catch (Exception e)
-            //{
-                // ignore exceptions
-            //}
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         private string destinationPath(string to)
@@ -499,15 +604,6 @@ namespace Constructor
                 t.isTeacher = true;
         }
 
-        private void step_five_bw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            teachersFix();
-            exportDataRegistry export = new exportDataRegistry(cregistry);
-
-
-            this.textBox1.Text = export.export();
-        }
-
         private void step_four_bw_DoWork(object sender, DoWorkEventArgs e)
         {
 
@@ -515,12 +611,25 @@ namespace Constructor
 
         private void step_four_bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            teachersFix();
+            exportDataRegistry export = new exportDataRegistry(cregistry);
+            saveToFile(export.export(), Path.Combine(DataRegistry.program_src_distro, "DataRegistry.as") );
+
             step_five();
         }
 
-        private void step_five_bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void saveToFile(string data, string path)
         {
-            // TOTAL COMPLETE
+            FileInfo f = new FileInfo(path);
+            StreamWriter w = f.CreateText();
+            w.Write(data);
+            w.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (++current_progress.Value >= 99)
+                current_progress.Value = 0;
         }
 
     }
