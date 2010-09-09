@@ -64,11 +64,11 @@ namespace Constructor.Compilers
 
             if (original.Width > original.Height)
             {
-                result.Height = (int)Math.Floor(original.Height * ((double)150 / original.Width));
+                result.Height = (int)Math.Floor(original.Height * ((double)thumbnail_width / original.Width));
             }
             else
             {
-                result.Width = (int)Math.Floor(original.Width * ((double)150 / original.Height));
+                result.Width = (int)Math.Floor(original.Width * ((double)thumbnail_height / original.Height));
             }
 
             return result;

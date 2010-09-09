@@ -45,6 +45,9 @@ namespace Constructor
             treeNode5,
             treeNode6,
             treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Цвета");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Оформление", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,6 +225,14 @@ namespace Constructor
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.label4 = new System.Windows.Forms.Label();
             this.ColorsPanel = new Controls.ManagedPanel();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.css_color_highlight = new Constructor.Selectors.ColorSelect();
+            this.css_color_normal = new Constructor.Selectors.ColorSelect();
+            this.css_color_submenu = new Constructor.Selectors.ColorSelect();
             this.label7 = new System.Windows.Forms.Label();
             this.ButtonsPanel = new Controls.ManagedPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -284,6 +295,8 @@ namespace Constructor
             ((System.ComponentModel.ISupportInitialize)(this.teachers_navigator)).BeginInit();
             this.teachers_navigator.SuspendLayout();
             this.ColorsPanel.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             this.ScrollbarsPanel.SuspendLayout();
             this.SchoolHistoryPanel.SuspendLayout();
@@ -398,8 +411,13 @@ namespace Constructor
             treeNode7.Text = "Информация";
             treeNode8.Name = "Content";
             treeNode8.Text = "Контент";
+            treeNode9.Name = "Colors";
+            treeNode9.Text = "Цвета";
+            treeNode10.Name = "Design";
+            treeNode10.Text = "Оформление";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode8,
+            treeNode10});
             this.treeView1.Size = new System.Drawing.Size(233, 574);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -419,8 +437,8 @@ namespace Constructor
             this.panelManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelManager1.Location = new System.Drawing.Point(0, 0);
             this.panelManager1.Name = "panelManager1";
-            this.panelManager1.SelectedIndex = 9;
-            this.panelManager1.SelectedPanel = this.SchoolHistoryPanel;
+            this.panelManager1.SelectedIndex = 6;
+            this.panelManager1.SelectedPanel = this.ColorsPanel;
             this.panelManager1.Size = new System.Drawing.Size(793, 574);
             this.panelManager1.TabIndex = 0;
             // 
@@ -432,7 +450,7 @@ namespace Constructor
             this.GeneralPanel.Controls.Add(this.label1);
             this.GeneralPanel.Location = new System.Drawing.Point(0, 0);
             this.GeneralPanel.Name = "GeneralPanel";
-            this.GeneralPanel.Size = new System.Drawing.Size(793, 574);
+            this.GeneralPanel.Size = new System.Drawing.Size(0, 0);
             this.GeneralPanel.Text = "Общее";
             // 
             // groupBox13
@@ -442,7 +460,7 @@ namespace Constructor
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox13.Location = new System.Drawing.Point(0, 143);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(793, 188);
+            this.groupBox13.Size = new System.Drawing.Size(0, 188);
             this.groupBox13.TabIndex = 3;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Музыка";
@@ -482,7 +500,7 @@ namespace Constructor
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(787, 145);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(0, 145);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
             // label25
@@ -538,7 +556,7 @@ namespace Constructor
             this.general_music_school.filter = "Music (*.mp3)|*.mp3";
             this.general_music_school.Location = new System.Drawing.Point(153, 3);
             this.general_music_school.Name = "general_music_school";
-            this.general_music_school.Size = new System.Drawing.Size(446, 23);
+            this.general_music_school.Size = new System.Drawing.Size(300, 23);
             this.general_music_school.TabIndex = 5;
             // 
             // general_music_schoolmates
@@ -549,7 +567,7 @@ namespace Constructor
             this.general_music_schoolmates.filter = "Music (*.mp3)|*.mp3";
             this.general_music_schoolmates.Location = new System.Drawing.Point(153, 32);
             this.general_music_schoolmates.Name = "general_music_schoolmates";
-            this.general_music_schoolmates.Size = new System.Drawing.Size(446, 23);
+            this.general_music_schoolmates.Size = new System.Drawing.Size(300, 23);
             this.general_music_schoolmates.TabIndex = 6;
             // 
             // general_music_teachers
@@ -560,7 +578,7 @@ namespace Constructor
             this.general_music_teachers.filter = "Music (*.mp3)|*.mp3";
             this.general_music_teachers.Location = new System.Drawing.Point(153, 61);
             this.general_music_teachers.Name = "general_music_teachers";
-            this.general_music_teachers.Size = new System.Drawing.Size(446, 23);
+            this.general_music_teachers.Size = new System.Drawing.Size(300, 23);
             this.general_music_teachers.TabIndex = 7;
             // 
             // general_music_archive
@@ -571,7 +589,7 @@ namespace Constructor
             this.general_music_archive.filter = "Music (*.mp3)|*.mp3";
             this.general_music_archive.Location = new System.Drawing.Point(153, 90);
             this.general_music_archive.Name = "general_music_archive";
-            this.general_music_archive.Size = new System.Drawing.Size(446, 23);
+            this.general_music_archive.Size = new System.Drawing.Size(300, 23);
             this.general_music_archive.TabIndex = 8;
             // 
             // general_music_info
@@ -582,7 +600,7 @@ namespace Constructor
             this.general_music_info.filter = "Music (*.mp3)|*.mp3";
             this.general_music_info.Location = new System.Drawing.Point(153, 119);
             this.general_music_info.Name = "general_music_info";
-            this.general_music_info.Size = new System.Drawing.Size(446, 23);
+            this.general_music_info.Size = new System.Drawing.Size(300, 23);
             this.general_music_info.TabIndex = 9;
             // 
             // groupBox1
@@ -593,7 +611,7 @@ namespace Constructor
             this.groupBox1.Location = new System.Drawing.Point(0, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(793, 104);
+            this.groupBox1.Size = new System.Drawing.Size(0, 104);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Вступительный ролик";
@@ -616,7 +634,7 @@ namespace Constructor
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(783, 81);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 81);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // general_intro_video
@@ -627,7 +645,7 @@ namespace Constructor
             this.general_intro_video.filter = "Flash video (*.flv)|*.flv";
             this.general_intro_video.Location = new System.Drawing.Point(158, 8);
             this.general_intro_video.Name = "general_intro_video";
-            this.general_intro_video.Size = new System.Drawing.Size(446, 23);
+            this.general_intro_video.Size = new System.Drawing.Size(300, 23);
             this.general_intro_video.TabIndex = 1;
             this.general_intro_video.Selected += new Constructor.FileSelect.SelectedHandler(this.general_intro_video_Selected);
             // 
@@ -653,7 +671,7 @@ namespace Constructor
             this.general_show_intro.AutoSize = true;
             this.general_show_intro.Location = new System.Drawing.Point(158, 37);
             this.general_show_intro.Name = "general_show_intro";
-            this.general_show_intro.Size = new System.Drawing.Size(202, 17);
+            this.general_show_intro.Size = new System.Drawing.Size(300, 17);
             this.general_show_intro.TabIndex = 3;
             this.general_show_intro.Text = "Показывать вступительный ролик";
             this.general_show_intro.UseVisualStyleBackColor = true;
@@ -663,7 +681,7 @@ namespace Constructor
             this.general_start_fullscreen.AutoSize = true;
             this.general_start_fullscreen.Location = new System.Drawing.Point(158, 60);
             this.general_start_fullscreen.Name = "general_start_fullscreen";
-            this.general_start_fullscreen.Size = new System.Drawing.Size(219, 17);
+            this.general_start_fullscreen.Size = new System.Drawing.Size(300, 17);
             this.general_start_fullscreen.TabIndex = 6;
             this.general_start_fullscreen.Text = "Стартовать в полноэкранном режиме";
             this.general_start_fullscreen.UseVisualStyleBackColor = true;
@@ -677,7 +695,7 @@ namespace Constructor
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(10);
-            this.label1.Size = new System.Drawing.Size(793, 39);
+            this.label1.Size = new System.Drawing.Size(0, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Общее";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -796,7 +814,7 @@ namespace Constructor
             this.school_video.filter = "Flash video (*.flv)|*.flv";
             this.school_video.Location = new System.Drawing.Point(153, 3);
             this.school_video.Name = "school_video";
-            this.school_video.Size = new System.Drawing.Size(1, 21);
+            this.school_video.Size = new System.Drawing.Size(300, 21);
             this.school_video.TabIndex = 1;
             // 
             // groupBox5
@@ -835,7 +853,7 @@ namespace Constructor
             // 
             this.school_director_name.Location = new System.Drawing.Point(153, 3);
             this.school_director_name.Name = "school_director_name";
-            this.school_director_name.Size = new System.Drawing.Size(1, 20);
+            this.school_director_name.Size = new System.Drawing.Size(300, 20);
             this.school_director_name.TabIndex = 5;
             // 
             // label21
@@ -873,7 +891,7 @@ namespace Constructor
             this.school_director_photo.filter = "Images (*.jpg)|*.jpg";
             this.school_director_photo.Location = new System.Drawing.Point(153, 29);
             this.school_director_photo.Name = "school_director_photo";
-            this.school_director_photo.Size = new System.Drawing.Size(1, 23);
+            this.school_director_photo.Size = new System.Drawing.Size(300, 23);
             this.school_director_photo.TabIndex = 6;
             // 
             // school_director_video
@@ -884,7 +902,7 @@ namespace Constructor
             this.school_director_video.filter = "Flash video (*.flv)|*.flv";
             this.school_director_video.Location = new System.Drawing.Point(153, 58);
             this.school_director_video.Name = "school_director_video";
-            this.school_director_video.Size = new System.Drawing.Size(1, 23);
+            this.school_director_video.Size = new System.Drawing.Size(300, 23);
             this.school_director_video.TabIndex = 7;
             // 
             // groupBox4
@@ -954,7 +972,7 @@ namespace Constructor
             this.school_pictures_director.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_director.Location = new System.Drawing.Point(153, 3);
             this.school_pictures_director.Name = "school_pictures_director";
-            this.school_pictures_director.Size = new System.Drawing.Size(1, 23);
+            this.school_pictures_director.Size = new System.Drawing.Size(300, 23);
             this.school_pictures_director.TabIndex = 3;
             // 
             // school_pictures_history
@@ -965,7 +983,7 @@ namespace Constructor
             this.school_pictures_history.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_history.Location = new System.Drawing.Point(153, 32);
             this.school_pictures_history.Name = "school_pictures_history";
-            this.school_pictures_history.Size = new System.Drawing.Size(1, 23);
+            this.school_pictures_history.Size = new System.Drawing.Size(300, 23);
             this.school_pictures_history.TabIndex = 4;
             // 
             // school_pictures_video
@@ -976,7 +994,7 @@ namespace Constructor
             this.school_pictures_video.filter = "Images (*.jpg)|*.jpg";
             this.school_pictures_video.Location = new System.Drawing.Point(153, 61);
             this.school_pictures_video.Name = "school_pictures_video";
-            this.school_pictures_video.Size = new System.Drawing.Size(1, 23);
+            this.school_pictures_video.Size = new System.Drawing.Size(300, 23);
             this.school_pictures_video.TabIndex = 5;
             // 
             // groupBox2
@@ -1057,21 +1075,21 @@ namespace Constructor
             // 
             this.school_name.Location = new System.Drawing.Point(153, 3);
             this.school_name.Name = "school_name";
-            this.school_name.Size = new System.Drawing.Size(1, 20);
+            this.school_name.Size = new System.Drawing.Size(300, 20);
             this.school_name.TabIndex = 4;
             // 
             // school_contacts_phone
             // 
             this.school_contacts_phone.Location = new System.Drawing.Point(153, 29);
             this.school_contacts_phone.Name = "school_contacts_phone";
-            this.school_contacts_phone.Size = new System.Drawing.Size(1, 20);
+            this.school_contacts_phone.Size = new System.Drawing.Size(300, 20);
             this.school_contacts_phone.TabIndex = 5;
             // 
             // school_contacts_email
             // 
             this.school_contacts_email.Location = new System.Drawing.Point(153, 55);
             this.school_contacts_email.Name = "school_contacts_email";
-            this.school_contacts_email.Size = new System.Drawing.Size(1, 20);
+            this.school_contacts_email.Size = new System.Drawing.Size(300, 20);
             this.school_contacts_email.TabIndex = 6;
             // 
             // school_contacts_links
@@ -1079,7 +1097,7 @@ namespace Constructor
             this.school_contacts_links.Location = new System.Drawing.Point(153, 81);
             this.school_contacts_links.Multiline = true;
             this.school_contacts_links.Name = "school_contacts_links";
-            this.school_contacts_links.Size = new System.Drawing.Size(1, 100);
+            this.school_contacts_links.Size = new System.Drawing.Size(300, 100);
             this.school_contacts_links.TabIndex = 7;
             // 
             // label16
@@ -1099,7 +1117,7 @@ namespace Constructor
             this.school_photo.filter = "Images (*.jpg)|*.jpg";
             this.school_photo.Location = new System.Drawing.Point(153, 187);
             this.school_photo.Name = "school_photo";
-            this.school_photo.Size = new System.Drawing.Size(1, 23);
+            this.school_photo.Size = new System.Drawing.Size(300, 23);
             this.school_photo.TabIndex = 9;
             // 
             // label2
@@ -1181,14 +1199,14 @@ namespace Constructor
             this.archiveSection_large.filepath = "";
             this.archiveSection_large.Location = new System.Drawing.Point(153, 29);
             this.archiveSection_large.Name = "archiveSection_large";
-            this.archiveSection_large.Size = new System.Drawing.Size(1, 23);
+            this.archiveSection_large.Size = new System.Drawing.Size(300, 23);
             this.archiveSection_large.TabIndex = 2;
             // 
             // archiveSection_name
             // 
             this.archiveSection_name.Location = new System.Drawing.Point(153, 3);
             this.archiveSection_name.Name = "archiveSection_name";
-            this.archiveSection_name.Size = new System.Drawing.Size(1, 20);
+            this.archiveSection_name.Size = new System.Drawing.Size(300, 20);
             this.archiveSection_name.TabIndex = 3;
             // 
             // groupBox8
@@ -1442,21 +1460,21 @@ namespace Constructor
             this.schoolmate_contacts_links.Location = new System.Drawing.Point(153, 139);
             this.schoolmate_contacts_links.Multiline = true;
             this.schoolmate_contacts_links.Name = "schoolmate_contacts_links";
-            this.schoolmate_contacts_links.Size = new System.Drawing.Size(1, 70);
+            this.schoolmate_contacts_links.Size = new System.Drawing.Size(300, 70);
             this.schoolmate_contacts_links.TabIndex = 13;
             // 
             // schoolmate_contacts_phone
             // 
             this.schoolmate_contacts_phone.Location = new System.Drawing.Point(153, 113);
             this.schoolmate_contacts_phone.Name = "schoolmate_contacts_phone";
-            this.schoolmate_contacts_phone.Size = new System.Drawing.Size(1, 20);
+            this.schoolmate_contacts_phone.Size = new System.Drawing.Size(300, 20);
             this.schoolmate_contacts_phone.TabIndex = 12;
             // 
             // schoolmate_contacts_cellphone
             // 
             this.schoolmate_contacts_cellphone.Location = new System.Drawing.Point(153, 87);
             this.schoolmate_contacts_cellphone.Name = "schoolmate_contacts_cellphone";
-            this.schoolmate_contacts_cellphone.Size = new System.Drawing.Size(1, 20);
+            this.schoolmate_contacts_cellphone.Size = new System.Drawing.Size(300, 20);
             this.schoolmate_contacts_cellphone.TabIndex = 11;
             // 
             // label27
@@ -1472,14 +1490,14 @@ namespace Constructor
             // 
             this.schoolmate_birthday.Location = new System.Drawing.Point(153, 215);
             this.schoolmate_birthday.Name = "schoolmate_birthday";
-            this.schoolmate_birthday.Size = new System.Drawing.Size(1, 20);
+            this.schoolmate_birthday.Size = new System.Drawing.Size(300, 20);
             this.schoolmate_birthday.TabIndex = 14;
             // 
             // schoolmate_name
             // 
             this.schoolmate_name.Location = new System.Drawing.Point(153, 3);
             this.schoolmate_name.Name = "schoolmate_name";
-            this.schoolmate_name.Size = new System.Drawing.Size(1, 20);
+            this.schoolmate_name.Size = new System.Drawing.Size(300, 20);
             this.schoolmate_name.TabIndex = 1;
             // 
             // label28
@@ -1507,7 +1525,7 @@ namespace Constructor
             this.schoolmate_photos.filepath = "";
             this.schoolmate_photos.Location = new System.Drawing.Point(153, 29);
             this.schoolmate_photos.Name = "schoolmate_photos";
-            this.schoolmate_photos.Size = new System.Drawing.Size(1, 23);
+            this.schoolmate_photos.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_photos.TabIndex = 4;
             // 
             // schoolmate_videos
@@ -1517,7 +1535,7 @@ namespace Constructor
             this.schoolmate_videos.filepath = "";
             this.schoolmate_videos.Location = new System.Drawing.Point(153, 58);
             this.schoolmate_videos.Name = "schoolmate_videos";
-            this.schoolmate_videos.Size = new System.Drawing.Size(1, 23);
+            this.schoolmate_videos.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_videos.TabIndex = 5;
             // 
             // label30
@@ -1573,7 +1591,7 @@ namespace Constructor
             this.schoolmate_photo.filter = "Images (*.jpg)|*.jpg";
             this.schoolmate_photo.Location = new System.Drawing.Point(153, 241);
             this.schoolmate_photo.Name = "schoolmate_photo";
-            this.schoolmate_photo.Size = new System.Drawing.Size(1, 23);
+            this.schoolmate_photo.Size = new System.Drawing.Size(300, 23);
             this.schoolmate_photo.TabIndex = 15;
             // 
             // groupBox6
@@ -1827,21 +1845,21 @@ namespace Constructor
             this.teacher_contacts_links.Location = new System.Drawing.Point(153, 139);
             this.teacher_contacts_links.Multiline = true;
             this.teacher_contacts_links.Name = "teacher_contacts_links";
-            this.teacher_contacts_links.Size = new System.Drawing.Size(1, 70);
+            this.teacher_contacts_links.Size = new System.Drawing.Size(300, 70);
             this.teacher_contacts_links.TabIndex = 13;
             // 
             // teacher_contacts_phone
             // 
             this.teacher_contacts_phone.Location = new System.Drawing.Point(153, 113);
             this.teacher_contacts_phone.Name = "teacher_contacts_phone";
-            this.teacher_contacts_phone.Size = new System.Drawing.Size(1, 20);
+            this.teacher_contacts_phone.Size = new System.Drawing.Size(300, 20);
             this.teacher_contacts_phone.TabIndex = 12;
             // 
             // teacher_contacts_cellphone
             // 
             this.teacher_contacts_cellphone.Location = new System.Drawing.Point(153, 87);
             this.teacher_contacts_cellphone.Name = "teacher_contacts_cellphone";
-            this.teacher_contacts_cellphone.Size = new System.Drawing.Size(1, 20);
+            this.teacher_contacts_cellphone.Size = new System.Drawing.Size(300, 20);
             this.teacher_contacts_cellphone.TabIndex = 11;
             // 
             // label39
@@ -1857,7 +1875,7 @@ namespace Constructor
             // 
             this.teacher_name.Location = new System.Drawing.Point(153, 3);
             this.teacher_name.Name = "teacher_name";
-            this.teacher_name.Size = new System.Drawing.Size(1, 20);
+            this.teacher_name.Size = new System.Drawing.Size(300, 20);
             this.teacher_name.TabIndex = 1;
             // 
             // label40
@@ -1885,7 +1903,7 @@ namespace Constructor
             this.teacher_photos.filepath = "";
             this.teacher_photos.Location = new System.Drawing.Point(153, 29);
             this.teacher_photos.Name = "teacher_photos";
-            this.teacher_photos.Size = new System.Drawing.Size(1, 23);
+            this.teacher_photos.Size = new System.Drawing.Size(300, 23);
             this.teacher_photos.TabIndex = 4;
             // 
             // teacher_videos
@@ -1895,7 +1913,7 @@ namespace Constructor
             this.teacher_videos.filepath = "";
             this.teacher_videos.Location = new System.Drawing.Point(153, 58);
             this.teacher_videos.Name = "teacher_videos";
-            this.teacher_videos.Size = new System.Drawing.Size(1, 23);
+            this.teacher_videos.Size = new System.Drawing.Size(300, 23);
             this.teacher_videos.TabIndex = 5;
             // 
             // label42
@@ -1951,14 +1969,14 @@ namespace Constructor
             this.teacher_photo.filter = "Images (*.jpg)|*.jpg";
             this.teacher_photo.Location = new System.Drawing.Point(153, 241);
             this.teacher_photo.Name = "teacher_photo";
-            this.teacher_photo.Size = new System.Drawing.Size(1, 23);
+            this.teacher_photo.Size = new System.Drawing.Size(300, 23);
             this.teacher_photo.TabIndex = 15;
             // 
             // teacher_discipline
             // 
             this.teacher_discipline.Location = new System.Drawing.Point(153, 215);
             this.teacher_discipline.Name = "teacher_discipline";
-            this.teacher_discipline.Size = new System.Drawing.Size(1, 20);
+            this.teacher_discipline.Size = new System.Drawing.Size(300, 20);
             this.teacher_discipline.TabIndex = 16;
             // 
             // groupBox12
@@ -2152,11 +2170,92 @@ namespace Constructor
             // ColorsPanel
             // 
             this.ColorsPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.ColorsPanel.Controls.Add(this.groupBox14);
             this.ColorsPanel.Controls.Add(this.label7);
             this.ColorsPanel.Location = new System.Drawing.Point(0, 0);
             this.ColorsPanel.Name = "ColorsPanel";
-            this.ColorsPanel.Size = new System.Drawing.Size(0, 0);
+            this.ColorsPanel.Size = new System.Drawing.Size(793, 574);
             this.ColorsPanel.Text = "Цвета";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.tableLayoutPanel14);
+            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox14.Location = new System.Drawing.Point(0, 39);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(793, 103);
+            this.groupBox14.TabIndex = 2;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Цвета";
+            // 
+            // tableLayoutPanel14
+            // 
+            this.tableLayoutPanel14.ColumnCount = 2;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Controls.Add(this.label53, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.label54, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.label55, 0, 2);
+            this.tableLayoutPanel14.Controls.Add(this.css_color_highlight, 1, 0);
+            this.tableLayoutPanel14.Controls.Add(this.css_color_normal, 1, 1);
+            this.tableLayoutPanel14.Controls.Add(this.css_color_submenu, 1, 2);
+            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 3;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(787, 82);
+            this.tableLayoutPanel14.TabIndex = 0;
+            // 
+            // label53
+            // 
+            this.label53.Location = new System.Drawing.Point(3, 0);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(51, 13);
+            this.label53.TabIndex = 0;
+            this.label53.Text = "Highlight:";
+            // 
+            // label54
+            // 
+            this.label54.Location = new System.Drawing.Point(3, 26);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(43, 13);
+            this.label54.TabIndex = 0;
+            this.label54.Text = "Normal:";
+            // 
+            // label55
+            // 
+            this.label55.Location = new System.Drawing.Point(3, 52);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(55, 13);
+            this.label55.TabIndex = 0;
+            this.label55.Text = "Submenu:";
+            // 
+            // css_color_highlight
+            // 
+            this.css_color_highlight.color = "";
+            this.css_color_highlight.Location = new System.Drawing.Point(153, 3);
+            this.css_color_highlight.Name = "css_color_highlight";
+            this.css_color_highlight.Size = new System.Drawing.Size(228, 20);
+            this.css_color_highlight.TabIndex = 1;
+            // 
+            // css_color_normal
+            // 
+            this.css_color_normal.color = "";
+            this.css_color_normal.Location = new System.Drawing.Point(153, 29);
+            this.css_color_normal.Name = "css_color_normal";
+            this.css_color_normal.Size = new System.Drawing.Size(228, 20);
+            this.css_color_normal.TabIndex = 2;
+            // 
+            // css_color_submenu
+            // 
+            this.css_color_submenu.color = "";
+            this.css_color_submenu.Location = new System.Drawing.Point(153, 55);
+            this.css_color_submenu.Name = "css_color_submenu";
+            this.css_color_submenu.Size = new System.Drawing.Size(228, 20);
+            this.css_color_submenu.TabIndex = 3;
             // 
             // label7
             // 
@@ -2167,7 +2266,7 @@ namespace Constructor
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(10);
-            this.label7.Size = new System.Drawing.Size(0, 39);
+            this.label7.Size = new System.Drawing.Size(793, 39);
             this.label7.TabIndex = 1;
             this.label7.Text = "Цвета";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2227,7 +2326,7 @@ namespace Constructor
             this.SchoolHistoryPanel.Controls.Add(this.label19);
             this.SchoolHistoryPanel.Location = new System.Drawing.Point(0, 0);
             this.SchoolHistoryPanel.Name = "SchoolHistoryPanel";
-            this.SchoolHistoryPanel.Size = new System.Drawing.Size(793, 574);
+            this.SchoolHistoryPanel.Size = new System.Drawing.Size(0, 0);
             this.SchoolHistoryPanel.Text = "История";
             // 
             // history_htmlsource_button
@@ -2259,7 +2358,7 @@ namespace Constructor
             this.school_history_html.Location = new System.Drawing.Point(0, 39);
             this.school_history_html.Multiline = true;
             this.school_history_html.Name = "school_history_html";
-            this.school_history_html.Size = new System.Drawing.Size(793, 498);
+            this.school_history_html.Size = new System.Drawing.Size(0, 498);
             this.school_history_html.TabIndex = 4;
             // 
             // label19
@@ -2271,7 +2370,7 @@ namespace Constructor
             this.label19.Location = new System.Drawing.Point(0, 0);
             this.label19.Name = "label19";
             this.label19.Padding = new System.Windows.Forms.Padding(10);
-            this.label19.Size = new System.Drawing.Size(793, 39);
+            this.label19.Size = new System.Drawing.Size(0, 39);
             this.label19.TabIndex = 2;
             this.label19.Text = "История школы";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2401,6 +2500,8 @@ namespace Constructor
             this.teachers_navigator.ResumeLayout(false);
             this.teachers_navigator.PerformLayout();
             this.ColorsPanel.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.tableLayoutPanel14.ResumeLayout(false);
             this.ButtonsPanel.ResumeLayout(false);
             this.ScrollbarsPanel.ResumeLayout(false);
             this.SchoolHistoryPanel.ResumeLayout(false);
@@ -2608,6 +2709,14 @@ namespace Constructor
         private FileSelect general_music_archive;
         private FileSelect general_music_info;
         private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private Constructor.Selectors.ColorSelect css_color_highlight;
+        private Constructor.Selectors.ColorSelect css_color_normal;
+        private Constructor.Selectors.ColorSelect css_color_submenu;
     }
 }
 

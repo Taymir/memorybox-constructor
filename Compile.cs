@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using EirikurN.Utilities;
 using System.Text.RegularExpressions;
+using Constructor.DataClasses;
 
 namespace Constructor
 {
@@ -90,8 +91,7 @@ namespace Constructor
 
             cregistry = new DataRegistry(registry);
 
-            extractImagesFromHtml(registry.info_html);
-            //step_one_bw.RunWorkerAsync();//@TMP
+            step_one_bw.RunWorkerAsync();
         }
         private void step_two()
         {
@@ -117,6 +117,16 @@ namespace Constructor
 
             current_text.Text = "DataRegistry.as";
             current_progress.Value = 0;
+
+            teachersFix();
+            exportDataRegistry export = new exportDataRegistry(cregistry);
+            saveToFile(export.export(), Path.Combine(DataRegistry.program_src_distro, "DataRegistry.as"));
+
+            current_text.Text = "AeonGraphical2.css";
+
+            exportCSS export_css = new exportCSS(cregistry);
+            saveToFile(export_css.export(), Path.Combine(DataRegistry.program_src_distro, "AeonGraphical2.css"));
+
             step_four_bw.RunWorkerAsync();
         }
         private void step_five()
@@ -300,8 +310,24 @@ namespace Constructor
             }
 
             // Копирование картинок для html-содержимого
-            cregistry.school_history_html = extractImagesFromHtml(registry.school_history_html);
-            cregistry.info_html = extractImagesFromHtml(registry.info_html);
+            cregistry.school_history_html = normalizeHtml(extractImagesFromHtml(registry.school_history_html));
+            cregistry.info_html = normalizeHtml(extractImagesFromHtml(registry.info_html));
+        }
+
+
+
+
+        private string normalizeHtml(string html)
+        {
+            Constructor.Compilers.TidyHtml tidy = new Constructor.Compilers.TidyHtml(html);
+            html = tidy.tidy();
+
+            html = html.Replace("STRONG", "b");
+            html = html.Replace("strong", "b");
+            html = html.Replace("EM", "i");
+            html = html.Replace("em", "i");
+
+            return html;
         }
 
         private string extractImagesFromHtml(string html)
@@ -321,7 +347,7 @@ namespace Constructor
                 if (source_path.StartsWith("http"))
                 {
                     System.Net.WebClient wc = new System.Net.WebClient();
-                    wc.DownloadFile(source_path, dest_path);
+                    wc.DownloadFile(source_path, destinationPath(dest_path));
                 }
                 else
                 {
@@ -593,8 +619,6 @@ namespace Constructor
 
         private void step_three_bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
-
             step_four();
         }
 
@@ -606,16 +630,39 @@ namespace Constructor
 
         private void step_four_bw_DoWork(object sender, DoWorkEventArgs e)
         {
+            // Копирование css
+            if (File.Exists(Path.Combine(registry.settings_source_path, "AeonGraphical2.css")))
+                step_four_copy(Path.Combine(registry.settings_source_path, "AeonGraphical2.css"),
+                    Path.Combine(DataRegistry.program_src_distro, "AeonGraphical2.css"));
+
+            // Копирование assets
+            if (Directory.Exists(Path.Combine(registry.settings_source_path, "assets")))
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(registry.settings_source_path, "assets"));
+                dirInfo.CopyTo(Path.Combine(registry.settings_project_path, "assets"), (p) =>
+                {
+                    step_four_bw.ReportProgress((int)((double)p.BytesTransferred * 100 / p.TotalBytes), p.CurrentFileName);
+                });
+            }
 
         }
 
         private void step_four_bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            teachersFix();
-            exportDataRegistry export = new exportDataRegistry(cregistry);
-            saveToFile(export.export(), Path.Combine(DataRegistry.program_src_distro, "DataRegistry.as") );
-
             step_five();
+        }
+
+        private void step_four_copy(string from, string to)
+        {
+            if (from == "")
+                return;
+
+            FileInfo file;
+            file = new FileInfo(from);
+            file.CopyTo(destinationPath(to), (p) =>
+            {
+                step_four_bw.ReportProgress((int)((double)p.BytesTransferred * 100 / p.TotalBytes), Path.GetFileName(from));
+            });
         }
 
         private void saveToFile(string data, string path)

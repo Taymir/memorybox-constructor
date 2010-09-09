@@ -51,7 +51,9 @@ namespace Constructor
         {
             if (value == null)
                 return "new Array()";
-            string[] arr = Regex.Split(value, "\r\n");
+
+            value = value.Replace("\r", "");
+            string[] arr = Regex.Split(value, "\n");
 
             return exportArray(arr);
         }
@@ -87,7 +89,8 @@ namespace Constructor
             if (value == null)
                 return res + "\"\";\r\n";
 
-            string[] arr = Regex.Split(value, "\r\n");
+            value = value.Replace("\r", "");
+            string[] arr = Regex.Split(value, "\n");
 
             if (arr.Length > 0)
             {

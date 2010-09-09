@@ -152,6 +152,11 @@ namespace Constructor
             info_html.DataBindings.Add("Text", data_source, "info_html", true, DataSourceUpdateMode.OnPropertyChanged);
             info_editor.DataBindings.Add("BodyHtml", data_source, "info_html", true, DataSourceUpdateMode.OnPropertyChanged);
 
+            /* CSS */
+            css_color_highlight.DataBindings.Add("color", data_source, "css_color_highlight");
+            css_color_normal.DataBindings.Add("color", data_source, "css_color_normal");
+            css_color_submenu.DataBindings.Add("color", data_source, "css_color_submenu");
+
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)

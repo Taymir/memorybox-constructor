@@ -34,16 +34,24 @@ namespace Constructor
 
         private void NewProject_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (projectPath == string.Empty)
+            if (this.DialogResult == DialogResult.OK)
             {
-                e.Cancel = true;
-                MessageBox.Show("Необходимо указать путь для сохранения проекта.");
-            }
-            else if (sourcePath == string.Empty)
-            {
-                if (MessageBox.Show("Вы уверены, что НЕ ХОТИТЕ указать путь к контенту? Это усложнит дальнейшую работу с конструктором.", "Путь к контенту", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if (projectPath == string.Empty)
+                {
                     e.Cancel = true;
+                    MessageBox.Show("Необходимо указать путь для сохранения проекта.");
+                }
+                else if (sourcePath == string.Empty)
+                {
+                    if (MessageBox.Show("Вы уверены, что НЕ ХОТИТЕ указать путь к контенту? Это усложнит дальнейшую работу с конструктором.", "Путь к контенту", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        e.Cancel = true;
+                }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

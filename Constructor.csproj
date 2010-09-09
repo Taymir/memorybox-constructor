@@ -13,6 +13,21 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>Full</TargetFrameworkSubset>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,11 +72,16 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZetaHtmlTidy, Version=1.0.2568.37235, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ZetaHtmlTidy.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compilers\FFmpeg.cs" />
     <Compile Include="Compilers\Flex.cs" />
     <Compile Include="Compilers\ImageMagick.cs" />
+    <Compile Include="Compilers\TidyHtml.cs" />
     <Compile Include="DataClasses\ArchiveSection.cs" />
     <Compile Include="Compile.cs">
       <SubType>Form</SubType>
@@ -70,6 +90,7 @@
       <DependentUpon>Compile.cs</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\DataRegistry.cs" />
+    <Compile Include="DataClasses\exportCSS.cs" />
     <Compile Include="Design\Editor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +121,12 @@
     </Compile>
     <Compile Include="DataClasses\exportDataRegistry.cs" />
     <Compile Include="EirikurN\Utilities\CopyExtensions.cs" />
+    <Compile Include="Selectors\ColorSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Selectors\ColorSelect.Designer.cs">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Selectors\FolderSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,6 +165,9 @@
     <EmbeddedResource Include="Design\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Selectors\ColorSelect.resx">
+      <DependentUpon>ColorSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Selectors\FolderSelect.resx">
       <DependentUpon>FolderSelect.cs</DependentUpon>
@@ -193,6 +223,38 @@
     <Content Include="Design\Resources\rj.bmp" />
     <Content Include="Design\Resources\underscore.bmp" />
     <Content Include="Design\Resources\uol.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

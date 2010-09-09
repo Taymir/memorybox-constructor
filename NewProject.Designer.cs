@@ -63,6 +63,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -78,7 +79,7 @@
             // 
             this.source.AutoSize = true;
             this.source.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.source.filepath = "c:\\MyProjects\\MemoryBox\\CONTENT2\\";
+            this.source.filepath = "";
             this.source.Location = new System.Drawing.Point(18, 71);
             this.source.Name = "source";
             this.source.Size = new System.Drawing.Size(446, 23);
@@ -88,7 +89,7 @@
             // 
             this.project.AutoSize = true;
             this.project.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.project.filepath = "c:\\MyProjects\\MemoryBox\\RESULT\\";
+            this.project.filepath = "";
             this.project.Location = new System.Drawing.Point(15, 25);
             this.project.Name = "project";
             this.project.Size = new System.Drawing.Size(446, 23);

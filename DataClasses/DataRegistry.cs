@@ -122,6 +122,52 @@ namespace Constructor
             }
         }
 
+        /* CSS PROPERTIES */
+        private string _css_color_highlight;
+        public string css_color_highlight
+        {
+            set
+            {
+                this._css_color_highlight = value;
+            }
+            get
+            {
+                if (_css_color_highlight != null && _css_color_highlight != string.Empty)
+                    return _css_color_highlight;
+                return "#00ADE9";
+            }
+        }
+
+        private string _css_color_normal;
+        public string css_color_normal
+        {
+            set
+            {
+                this._css_color_normal = value;
+            }
+            get
+            {
+                if (_css_color_normal != null && _css_color_normal != string.Empty)
+                    return _css_color_normal;
+                return "#999999";
+            }
+        }
+
+        private string _css_color_submenu;
+        public string css_color_submenu
+        {
+            set
+            {
+                this._css_color_submenu = value;
+            }
+            get
+            {
+                if (_css_color_submenu != null && _css_color_submenu != string.Empty)
+                    return _css_color_submenu;
+                return "#848484";
+            }
+        }
+
         public DataRegistry()
         {
             this.school_name = string.Empty;
@@ -166,6 +212,10 @@ namespace Constructor
 
             this.settings_project_path = string.Empty;
             this.settings_source_path = string.Empty;
+
+            this.css_color_highlight = string.Empty;
+            this.css_color_normal = string.Empty;
+            this.css_color_submenu = string.Empty;
         }
 
         // Copy constructor
@@ -213,6 +263,10 @@ namespace Constructor
 
             this.settings_project_path = clone.settings_project_path;
             this.settings_source_path = clone.settings_source_path;
+
+            this.css_color_highlight = clone.css_color_highlight;
+            this.css_color_normal = clone.css_color_normal;
+            this.css_color_submenu = clone.css_color_submenu;
         }
     }
 }
