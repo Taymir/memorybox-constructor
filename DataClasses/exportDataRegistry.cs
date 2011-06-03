@@ -96,7 +96,7 @@ namespace Constructor
             {
                 for (int i = 0; i < arr.Length; ++i)
                 {
-                    res += string.Format("\"{0}\"", escape(arr[i]));
+                    res += string.Format("\"{0} \"", escape(arr[i]));//@BUGFIX: Добавил пробел, чтобы устранить баг со слиянием слов
 
                     if (i < arr.Length - 1)
                     {
