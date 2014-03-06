@@ -1,0 +1,92 @@
+Application {
+	color: #000000;
+	border-style: none;
+	background-gradient-colors: #FFFFFF, #FFFFFF;
+	background-gradient-alphas: 1.0, 1.0;
+}
+
+.popup {
+	background-alpha: 1.0;
+	background-color: #FFFFFF;
+}
+
+VideoDisplay {
+	background-color: #FFFFFF;
+	background-alpha: 0;
+}
+
+List {
+	color: #000000;
+	borderColor: #ffffff;
+	border-style: none;
+	selectionColor: #00ADE9;
+	borderColor: #000000;
+	fontColor: #000000;
+	rollOverColor: #efefef;
+}
+
+.ListSelected
+{
+	color: #FFFFFF;
+}
+.ListUnselected
+{
+	color: #00ADE9;
+}
+
+ScrollBar
+{
+	cornerRadius: 0;
+	upArrowUpSkin: Embed(source="assets/scrollbarStyles/up_arrow.png");
+	downArrowUpSkin: Embed(source="assets/scrollbarStyles/down_arrow.png");
+	trackSkin: Embed(source="assets/scrollbarStyles/track.png");
+	thumbUpSkin: Embed(source="assets/scrollbarStyles/icon2.png");
+	thumbIcon: Embed(source="assets/scrollbarStyles/icon2.png");
+	thumbOverSkin: Embed(source="assets/scrollbarStyles/icon2.png");
+	thumbDownSkin: Embed(source="assets/scrollbarStyles/icon2.png");
+	downArrowOverSkin: Embed(source="assets/scrollbarStyles/down_arrow.png");
+	downArrowDownSkin: Embed(source="assets/scrollbarStyles/down_arrow.png");
+	downArrowDisabledSkin: Embed(source="assets/scrollbarStyles/down_arrow.png");
+	upArrowOverSkin: Embed(source="assets/scrollbarStyles/up_arrow.png");
+	upArrowDownSkin: Embed(source="assets/scrollbarStyles/up_arrow.png");
+	upArrowDisabledSkin: Embed(source="assets/scrollbarStyles/up_arrow.png");
+}
+
+.MySlider {
+	thumbSkin: Embed(source="assets/scrollbarStyles/icon.png");
+	trackSkin: Embed(source="assets/scrollbarStyles/progress_bar.png");
+}
+
+
+Text.dynamicSectionHeading
+{
+	color: #999999;
+	fontFamily: Arial;
+	fontSize: 16;
+	fontWeight: bold;
+}
+.StaticText
+{
+	color: #00ADE9;
+	fontFamily: Verdana;
+	fontWeight: bold;
+}
+.dynamicText
+{
+	color: #999999;
+	fontFamily: Verdana;
+}
+
+.submenuLink
+{
+	color: #848484;
+	padding-left: -5;
+	padding-right: -5;
+}
+
+.pictureBorder
+{
+	border-color: #00ADE9;
+	border-thickness: 1;
+	border-style: solid;
+}

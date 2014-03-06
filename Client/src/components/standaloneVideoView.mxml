@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()"  hide="stop()" xmlns:local="*">
+	<mx:Metadata>
+  		[Event(name="nextItem")]
+		[Event(name="prevItem")]
+	</mx:Metadata>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+		
+			private var _source : String = "";
+			
+			public function set source(str: String) : void
+			{
+				this._source = str;
+				init();
+			}
+			
+			public function get source() : String
+			{
+				return this._source;
+			}
+			
+			private function init() : void
+			{
+				if(this.video != null)
+				{
+					this.stop();
+					positionControl.visible = false;
+					this.video.source = this._source;
+					MemoryBox.musicPlayer.stop();
+					MemoryBox.setLastVideoView(this);
+				}
+					
+			}
+		
+			public function play() : void
+			{
+				if(video.source && video.source != "")
+				{
+					if(video.playing)
+						video.pause();
+					else
+					{
+						MemoryBox.musicPlayer.stop();
+						MemoryBox.setLastVideoView(this);
+						try{
+							video.play();
+						} catch (e: Error)
+						{
+						
+						}
+					}
+				}
+			}
+			
+			public function stop() : void
+			{
+				if(this.video != null && this.video.playing)
+					this.video.stop();
+			}
+			
+			private function positionControl_Press() : void
+			{
+				video.pause();
+			}
+			
+			private function positionControl_Release() : void
+			{
+				video.playheadTime = positionControl.value;
+				video.play();
+			}
+			
+			private function video_Metadata(event:Event) : void
+			{
+				positionControl.visible = true;
+				positionControl.maximum = video.totalTime;
+			    
+			}
+			
+			private var fullscreen_wnd:components.fullscreen
+			private function fullscreen() : void
+			{
+				
+				fullscreen_wnd = new components.fullscreen;
+				fullscreen_wnd.content = video;
+			    fullscreen_wnd.addEventListener("nextItem", next);
+			    fullscreen_wnd.addEventListener("prevItem", prev);
+			    fullscreen_wnd.addEventListener("exit", exit_fullscreen);
+				MemoryBox.addPopup(fullscreen_wnd);
+			}
+			
+			private function next(ev:Event) : void
+			{
+				var e : Event = new Event('nextItem');
+				dispatchEvent(e);
+			}
+			
+			private function prev(ev:Event) : void
+			{
+				var e : Event = new Event('prevItem');
+				dispatchEvent(e);
+			}
+			
+			private function exit_fullscreen(e: Event) : void
+			{
+				if(fullscreen_wnd != null)
+				{
+					videoHolder.addChild(video);
+					MemoryBox.removePopup();
+				}
+				
+				fullscreen_wnd = null;
+			}
+		]]>
+	</mx:Script>
+
+	<mx:GridRow width="100%" height="100%">
+		<mx:GridItem id="videoHolder" width="100%" height="100%">
+			<local:SmoothVideoDisplay id="video" width="100%" height="100%"
+				volume="{volumeControl.value}" metadataReceived="video_Metadata(event)" smoothing="true" autoPlay="true"  buttonMode="true" useHandCursor="true" click="play()"  />
+		</mx:GridItem>
+	</mx:GridRow>
+	<mx:GridRow width="100%" height="20">
+		<mx:GridItem width="100%" height="20" horizontalAlign="center" verticalAlign="bottom">
+			<mx:Image source="assets/buttons/play_button.png" buttonMode="true" useHandCursor="true" click="play()"/>
+			<mx:Image source="assets/buttons/stop_button.png" buttonMode="true" useHandCursor="true" click="stop()"/>
+			<mx:HSlider id="positionControl"
+				styleName="MySlider"
+				allowTrackClick="false"
+				invertThumbDirection="false"
+				liveDragging="false"
+				maximum="1"
+				minimum="0"
+				thumbPress="positionControl_Press()"
+				thumbRelease="positionControl_Release()"
+				tickInterval="0"
+				showDataTip="false"
+				value="{video.playheadTime}"
+				visible="false" />
+			<mx:Image source="assets/buttons/sound_button.png"/>
+			<mx:HSlider 
+				styleName="MySlider"
+				id="volumeControl"
+				minimum="0"
+				maximum="1"
+				tickInterval="0"
+				showDataTip="false"
+				width="70"
+				value="1"
+				/>
+			<mx:Image source="assets/buttons/fullscreen_button.png" useHandCursor="true" buttonMode="true" click="fullscreen()"/>
+		</mx:GridItem>
+	</mx:GridRow>
+</mx:Grid>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Text;
+			import mx.core.UIComponent;
+			/*import org.groe.html.Element;
+			import org.groe.html.HtmlParser;
+			import org.groe.html.FlashHtmlRenderer;*/
+			private var _html: String;
+			
+			public function set html(str: String) : void
+			{
+				this._html = correctHtmlImageTextFlow(str);
+				clear();
+				render();
+			}
+			
+			private function clear() : void
+			{
+				this.removeAllChildren();
+			}
+			
+			private function render() : void
+			{
+				// USING Text.htmlText
+				var t:Text = new Text();
+				t.width = this.width - 20;
+				t.htmlText = this._html;
+				addChild(t);		
+			}
+			
+			//@TEST
+			private function test() : void
+			{
+				var str : String = 
+					"<P>Приказ N 165 по Новосибирскому<br> городскому отделу народного образования " + 
+					"от 13.04.1950 года. Алымова Алексея Яковлевича назначить исполняющим " +  
+					"обязанности директора вновь строящейся школы в Дзержинском районе. " +  
+					"Заведующая Новосибирским отделом народного образования - Данилова. " +  
+					"Так родилась наша школа!</P> " +  
+					"<p><img src=\"http://www.school23.info/hp1.jpg\" width=\"200\" height=\"126\" alt=\"Наша Школа 1950 год\"> </p>" +  
+					"<p>Средняя общеобразовательная школа N 23 города Новосибирска была " +  
+					"открыта 30 августа 1950 года. Первый выпуск учащихся из 37 человек, " +  
+					"состоялся уже в 1954 году. Среди первых выпускников того времени: " +  
+					"Дмитриев Евгений - золотой медалист нашей школы, серебрянные " +  
+					"медалисты Халимов Анатолий и Яковлев Альберт. К 2006 году (время " +  
+					"открытия нашего сайта) средняя общеобразовательная школа N 23 " +  
+					"выпустила 3772 учащихся, 8 золотых медалистов и 57 серебряных.  " + 
+					"<b>Из воспоминаний выпускников:</b></p> " +  
+					"<p><img src=\"http://www.school23.info/hp2.jpg\" width=\"200\" height=\"97\" alt=\"Первый выпуск с классным руководителем\"></p> " +  
+					"<p>Новый, 1951 учебный год. Учителя и ученики так называемых кварталов на " +  
+					"Богдашке начинали бурно и радостно. На улице Народной была открыта " +  
+					"новая средняя школа N 23. Четырехэтажная, со специальными кабинетами " +  
+					"физики, химии, биологии, со спортивным залом и уютным двориком, она " +  
+					"притягивала, как мечта, всех нас, послевоенных учеников, четырнадцати " +  
+					"летних подростков, светом новой послевоенной жизни. Мы выплеснулись " +  
+					"из переполненных старых, где-то барачных школ в округе на новый в " +  
+					"Дзержинском районе проспект Богдана Хмельницкого. И он навсегда стал " +  
+					"нашим. Школа стала местом, куда мы приходили не просто за знаниями, " +  
+					"а за общением между собой, которое вынужденно прерывалось занятиями. " +  
+					"Учить нас было трудно. Мешали огромные пробелы в начальном образовании " +  
+					"за годы войны. И вся эта тяжесть легла на плечи новых для школы и новых " +  
+					"и новых для нас учителей. Но они стали для нас, учеников нового набора " +  
+					"1951 года и затем первого выпуска 1954 года, первооткрывателями нашего " +  
+					"нашего осознания жизненных ценностей страны, семьи, школы, друзей... " +  
+					"(По поручению выпускников 1954 года школы N 23, Юрий Куратченко)</p> "; 
+
+				html = str;
+			}
+			
+			/**
+			 * Code author: Paul Klinkenberg, http://www.coldfusiondeveloper.nl/
+			 * Project: Images in flash as3 htmlText, part 2; how to display them correctly
+			 * Blog post: http://www.coldfusiondeveloper.nl/post.cfm/flash-as3-images-in-htmltext-how-to
+			 * Date: 2010-01-15 19:10:00 +0100
+			 * Revision: 1.1 (added parameter 's' to most regex'es)
+			 * Copyright (c) 2010 Paul Klinkenberg, Ongevraagd Advies (www.ongevraagdadvies.nl)
+			 * Licensed under the GPL license, see <http://www.gnu.org/licenses/>.HTmltAG * Leave this copyright notice in place!HTmltAG put every <img> tag inside a <textformat> tag with the same leading height as the image has a height,
+			 * so text won't flow around it.
+			 * Also, since flash always displays images on a new line, add a line break <br> tag before
+			 * and after the image.
+			 * Yes, I know it IS possible to have text appear after the image on the same line,
+			 * but that has much complications: if you then have more then one image, they will often not be correctly
+			 *  set in the text's order: 'text1 <img1> text2 <img2>' will become 'text1 text2 <img1> <img2>'.
+			 */
+			public function correctHtmlImageTextFlow(htmlTxt:String, fontSize:uint = 10):String
+			{
+			    // remove optional break before and after the image tag (since we will add it anyway)
+			    htmlTxt = htmlTxt.replace(/<br>[\t ]*((<\/[^>]*>)*<img)/gsi, '$1');
+			    htmlTxt = htmlTxt.replace(/(<img[^>]+>(<\/[^>]*>)*)[\t ]*<br>/gsi, '$1');
+			    
+			    var currImgHeight:Number;
+			    while (htmlTxt.match(/<img[^>]*height=.[0-9]+.[^>]*>/si))
+			    {
+			        // get the height from the current image
+			        currImgHeight = parseInt(htmlTxt.replace(/^.*?<img[^>]*height=.([0-9]+).[^>]*>.*$/si, "$1"));
+			        /** Now, the magic:
+			         * - temporarily rename <img tags to <xXxXimg tags, so we won't match the tag again
+			         * - wrap the img tag inside textformat tags
+			         * - give the textformat tag a 'leading' attribute width a value of: image height - fontSize
+			         * - add a break before and after the img tag, to be sure it displays correctly on a line of it's own.
+			         */
+			        htmlTxt = htmlTxt.replace(/<(img[^>]*height=.[0-9]+.[^>]*>)/si, '<br><textformat leading="'+Math.ceil(currImgHeight-fontSize)+'"><xXxX$1<br></textformat>');
+			    }
+			    // now un-rename the <xXxXimg tags
+			    htmlTxt = htmlTxt.replace(/<xXxXimg/gi, "<img");
+			    
+			    /** now check: if the image is the last visible thing in the html, then append a space to the html.
+			     * Otherwise, the image's height won't be taken into account for the html's totalHeight, which
+			     * causes part of the image to disappear below the end of the htmlText text box.
+			     */
+			    if (htmlTxt.match(/<br><\/textformat>(<[^>]+>)*$/))
+			    {
+			        htmlTxt += ' ';
+			    }
+			    
+			    // remove optionally existing vspace and hspace from img tags (who uses this anyway??)
+			    htmlTxt = htmlTxt.replace(new RegExp("(<img[^>]*)hspace=.[0-9]+.", "gsi"), '$1');
+			    htmlTxt = htmlTxt.replace(new RegExp("(<img[^>]*)vspace=.[0-9]+.", "gsi"), '$1');
+			    // now set vspace=0 and hspace=0 in the img tags
+			    htmlTxt = htmlTxt.replace(new RegExp("<img", "gi"), '<img vspace="0" hspace="0"');
+			    // done!
+			    return htmlTxt;
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

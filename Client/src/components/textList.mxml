@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<mx:Metadata>
+	[Event(name="userSelected", type="UserEvent")]
+</mx:Metadata>
+  	
+<mx:Script>
+	<![CDATA[
+		import mx.controls.Label;
+		
+		private var _dataProvider:Array;
+		public function set dataProvider(lst: Array) : void
+		{
+			this._dataProvider = lst;
+			init();
+		}
+		
+		private function init() : void
+		{
+			if(userList != null)
+				fillUserNames();
+		}
+		
+		private function firstLetter(str : String) : String
+		{
+			return str.charAt(0);
+		}
+		
+		private function fillUserNames() : void
+		{
+			for(var i:int = 0; i < _dataProvider.length; ++i)
+			{
+				if(
+					(i > 0 &&
+					 firstLetter( (_dataProvider[i] as User).name ) != firstLetter( (_dataProvider[i-1] as User).name ) 
+					) 
+					|| i ==0
+				   )
+				{
+					var letter: Label = new Label();
+					letter.text = firstLetter( (_dataProvider[i] as User).name );
+					letter.styleName="StaticText";
+					userList.addChild(letter);
+				}
+				
+				var l: Label = new Label();
+				l.text = (_dataProvider[i] as User).name;
+				l.data = _dataProvider[i] as User;
+				l.useHandCursor = true;
+				l.buttonMode = true;
+				l.mouseChildren=false
+				l.addEventListener(MouseEvent.CLICK, clickHandler);
+				userList.addChild(l);
+			}
+		}
+		
+		private function clickHandler(event: Event):void
+		{
+			var e:UserEvent = new UserEvent('userSelected');
+			e.user = event.target.data as User;
+			dispatchEvent(e);
+		}
+	]]>
+</mx:Script>
+<mx:HBox width="100%" height="100%" horizontalAlign="center">
+<mx:Tile height="500" maxWidth="1000" id="userList" direction="vertical" 
+ creationComplete="init()">
+</mx:Tile>
+</mx:HBox>
+
+
+</mx:Canvas>

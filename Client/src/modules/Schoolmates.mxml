@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:comp="components.*"
+	layout="absolute" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			public function resetFrame() : void
+			{
+				if(userlist)
+					userlist.reset();
+				MemoryBox.musicPlayer.playMP3(DataRegistry.instance.general_music_schoolmates);
+				MemoryBox.stopVideoView();
+			}
+		]]>
+	</mx:Script>
+ 
+	<comp:userList id="userlist" dataProvider="{DataRegistry.instance.schoolmates}" />
+	
+</mx:Module>

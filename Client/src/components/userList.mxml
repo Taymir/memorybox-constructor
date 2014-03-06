@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ViewStack xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:comp="components.*" width="100%" height="100%">
+ <mx:Script>
+ 	<![CDATA[
+ 	
+ 		[Bindable]
+ 		public var dataProvider: Array;
+ 		
+ 		[Bindable]
+ 		public var teachersMode: Boolean = false;
+ 		
+ 		private function showUser(event:UserEvent) : void
+ 		{
+ 			userMode.user = event.user;
+ 			this.selectedChild = userMode;	
+ 		}
+ 		
+ 		public function reset() : void
+ 		{
+ 			if(userListMode)
+ 			{
+ 				this.selectedChild = userListMode;
+ 				this.userListType.selectedChild = coverflow;
+ 			}
+ 		}
+ 	]]>
+ </mx:Script>
+ 
+ 	<mx:Canvas id="userListMode" label="" width="100%" height="100%">
+	<mx:Grid x="0" y="0" width="100%" height="100%">
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%">
+				<mx:ViewStack id="userListType" width="100%" height="100%">
+					<comp:coverflowList id="coverflow" dataProvider="{dataProvider}" userSelected="showUser(event)" />
+					<comp:thumbnailsList id="thumbnails" dataProvider="{dataProvider}" userSelected="showUser(event)" />
+					<comp:textList id="text" dataProvider="{dataProvider}" userSelected="showUser(event)" />
+				</mx:ViewStack>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow width="100%" height="40" verticalAlign="middle" horizontalAlign="center">
+			<mx:GridItem width="100%" height="40" horizontalAlign="center" verticalAlign="middle">
+				<mx:Image source="assets/buttons/view_slideshow.gif" buttonMode="true" useHandCursor="true" click="userListType.selectedChild=coverflow" />
+				<mx:Image source="assets/buttons/view_thumbnails.gif" buttonMode="true" useHandCursor="true" click="userListType.selectedChild=thumbnails"/>
+				<mx:Image source="assets/buttons/view_textonly.gif" buttonMode="true" useHandCursor="true" click="userListType.selectedChild=text"/>
+			</mx:GridItem>
+		</mx:GridRow>
+	</mx:Grid>
+	</mx:Canvas>
+	
+	<comp:userView id="userMode" height="100%" width="100%" teachersMode="{teachersMode}" backFromUserView="this.selectedChild=userListMode" />
+	
+</mx:ViewStack>

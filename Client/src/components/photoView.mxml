@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()" xmlns:local="*">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexMouseEvent;
+			import mx.managers.PopUpManager;
+			import components.fullscreen;
+			
+			private var _photos: IPhotos;
+			private var iterator: int = 0;
+			public function set photos(photos: IPhotos) : void
+			{
+				this._photos = photos;
+				init();
+			}
+			
+			private var _loader:Loader;
+			private function init() : void
+			{
+				if(_photos && photo && _photos.photosLarge.length > 0)
+				{
+					switchToPhoto(0);
+					fillThumbnailsList();
+				}
+			}
+			
+			private function switchToPhoto(num: int) : void
+			{
+				if(num < _photos.photosLarge.length && num >= 0)
+				{
+					this.photo.source = _photos.photosLarge[num];
+
+					this.iterator = num;
+					
+					if(this.thumbnailsList.selectedIndex != iterator)
+					{
+						this.thumbnailsList.selectedIndex = iterator;
+						this.thumbnailsList.scrollToIndex(iterator);
+					}
+				}
+			}
+			
+			private function next(e: Event = null) : void
+			{
+				switchToPhoto(this.iterator + 1);
+			}
+			
+			private function prev(e: Event = null) : void
+			{
+				switchToPhoto(this.iterator - 1);
+			}
+			
+			private function fillThumbnailsList() : void
+			{
+				thumbnailsList.dataProvider = _photos.photosThumbnails;
+			}
+			
+			private var fullscreen_wnd:components.fullscreen;
+			private function fullscreen() : void
+			{
+				fullscreen_wnd = new components.fullscreen;
+				fullscreen_wnd.content = photo;
+			    fullscreen_wnd.addEventListener("nextItem", next);
+			    fullscreen_wnd.addEventListener("prevItem", prev);
+			    fullscreen_wnd.addEventListener("exit", exit_fullscreen);
+			    MemoryBox.addPopup(fullscreen_wnd);
+			}
+			
+			private function exit_fullscreen(e: Event) : void
+			{
+				if(fullscreen_wnd != null)
+				{
+					MemoryBox.removePopup();
+					photoHolder.addChild(photo);
+				}
+				
+				fullscreen_wnd = null;
+			}
+			
+			private function navigateURL(url: String):void
+			{
+				var urlRequest:URLRequest = new URLRequest(url);
+				navigateToURL(urlRequest, "_parent");
+			}
+			
+			private function saveClick() : void
+			{
+				this.navigateURL(_photos.photosLarge[iterator]);
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Grid id="photoViewFrame" x="0" y="0" width="100%" height="100%">
+	<mx:GridRow width="100%" height="100%">
+		<mx:GridItem width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+			<mx:Grid width="100%" height="100%">
+				<mx:GridRow width="100%" height="100%">
+					<mx:GridItem id="photoHolder" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+						<local:SmoothImage id="photo" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" autoLoad="true" />
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="20">
+					<mx:GridItem width="100%" height="20" horizontalAlign="center">
+						<mx:Image source="assets/buttons/backward_button.png" useHandCursor="true" buttonMode="true" click="prev()"/>
+						<mx:Image source="assets/buttons/fullscreen_button.png" useHandCursor="true" buttonMode="true" click="fullscreen()"/>
+						<mx:Image source="assets/buttons/forward_button.png" useHandCursor="true" buttonMode="true" click="next()"/>
+						<mx:Label text="сохранить" styleName="StaticText" buttonMode="true" useHandCursor="true" mouseChildren="false" toolTip="Для сохранения фотографии, нажмите в браузере правой кнопкой мышки на фотографию и выберите сохранить как" click="saveClick()" />
+					</mx:GridItem>
+				</mx:GridRow>
+			</mx:Grid>
+		</mx:GridItem>
+		<mx:GridItem width="200" height="100%" horizontalAlign="center">
+			<mx:List id="thumbnailsList" width="135" height="100%" click="switchToPhoto(thumbnailsList.selectedIndex)">
+				<mx:itemRenderer>
+					<mx:Component>
+						<mx:Image width="200" height="85" horizontalAlign="center" verticalAlign="middle" />
+					</mx:Component>
+				</mx:itemRenderer>
+			</mx:List>
+		</mx:GridItem>
+	</mx:GridRow>
+</mx:Grid>
+</mx:Canvas>

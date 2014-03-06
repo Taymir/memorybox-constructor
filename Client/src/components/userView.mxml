@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid xmlns:mx="http://www.adobe.com/2006/mxml"
+	     xmlns:comp="components.*"
+	 width="100%" height="100%" creationComplete="init()" xmlns:local="*">
+   	<mx:Metadata>
+  		[Event(name="backFromUserView", type="flash.events.Event")]
+  	</mx:Metadata>
+  	
+	<mx:Script>
+		<![CDATA[
+		 	[Bindable]
+			public var teachersMode : Boolean = false;
+		
+			[Bindable]
+			private var _user : User;
+			public function set user(user: User) : void
+			{
+				this._user = user;
+				init();
+			}
+			
+			public function init(): void
+			{
+				if(this.usernameText != null)
+				{
+					this.usernameText.text = _user.name;
+					this.userPhoto.source = _user.photo_large;
+					this.userViewFrameSet.selectedChild = defaultFrame;
+					
+					MemoryBox.fillLinks(linksContainer, _user.contacts_links);
+				}
+			}
+			
+			private function goBackFromUserView() : void
+			{
+				var e:Event = new Event('backFromUserView');
+				dispatchEvent(e);	
+			}
+			
+			private function switchToPhotos() : void
+			{
+				photoViewFrame.photos = _user;
+				userViewFrameSet.selectedChild=photoViewFrame;
+			}
+			
+			private function switchToVideos() : void
+			{
+				videoViewFrame.videos = _user;
+				userViewFrameSet.selectedChild=videoViewFrame;
+			}
+		]]>
+	</mx:Script>
+
+	<mx:GridRow width="100%" height="100%">
+		<mx:GridItem width="200" height="100%">
+			<mx:Grid width="100%" height="100%">
+				<mx:GridRow width="100%">
+					<mx:GridItem>
+						<mx:Text text="" styleName="dynamicSectionHeading" width="200" id="usernameText"/>
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="15">
+					<mx:GridItem>
+						<mx:Label text="Контакты:" styleName="dynamicText"/>
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="200" height="100%">
+					<mx:GridItem>
+								<mx:Grid>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{teachersMode}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="Предмет:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{_user.discipline}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{!teachersMode}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="Д/р:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{_user.birthday}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{_user.contacts_cellphone!=''}" visible="{_user.contacts_cellphone!=''}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="моб.:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{_user.contacts_cellphone}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{_user.contacts_phone!=''}" visible="{_user.contacts_phone!=''}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="тел.:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{_user.contacts_phone}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{_user.contacts_links.length > 0}" visible="{_user.contacts_links.length > 0}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="ссылки:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:VBox id="linksContainer" />
+										</mx:GridItem>
+									</mx:GridRow>
+								</mx:Grid>
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="15" horizontalAlign="center">
+					<mx:GridItem horizontalAlign="center" verticalAlign="bottom">
+						<mx:LinkButton label="фото" styleName="submenuLink" click="switchToPhotos()" />
+						<mx:Label text="|" styleName="submenuLink" />
+						<mx:LinkButton label="видео" styleName="submenuLink" click="switchToVideos()" />
+					</mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow width="100%" height="15" horizontalAlign="center">
+					<mx:GridItem horizontalAlign="center" verticalAlign="bottom">
+						<mx:LinkButton label="Назад к списку" styleName="submenuLink" click="videoViewFrame.stop(); goBackFromUserView();" />
+					</mx:GridItem>
+				</mx:GridRow> 
+			</mx:Grid>
+			
+		</mx:GridItem>
+		<mx:GridItem width="100%" height="100%">
+			<mx:ViewStack id="userViewFrameSet" width="100%" height="100%">
+					<mx:Grid id="defaultFrame" x="0" y="0" width="100%" height="100%">
+						<mx:GridRow width="100%" height="100%">
+							<mx:GridItem width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+								<local:SmoothImage width="100%" height="100%"  horizontalAlign="center" verticalAlign="middle" id="userPhoto" styleName="pictureBorder"/>
+							</mx:GridItem>
+							<mx:GridItem width="200" height="100%">
+								<mx:VBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+									<mx:Image source="{_user.getFirstPhotoThumb()}" width="150" height="120" horizontalAlign="center" verticalAlign="middle" buttonMode="true" useHandCursor="true" click="switchToPhotos()" />
+									<mx:Label text="фото" styleName="StaticText" buttonMode="true" useHandCursor="true" mouseChildren="false" click="switchToPhotos()" />
+									<mx:Image source="{_user.getFirstVideoThumb()}" width="150" height="120" horizontalAlign="center" verticalAlign="middle" buttonMode="true" useHandCursor="true" click="switchToVideos()"/>
+									<mx:Label text="видео" styleName="StaticText" buttonMode="true" useHandCursor="true" mouseChildren="false" click="switchToVideos()"/>
+								</mx:VBox>
+							</mx:GridItem>
+						</mx:GridRow>
+					</mx:Grid>
+					<comp:photoView id="photoViewFrame" />
+					<comp:videoView id="videoViewFrame" />
+
+			</mx:ViewStack>
+			
+		</mx:GridItem>
+	</mx:GridRow>
+</mx:Grid>

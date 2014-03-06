@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:comp="components.*" width="100%" height="100%" creationComplete="init()" hide="stop()">
+
+<mx:Script>
+	<![CDATA[
+		import mx.events.FlexMouseEvent;
+		import mx.managers.PopUpManager;
+	
+		[Bindable]
+		private var _videos: IVideos;
+		private var iterator: int = 0;
+		public function set videos(videos: IVideos) : void
+		{
+			this._videos = videos;
+			init();
+		}
+		
+		public function stop() : void
+		{
+			if(video)
+				video.stop();
+		}
+		
+		private function init() : void
+		{
+			if(_videos != null && video != null && _videos.videosLarge.length > 0)
+			{
+				switchToVideo(0);
+				fillThumbnailsList();
+			}
+		}
+		
+		private function switchToVideo(num: int) : void
+		{
+			if(num < _videos.videosLarge.length && num >= 0)
+			{
+				this.video.source = _videos.videosLarge[num];
+				
+				this.iterator = num;
+				
+				if(this.thumbnailsList.selectedIndex != iterator)
+				{
+					this.thumbnailsList.selectedIndex = iterator;
+					this.thumbnailsList.scrollToIndex(iterator);
+				}
+			}
+		}
+		
+		private function next(e: Event = null) : void
+		{
+			switchToVideo(this.iterator + 1);
+		}
+		
+		private function prev(e: Event = null) : void
+		{
+			switchToVideo(this.iterator - 1);
+		}
+		
+		private function fillThumbnailsList() : void
+		{
+			thumbnailsList.dataProvider = _videos.videosThumbnails;
+		}
+	]]>
+</mx:Script>
+	<mx:Grid id="videoViewFrame" x="0" y="0" width="100%" height="100%">
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+				<comp:standaloneVideoView id="video" width="100%" height="100%" nextItem="next(event)" prevItem="prev(event)" />
+			</mx:GridItem>
+			<mx:GridItem width="200" height="100%" horizontalAlign="center">
+				<mx:List id="thumbnailsList" width="165" height="100%" click="switchToVideo(thumbnailsList.selectedIndex)" itemRenderer="VideoThumbnailsListItemRenderer" />
+			</mx:GridItem>
+		</mx:GridRow>
+	</mx:Grid>
+</mx:Canvas>

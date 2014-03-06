@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="MemoryBox.mxml" version="3">
+<compiler additionalCompilerArguments="-locale en_US -default-size 1000 700 -default-background-color 0xFFFFFF" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
+<compilerSourcePath/>
+<libraryPath defaultLinkType="1">
+<libraryPathEntry kind="4" path=""/>
+</libraryPath>
+<sourceAttachmentPath/>
+</compiler>
+<applications>
+<application path="MemoryBox.mxml"/>
+</applications>
+<modules>
+<module application="src/MemoryBox.mxml" destPath="modules/School.swf" optimize="true" sourcePath="src/modules/School.mxml"/>
+<module application="src/MemoryBox.mxml" destPath="modules/Schoolmates.swf" optimize="true" sourcePath="src/modules/Schoolmates.mxml"/>
+<module application="src/MemoryBox.mxml" destPath="modules/Teachers.swf" optimize="true" sourcePath="src/modules/Teachers.mxml"/>
+<module application="src/MemoryBox.mxml" destPath="modules/Archive.swf" optimize="true" sourcePath="src/modules/Archive.mxml"/>
+<module application="src/MemoryBox.mxml" destPath="modules/Info.swf" optimize="true" sourcePath="src/modules/Info.mxml"/>
+</modules>
+<buildCSSFiles/>
+</actionScriptProperties>

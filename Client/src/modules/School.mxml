@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" xmlns:comp="components.*">
+	<mx:Script>
+		<![CDATA[
+			public function resetFrame() : void
+			{
+				if(this.schoolFrameSet)
+					this.schoolFrameSet.selectedChild = schoolFrame;
+				MemoryBox.musicPlayer.playMP3(DataRegistry.instance.general_music_school);
+				MemoryBox.stopVideoView();
+			}
+		]]>
+	</mx:Script>
+	<mx:Grid x="0" y="0" width="100%" height="100%">
+		<mx:GridRow width="100%" height="100%">
+			<mx:GridItem width="200" height="100%">
+				<mx:Grid height="100%">
+					<mx:GridRow width="100%">
+						<mx:GridItem>
+							<mx:Text text="{DataRegistry.instance.school_name}" width="200" styleName="dynamicSectionHeading"/>
+						</mx:GridItem>
+					</mx:GridRow>
+					<mx:GridRow width="100%" height="15">
+						<mx:GridItem>
+							<mx:Label text="Контакты:" styleName="dynamicText"/>
+						</mx:GridItem>
+					</mx:GridRow>
+					<mx:GridRow width="100%" height="100%">
+						<mx:GridItem>
+								<mx:Grid>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{DataRegistry.instance.school_contacts_phone!=''}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="тел.:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{DataRegistry.instance.school_contacts_phone}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{DataRegistry.instance.school_contacts_email!=''}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="e-mail:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="{DataRegistry.instance.school_contacts_email}" width="130" styleName="dynamicText"/>
+										</mx:GridItem>
+									</mx:GridRow>
+									<mx:GridRow width="100%" height="100%" includeInLayout="{DataRegistry.instance.school_contacts_links.length > 0}">
+										<mx:GridItem width="100%" height="100%">
+											<mx:Label text="ссылки:" styleName="StaticText"/>
+										</mx:GridItem>
+										<mx:GridItem width="100%" height="100%">
+											<mx:VBox id="linksContainer" creationComplete="MemoryBox.fillLinks(linksContainer, DataRegistry.instance.school_contacts_links)" />
+										</mx:GridItem>
+									</mx:GridRow>
+								</mx:Grid>
+						</mx:GridItem>
+					</mx:GridRow>
+					<mx:GridRow width="100%" height="15" horizontalAlign="center">
+						<mx:GridItem horizontalAlign="center" verticalAlign="bottom">						
+							<mx:LinkButton label="директор" styleName="submenuLink" click="schoolFrameSet.selectedChild=directorFrame" />
+							 <mx:Label text="|" styleName="submenuLink"  />
+							<mx:LinkButton label="история" styleName="submenuLink" click="schoolFrameSet.selectedChild=historyFrame" />
+							 <mx:Label text="|" styleName="submenuLink" />
+							<mx:LinkButton label="видео" styleName="submenuLink" click="schoolFrameSet.selectedChild=videoFrame" />
+						</mx:GridItem>
+					</mx:GridRow>
+				</mx:Grid>
+			</mx:GridItem>
+			<mx:GridItem width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+				<mx:ViewStack id="schoolFrameSet" width="100%" height="100%">
+					<mx:Canvas id="schoolFrame" width="100%" height="100%" label="фото">
+						<mx:Image source="{DataRegistry.instance.school_photo}" width="100%" height="100%" x="0" y="0" verticalAlign="middle" horizontalAlign="center"/>
+					</mx:Canvas>
+					
+					<comp:htmlRender width="580" label="история" id="historyFrame" html="{DataRegistry.instance.school_history_html}" />
+					
+					<mx:Canvas width="100%" height="100%" id="directorFrame" label="директор">
+						<mx:VBox x="0" y="0" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+							<mx:Image source="{DataRegistry.instance.school_director_photo}" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" />
+							<mx:Label text="{DataRegistry.instance.school_director_name}" styleName="StaticText"/>
+							<mx:LinkButton label="Видеообращение" styleName="dynamicText" click="schoolFrameSet.selectedChild=directorVideoFrame"/>
+						</mx:VBox>
+					</mx:Canvas>
+					
+					<comp:standaloneVideoView id="videoFrame" source="{DataRegistry.instance.school_video}" />
+					
+					<mx:Canvas id="directorVideoFrame" hide="directorVideo.stop()">
+						<mx:VBox horizontalAlign="center" width="100%" height="100%">
+							<comp:standaloneVideoView id="directorVideo" source="{DataRegistry.instance.school_director_video}" />
+							<mx:LinkButton label="Назад" click="schoolFrameSet.selectedChild=directorFrame; directorVideo.stop()"/>
+						</mx:VBox>
+					</mx:Canvas>
+					
+				</mx:ViewStack>
+			</mx:GridItem>
+			<mx:GridItem width="200" height="100%">
+				<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+					<mx:Image source="{DataRegistry.instance.school_pictures_director}" width="150" height="120" horizontalAlign="center" verticalAlign="middle"  useHandCursor="true" buttonMode="true" mouseChildren="false"  click="schoolFrameSet.selectedChild=directorFrame" />
+					<mx:Label text="директор" styleName="StaticText"  buttonMode="true" useHandCursor="true" mouseChildren="false" click="schoolFrameSet.selectedChild=directorFrame" />
+					<mx:Image source="{DataRegistry.instance.school_pictures_history}" width="150" height="120" horizontalAlign="center" verticalAlign="middle"  useHandCursor="true" buttonMode="true" mouseChildren="false"  click="schoolFrameSet.selectedChild=historyFrame" />
+					<mx:Label text="история" styleName="StaticText"  buttonMode="true" useHandCursor="true" mouseChildren="false" click="schoolFrameSet.selectedChild=historyFrame" />
+					<mx:Image source="{DataRegistry.instance.school_pictures_video}" width="150" height="120" horizontalAlign="center" verticalAlign="middle"  useHandCursor="true" buttonMode="true" mouseChildren="false"  click="schoolFrameSet.selectedChild=videoFrame" />
+					<mx:Label text="видео" styleName="StaticText"  buttonMode="true" useHandCursor="true" mouseChildren="false" click="schoolFrameSet.selectedChild=videoFrame" />
+				</mx:VBox>
+			</mx:GridItem>
+		</mx:GridRow>
+	</mx:Grid>
+</mx:Module>

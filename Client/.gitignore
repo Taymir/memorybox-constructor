@@ -1,0 +1,12 @@
+bin-debug/
+bin-release/
+src/generated/
+src/modules/generated/
+src/archive/*
+src/html/*
+src/music/*
+src/school/*
+src/schoolmates/*
+src/teachers/*
+src/intro.flv
+Thumbs.db

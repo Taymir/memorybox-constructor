@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	 xmlns:comp="components.*"
+	 width="100%" height="100%">
+  	<mx:Metadata>
+  		[Event(name="userSelected", type="UserEvent")]
+  	</mx:Metadata>
+  	
+  	<mx:Binding source="shelf.selectedIndex" destination="switchToUser" />
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.IList;
+			import mx.controls.Label;
+			import mx.controls.Image;
+			import mx.containers.VBox;
+			
+			private var _dataProvider:Array;
+			private var _currentUser:int;
+			
+			public function set dataProvider(lst: Array) : void
+			{
+				this._dataProvider = lst;
+				init();
+			}
+			
+			private function init():void
+			{
+				if(this.shelf != null)
+				{
+					this.shelf.dataProvider = getFilenames();
+					switchToUser = 0;
+				}
+			}
+			
+			private function getFilenames():Array
+			{
+				var res:Array = new Array(_dataProvider.length);
+				
+				for(var i:int = 0; i < _dataProvider.length; ++i)
+				{
+					res[i] = (_dataProvider[i] as User).photo_thumbnail;
+				}
+				
+				return res;
+			}
+			
+			private function set switchToUser(Value: int):void
+			{
+				if(_dataProvider.length > 0) {
+					_currentUser = Value;
+					photousername.text = (_dataProvider[_currentUser] as User).name;
+				}
+				else
+					photousername.text = "";
+			} 
+			
+			private function clickHandler(event: Event):void
+			{
+				var e:UserEvent = new UserEvent('userSelected');
+				e.user = _dataProvider[_currentUser];
+				dispatchEvent(e);
+			}
+		]]>
+	</mx:Script>
+	<comp:DisplayShelf id="shelf"
+ 				styleName="pictureBorder"
+ 			    angle="12" popout=".3" y="130" width="1000" maxWidth="1000" cacheAsBitmap="false" creationComplete="init()" currentClick="clickHandler(event)" useHandCursor="true" buttonMode="true" />
+ 			    
+ 	<mx:Grid x="0" y="0" width="100%" height="100%">
+ 		<mx:GridRow width="100%" height="100%">
+ 			<mx:GridItem  width="55" height="100%" verticalAlign="middle" horizontalAlign="right">
+ 				<mx:Image source="assets/buttons/arrow_left.swf" useHandCursor="true" buttonMode="true" click="shelf.nextItem()"/>
+ 			</mx:GridItem>
+ 			
+ 			<mx:GridItem  width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+ 			</mx:GridItem>
+ 			
+ 			<mx:GridItem width="55" height="100%" verticalAlign="middle" horizontalAlign="left">
+ 				<mx:Image source="assets/buttons/arrow_right.swf" useHandCursor="true" buttonMode="true" click="shelf.prevItem()" />
+ 			</mx:GridItem>
+ 		</mx:GridRow>
+ 	</mx:Grid>
+    <mx:Label id="photousername" x="0" y="370" text="" styleName="StaticText" width="100%" textAlign="center" useHandCursor="true" buttonMode="true" mouseChildren="false" click="clickHandler(event)"/>
+</mx:Canvas>

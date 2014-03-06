@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+  	<mx:Metadata>
+  		[Event(name="userSelected", type="UserEvent")]
+  	</mx:Metadata>
+  	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Label;
+			import mx.controls.Image;
+			import mx.containers.VBox;
+			
+			private var _dataProvider:Array;
+			private const photoWidth:int = 135;
+			private const photosPerPage:int = 12;
+			private var offset:int = 0;
+			
+			public function set dataProvider(lst: Array) : void
+			{
+				this._dataProvider = lst;
+				init();
+			}
+			
+			private function init():void
+			{
+				if(this.userPhotos != null)
+					fillUserPhotos();
+			}
+		
+			private function clearUserPhotos() : void
+			{
+				userPhotos.removeAllChildren();
+			}
+
+			private function fillUserPhotos() : void
+			{
+				clearUserPhotos();
+				
+				userPhotos.tileWidth = photoWidth;
+				userPhotos.tileHeight = photoWidth + 70;
+				
+				for(var i:int = offset; i < Math.min(offset + photosPerPage, _dataProvider.length); ++i)
+				{
+					var vb: VBox = new VBox();
+					var l: Label = new Label();
+					var im: Image = new Image();
+					
+					l.text = (_dataProvider[i] as User).name;
+					l.truncateToFit = true
+					l.width = photoWidth;
+					l.styleName="StaticText";
+					l.useHandCursor = true;
+					l.buttonMode = true;
+					l.mouseChildren = false;
+					
+					im.source = (_dataProvider[i] as User).photo_thumbnail;
+					im.width = photoWidth;
+					im.height = photoWidth;
+					im.useHandCursor = true;
+					im.buttonMode = true;
+					im.styleName = "pictureBorder";
+					im.setStyle("horizontalAlign", "center");
+					im.setStyle("verticalAlign", "middle");
+					
+					vb.data = (_dataProvider[i] as User);
+					vb.addEventListener(MouseEvent.CLICK, clickHandler);
+					
+					vb.addChild(im);
+					vb.addChild(l);
+					
+					userPhotos.addChild(vb);
+				}
+			}
+			
+			private function clickHandler(event: Event):void
+			{
+				var e:UserEvent = new UserEvent('userSelected');
+				e.user = event.currentTarget.data;
+				dispatchEvent(e);
+			}
+			
+			private function prev() : void
+			{
+				offset -= photosPerPage;
+				if(offset < 0)
+					offset = 0;
+					
+				fillUserPhotos();
+			}
+			
+			private function next() : void
+			{
+				offset += photosPerPage;
+				if(offset >= _dataProvider.length)
+					offset -= photosPerPage;
+				
+				fillUserPhotos();
+			}
+		]]>
+	</mx:Script>
+
+	 <mx:GridRow  width="100%" height="100%" borderColor="black">
+		 <mx:GridItem width="55" height="100%" verticalAlign="middle">
+		 	<mx:Image source="assets/buttons/arrow_left.swf" useHandCursor="true" buttonMode="true" click="prev()"/>
+		 </mx:GridItem>
+		 <mx:GridItem width="100%" height="100%">
+		
+		<mx:Tile id="userPhotos" label="" width="100%" height="100%" direction="horizontal" verticalAlign="middle" horizontalAlign="center" creationComplete="init()">       
+	    </mx:Tile>
+		 </mx:GridItem>
+		 <mx:GridItem width="55" height="100%" verticalAlign="middle">
+		 	<mx:Image source="assets/buttons/arrow_right.swf" useHandCursor="true" buttonMode="true" click="next()" />
+		 </mx:GridItem>
+	 </mx:GridRow>
+ </mx:Grid>
